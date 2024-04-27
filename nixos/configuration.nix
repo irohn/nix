@@ -24,7 +24,7 @@
     # You can add overlays here
     overlays = [
       # If you want to use overlays exported from other flakes:
-      neovim-nightly-overlay.overlays.default
+      # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -58,6 +58,10 @@
   };
 
   # FIXME: Add the rest of your current configuration
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -127,14 +131,6 @@
     nvidiaSettings = true;
   };
 
-
-  environment.systemPackages = with pkgs; [
-    git
-    neovim-nightly
-    curl
-    wget
-  ];
-
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
     ori = {
@@ -163,6 +159,12 @@
       PasswordAuthentication = false;
     };
   };
+
+  # system packages
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
