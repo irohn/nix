@@ -24,7 +24,7 @@
     # You can add overlays here
     overlays = [
       # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+      neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -59,23 +59,95 @@
 
   # FIXME: Add the rest of your current configuration
 
-  # TODO: Set your hostname
-  networking.hostName = "your-hostname";
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "Asia/Jerusalem";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_IL";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "he_IL.UTF-8";
+    LC_IDENTIFICATION = "he_IL.UTF-8";
+    LC_MEASUREMENT = "he_IL.UTF-8";
+    LC_MONETARY = "he_IL.UTF-8";
+    LC_NAME = "he_IL.UTF-8";
+    LC_NUMERIC = "he_IL.UTF-8";
+    LC_PAPER = "he_IL.UTF-8";
+    LC_TELEPHONE = "he_IL.UTF-8";
+    LC_TIME = "he_IL.UTF-8";
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+
+  };
+
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    # Modesetting is required.
+    modesetting.enable = true;
+    # Nvidia power management
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    # Nvidia open source kernel module
+    open = false;
+    # Enable nvidia settings menu
+    nvidiaSettings = true;
+  };
+
+
+  environment.systemPackages = with pkgs; [
+    git
+    neovim-nightly
+    curl
+    wget
+  ];
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
-    # FIXME: Replace with your username
-    your-username = {
+    ori = {
       # TODO: You can set an initial password for your user.
       # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
       # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+      initialPassword = "admin";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" "networkmanager" ];
     };
   };
 
