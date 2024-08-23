@@ -1,30 +1,27 @@
 {
-  description = "Home Manager configuration of ori";
+  description = "NixOS + standalone home-manager config flakes";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";  # Adjust this if you're not on x86_64-linux
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."ori" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home-manager/home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-        extraSpecialArgs = { };
+  outputs = {nixpkgs, ...}: let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+  in {
+    templates = {
+      ori = {
+        description = ''
+          Main flake - contains only the configs.
+        '';
+        path = ./main;
       };
     };
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+  };
 }
