@@ -5,13 +5,21 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+
+let
+  default_username = "ori";  # Replace with your preferred default username
+  default_homeDir = "/home/${default_username}";
+
+  username = builtins.getEnv "USER";
+  homeDir = builtins.getEnv "HOME";
+in {
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./packages/neovim.nix
   ];
 
   nixpkgs = {
@@ -29,28 +37,24 @@
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
 
   home = {
-    username = "ori";
-    homeDirectory = "/home/ori";
+    username = if username != "" then username else default_username;
+    homeDirectory = if homeDir != "" then homeDir else default_homeDir;
   };
+
+  fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
     curl
   ];
 
-  # Enable home-manager and git
+  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 }
