@@ -15,11 +15,11 @@
     ];
   in {
     templates = {
-      ori = {
+      default = {
         description = ''
           Main flake - contains only the configs.
         '';
-        path = ./main;
+        path = ./default;
       };
     };
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
