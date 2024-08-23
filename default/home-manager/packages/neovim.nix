@@ -15,4 +15,5 @@
       source = ./config/nvim;
       recursive = true;
     };
+  };
 }
