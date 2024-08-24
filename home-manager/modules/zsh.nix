@@ -44,7 +44,7 @@
       la = "eza -laa";
       lt = "eza --almost-all --tree --color=auto --icons=auto --git-ignore --smart-group --mounts --level=5";
       cat = "bat";
-      cd = "z";
+      cd = "__zoxide_z";
     };
 
     plugins = [

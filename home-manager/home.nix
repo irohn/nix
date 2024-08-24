@@ -26,6 +26,7 @@ in {
   imports = [
     ./modules/git.nix
     ./modules/zsh.nix
+    ./modules/zoxide.nix
     ./modules/utils.nix
     ./modules/fonts.nix
     ./modules/starship.nix
