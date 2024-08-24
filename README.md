@@ -29,3 +29,9 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 - Run `sudo nixos-rebuild switch --flake ~/nix-config#<environment>` to apply your system configuration.
 - Run `home-manager switch --flake ~/nix-config#<environment>` to apply your home configuration.
 
+Lastly, if you are not managing your system configuration with nixos or darwin-nix make sure to add the new shell as default for the user:
+```
+echo "$(which zsh)" | sudo tee -a /etc/shells
+chsh -s $(which zsh)
+```
+
