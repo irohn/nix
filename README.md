@@ -9,7 +9,13 @@ Currently these are the supported environments:
 ## Usage
 Install Nix and home-manager with the install script:
 ```
-./install.sh
+# Nix
+./install.sh nix
+
+# Restart your shell between those
+
+# Home-manager
+./install.sh home-manager
 ```
 Or install [nix](https://nixos.org/download/) (the package-manager or NixOS)
 as well as [home-manager](https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone) yourself (standalone method)
