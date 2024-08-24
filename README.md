@@ -7,7 +7,12 @@ Currently these are the supported environments:
 - darwin-aarch64
 
 ## Usage
-Install [nix](https://nixos.org/download/) (the package-manager or NixOS)
+Install Nix and home-manager with the install script:
+```
+./install.sh
+```
+Or install [nix](https://nixos.org/download/) (the package-manager or NixOS)
+as well as [home-manager](https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone) yourself (standalone method)
 
 Clone this repository:
 ```
