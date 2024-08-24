@@ -32,6 +32,10 @@
         success_symbol = "[\\$](bright-green bold)";
         error_symbol = "[\\$](bright-red bold)";
       };
+      git_branch = {
+        symbol = "";
+        format = "[$symbol$branch(:$remote_branch)]($style) ";
+      };
       os = {
         disabled = false;
         format = " [$symbol](white)";
@@ -76,6 +80,31 @@
           Unknown = " ";
           Windows = "󰍲 ";
         };
+      };
+      c = {
+        symbol = " ";
+        format = "[$symbol($version(-$name) )]($style)";
+      };
+      cmake = { disabled = true; };
+      golang = {
+        symbol = " ";
+        format = "[$symbol($version )]($style)";
+      };
+      lua = {
+        symbol = "󰢱 ";
+        format = "[$symbol($version )]($style)";
+      };
+      nodejs = {
+        symbol = "󰎙 ";
+        format = "[$symbol($version )]($style)";
+      };
+      python = {
+        symbol = "󰌠 ";
+        format = "[$symbol($version )(\($virtualenv\) )]($style)";
+      };
+      rust = {
+        symbol = "󱘗 ";
+        format = "[$symbol($version )]($style)";
       };
     };
   };
