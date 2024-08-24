@@ -20,14 +20,14 @@
   } @ inputs: let
     inherit (self) outputs;
   in {
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#desktop'
-    nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/configuration.nix];
-      };
-    };
+    # # NixOS configuration entrypoint
+    # # Available through 'nixos-rebuild --flake .#desktop'
+    # nixosConfigurations = {
+    #   desktop = nixpkgs.lib.nixosSystem {
+    #     specialArgs = {inherit inputs outputs;};
+    #     modules = [./nixos/configuration.nix];
+    #   };
+    # };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#default'

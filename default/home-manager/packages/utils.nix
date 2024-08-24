@@ -9,6 +9,5 @@
     gawk
     bat
     eza
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 }
