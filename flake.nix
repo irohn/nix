@@ -13,6 +13,12 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
+
+    # Define defaults here
+    defaults = {
+      username = "ori";
+      email = "orisneh@gmail.com";
+    };
   in {
     templates = {
       default = {
@@ -24,10 +30,8 @@
     };
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    defaults = forAllSystems (system: {
-      username = "ori";
-      email = "orisneh@gmail.com";
-    });
+    # Export defaults
+    inherit defaults;
 
   };
 }

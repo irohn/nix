@@ -19,7 +19,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    mainFlakeDefaults = inputs.self.defaults.${nixpkgs.system};
+    mainFlakeDefaults = inputs.self.defaults;
   in {
     # # NixOS configuration entrypoint
     # # Available through 'nixos-rebuild --flake .#desktop'
