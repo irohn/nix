@@ -29,8 +29,8 @@
         format = "[󰉋 $path]($style)[$read_only]($read_only_style) ";
       };
       character = {
-        success_symbol = "[\\$](bright-green bold)";
-        error_symbol = "[\\$](bright-red bold)";
+        success_symbol = "[\\$](white bold)";
+        error_symbol = "[\\$](red bold)";
       };
       git_branch = {
         symbol = "";
