@@ -9,5 +9,6 @@
     gawk
     bat
     eza
+    zoxide
   ];
 }
