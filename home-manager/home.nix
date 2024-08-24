@@ -27,7 +27,6 @@ in {
     ./modules/git.nix
     ./modules/zsh.nix
     ./modules/zoxide.nix
-    ./modules/utils.nix
     ./modules/fonts.nix
     ./modules/starship.nix
     ./modules/tmux.nix
@@ -64,6 +63,12 @@ in {
 
   home.packages = with pkgs; [
     curl
+    wget
+    jq
+    yq
+    gawk
+    bat
+    eza
   ];
 
   # Let Home Manager install and manage itself.
