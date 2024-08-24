@@ -7,6 +7,7 @@
     fd
     nodejs
     unzip
+    gcc
   ];
 
   home.file = {
