@@ -8,13 +8,17 @@
 }: 
 
 let
-  default_username = "ori";  # Replace with your preferred default username
-  default_homeDir = "/home/${default_username}";
+  # Set your defaults here or by setting the environment
+  # variables before running the flake
+  default_username = "ori";
+  default_email = "orisneh@gmail.com";
 
-  username = builtins.getEnv "USER";
-  homeDir = builtins.getEnv "HOME";
+  username = builtins.getEnv "USER" or default_username;
+  homeDir = builtins.getEnv "HOME" or "/home/${username}";
+  email = builtins.getEnv "EMAIL" or default_email;
 in {
   imports = [
+    (import ./packages/git.nix { inherit username, email; })
     ./packages/zsh.nix
     ./packages/neovim.nix
   ];
@@ -40,8 +44,8 @@ in {
   };
 
   home = {
-    username = if username != "" then username else default_username;
-    homeDirectory = if homeDir != "" then homeDir else default_homeDir;
+    username = username;
+    homeDirectory = homeDir;
   };
 
   fonts.fontconfig.enable = true;
