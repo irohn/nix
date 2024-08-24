@@ -14,9 +14,14 @@ let
   default_username = defaults.username;
   default_email = defaults.email;
 
-  username = let u = builtins.getEnv "USER"; in if u != "" then u else default_username;
-  homeDir = let h = builtins.getEnv "HOME"; in if h != "" then h else "/home/${username}";
-  email = let e = builtins.getEnv "EMAIL"; in if e != "" then e else default_email;
+  username = default_username;
+  email = default_email;
+  homeDir = let 
+    h = builtins.getEnv "HOME"; 
+  in if h != "" then h else 
+     if pkgs.stdenv.isDarwin 
+     then "/Users/${username}" 
+     else "/home/${username}";
 in {
   imports = [
     ./modules/git.nix

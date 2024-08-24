@@ -57,7 +57,7 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#hostname'
       nixosConfigurations = {
-        "linux-x86" = mkNixosConfiguration {
+        linux-x86 = mkNixosConfiguration {
           system = "x86_64-linux";
           hostname = "desktop";
         };
@@ -66,8 +66,8 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#default'
       homeConfigurations = {
-        "linux-x86" = mkHomeConfiguration "x86_64-linux";
-        "darwin-aarch64" = mkHomeConfiguration "aarch64-darwin";
+        linux-x86 = mkHomeConfiguration "x86_64-linux";
+        darwin-aarch64 = mkHomeConfiguration "aarch64-darwin";
       };
     };
 }
