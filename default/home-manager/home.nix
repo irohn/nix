@@ -4,14 +4,15 @@
   lib,
   config,
   pkgs,
+  defaults,
   ...
 }: 
 
 let
-  # Set your defaults here or by setting the environment
+  # Set your defaults by setting the environment
   # variables before running the flake
-  default_username = "ori";
-  default_email = "orisneh@gmail.com";
+  default_username = defaults.username;
+  default_email = defaults.email;
 
   username = let u = builtins.getEnv "USER"; in if u != "" then u else default_username;
   homeDir = let h = builtins.getEnv "HOME"; in if h != "" then h else "/home/${username}";
@@ -51,7 +52,6 @@ in {
   home = {
     username = username;
     homeDirectory = homeDir;
-    email = email;
   };
 
   fonts.fontconfig.enable = true;

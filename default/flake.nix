@@ -34,7 +34,13 @@
     homeConfigurations = {
       "default" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          defaults = {
+            username = "ori";
+            email = "orisneh@gmail.com";
+          };
+        };
         modules = [
           ./home-manager/home.nix
         ];
