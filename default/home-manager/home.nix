@@ -18,7 +18,7 @@ let
   email = let e = builtins.getEnv "EMAIL"; in if e != "" then e else default_email;
 in {
   imports = [
-    (import ./packages/git.nix { inherit username, email; })
+    (import ./packages/git.nix { inherit username email; })
     ./packages/zsh.nix
     ./packages/utils.nix
     ./packages/fonts.nix
