@@ -23,5 +23,11 @@
       };
     };
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
+    defaults = forAllSystems (system: {
+      username = "ori";
+      email = "orisneh@gmail.com";
+    });
+
   };
 }

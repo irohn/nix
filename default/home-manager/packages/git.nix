@@ -1,9 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, defaults, ... }:
 
 {
   programs.git = {
     enable = true;
-    userName = config.home.username;
-    userEmail = config.home.email;
+    userName = defaults.username;
+    userEmail = defaults.email;
   };
 }

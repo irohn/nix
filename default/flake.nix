@@ -19,6 +19,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    mainFlakeDefaults = inputs.self.defaults.${nixpkgs.system};
   in {
     # # NixOS configuration entrypoint
     # # Available through 'nixos-rebuild --flake .#desktop'
@@ -36,10 +37,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {
           inherit inputs outputs;
-          defaults = {
-            username = "ori";
-            email = "orisneh@gmail.com";
-          };
+          defaults = mainFlakeDefaults;
         };
         modules = [
           ./home-manager/home.nix
