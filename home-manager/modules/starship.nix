@@ -11,17 +11,22 @@
       add_newline = false;
       line_break = { disabled = true; };
       username = {
-        style_user = "bright-white bold";
+        style_user = "bright-green bold";
         style_root = "bright-red bold";
+        show_always = true;
+        format = "[$user]($style)";
       };
       nix_shell = {
-        symbol = "";
-        format = "[$symbol$name]($style) ";
-        style = "bright-purple bold";
+        symbol = "❄️ ";
+        format = "[$symbol$state]($style) ";
       };
       hostname = {
-        ssh_symbol = "SSH->";
-        format = "[$ssh_symbol](bold yellow) [$hostname](bold green) ";
+        ssh_symbol = "->ssh";
+        ssh_only = false;
+        format = "[@$hostname$ssh_symbol](bold green) ";
+      };
+      directory = {
+        format = "[󰉋 $path]($style)[$read_only]($read_only_style) ";
       };
       character = {
         success_symbol = "[\\$](bright-green bold)";
