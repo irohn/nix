@@ -1,9 +1,10 @@
-{ pkgs, username, email, ... }:
+{ config, pkgs, lib, ... }:
 
+{ config, ... }:
 {
   programs.git = {
     enable = true;
-    userName = username;
-    userEmail = email;
+    userName = config.home.username;
+    userEmail = config.home.email;
   };
 }
