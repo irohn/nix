@@ -14,7 +14,6 @@
         "git"
         "docker"
         "kubectl"
-        "zsh-autosuggestions"
       ]; # Add or remove plugins as needed
       theme = "robbyrussell"; # You can change this to your preferred theme
     };
