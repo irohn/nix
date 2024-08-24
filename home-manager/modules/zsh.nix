@@ -28,6 +28,8 @@
       bindkey "^[[A" up-line-or-beginning-search
       bindkey "^[[B" down-line-or-beginning-search
 
+      setopt completealiases
+
       sessionizer() {
         local selected=$(fd -H -t d '^.git$' ~ --exclude .local -x echo {//} | fzf --preview "eza -A --color=always {}")
         [ -z "$selected" ] && echo "Error: empty selection..." && return 1

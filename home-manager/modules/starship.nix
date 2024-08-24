@@ -20,8 +20,8 @@
         style = "bright-purple bold";
       };
       hostname = {
-        ssh_symbol = " ";
-        format = "[$ssh_symbol](bold white) [$hostname](bold green) ";
+        ssh_symbol = "SSH->";
+        format = "[$ssh_symbol](bold yellow) [$hostname](bold green) ";
       };
       character = {
         success_symbol = "[\\$](bright-green bold)";
