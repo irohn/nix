@@ -19,14 +19,14 @@ let
   email = let e = builtins.getEnv "EMAIL"; in if e != "" then e else default_email;
 in {
   imports = [
-    ./packages/git.nix
-    ./packages/zsh.nix
-    ./packages/utils.nix
-    ./packages/fonts.nix
-    ./packages/starship.nix
-    ./packages/tmux.nix
-    ./packages/neovim.nix
-    ./packages/kubernetes.nix
+    ./modules/git.nix
+    ./modules/zsh.nix
+    ./modules/utils.nix
+    ./modules/fonts.nix
+    ./modules/starship.nix
+    ./modules/tmux.nix
+    ./modules/neovim.nix
+    ./modules/kubernetes.nix
   ];
 
   nixpkgs = {
