@@ -32,6 +32,7 @@ in {
     ./modules/tmux.nix
     ./modules/neovim.nix
     ./modules/kubernetes.nix
+    ./modules/terminal.nix
   ];
 
   nixpkgs = {
