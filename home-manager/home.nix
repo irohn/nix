@@ -33,6 +33,7 @@ in {
     ./modules/neovim.nix
     ./modules/kubernetes.nix
     ./modules/terminal.nix
+    ./modules/greeneye.nix
   ];
 
   nixpkgs = {

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -8,6 +8,12 @@
     nodejs
     unzip
     gcc
+  ];
+
+  programs.zsh.sessionVariables = lib.mkMerge [
+    (lib.mkIf (config.programs.zsh.enable) {
+      EDITOR = "nvim";
+    })
   ];
 
   home.file = {
