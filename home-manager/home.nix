@@ -71,6 +71,7 @@ in {
     gawk
     bat
     eza
+    lazygit
   ];
 
   # Let Home Manager install and manage itself.

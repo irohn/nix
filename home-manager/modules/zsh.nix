@@ -42,6 +42,8 @@
         [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
       }
       bindkey -s '^S' 'sessionizer\n'
+
+      bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
     '';
 
     shellAliases = {
