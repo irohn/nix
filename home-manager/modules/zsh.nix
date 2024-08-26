@@ -44,6 +44,8 @@
       bindkey -s '^S' 'sessionizer\n'
 
       bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
+
+      bindkey -s "^M" 'tmux popup -h 75% -w 75% "ollama run deepseek-coder-v2:latest"'
     '';
 
     shellAliases = {
