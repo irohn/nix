@@ -55,7 +55,7 @@
       lt = "eza --almost-all --tree --color=auto --icons=auto --git-ignore --smart-group --mounts --level=5";
       cat = "bat";
       cd = "__zoxide_z";
-      ai = "ollama run deepseek-coder-v2:latest"
+      ai = "ollama run deepseek-coder-v2:latest";
     };
 
     plugins = [
