@@ -44,8 +44,6 @@
       bindkey -s '^S' 'sessionizer\n'
 
       bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
-
-      bindkey -s "^A" 'tmux popup -h 75% -w 75% "ollama run deepseek-coder-v2:latest"^M'
     '';
 
     shellAliases = {
@@ -57,6 +55,7 @@
       lt = "eza --almost-all --tree --color=auto --icons=auto --git-ignore --smart-group --mounts --level=5";
       cat = "bat";
       cd = "__zoxide_z";
+      ai = "ollama run deepseek-coder-v2:latest"
     };
 
     plugins = [
