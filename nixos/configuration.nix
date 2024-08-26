@@ -1,95 +1,93 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  defaults,
-  ...
-}: {
-  # You can import other NixOS modules here
-  imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
+{ config, pkgs, lib, ... }:
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
+let
+  hostname = "pinix";
+  user = "ori";
+  password = "123456";
+  nixosHardwareVersion = "7f1836531b126cfcf584e7d7d71bf8758bb58969";
 
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+  timeZone = "Asia/Jerusalem";
+  defaultLocale = "en_US.UTF-8";
+in {
+  imports = ["${fetchTarball "https://github.com/NixOS/nixos-hardware/archive/${nixosHardwareVersion}.tar.gz" }/raspberry-pi/4"];
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+  };
+
+  networking.hostName = hostname;
+
+  environment.systemPackages = with pkgs; [
+    vim
+    fluxcd
   ];
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+  services.openssh.enable = true;
 
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
+  time.timeZone = timeZone;
+
+  i18n = {
+    defaultLocale = defaultLocale;
+    extraLocaleSettings = {
+      LC_ADDRESS = defaultLocale;
+      LC_IDENTIFICATION = defaultLocale;
+      LC_MEASUREMENT = defaultLocale;
+      LC_MONETARY = defaultLocale;
+      LC_NAME = defaultLocale;
+      LC_NUMERIC = defaultLocale;
+      LC_PAPER = defaultLocale;
+      LC_TELEPHONE = defaultLocale;
+      LC_TIME = defaultLocale;
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
-
-  networking.hostName = "computer";
-
-  users.users = {
-    defaults.username = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+  users = {
+    mutableUsers = false;
+    users."${user}" = {
       isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+      password = password;
+      extraGroups = [ "wheel" ];
+    };
+  };
+
+  # Enable passwordless sudo.
+  security.sudo.extraRules= [
+    {  users = [ user ];
+      commands = [
+         { command = "ALL" ;
+           options= [ "NOPASSWD" ];
+        }
       ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
-    };
-  };
+    }
+  ];
 
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Opinionated: forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Opinionated: use keys only.
-      # Remove if you want to SSH using passwords
-      PasswordAuthentication = false;
-    };
-  };
+  # Enable GPU acceleration
+  hardware.raspberry-pi."4".fkms-3d.enable = true;
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
+  boot.kernelParams = [ "cgroup_enable=memory" "cgroup_enable=cpuset" "cgroup_memory=1" ];
+
+  networking.firewall.allowedTCPPorts = [
+    6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
+    # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
+    # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+  ];
+  networking.firewall.allowedUDPPorts = [
+    # 8472 # k3s, flannel: required if using multi-node for inter-node networking
+  ];
+  services.k3s.enable = true;
+  services.k3s.role = "server";
+  services.k3s.extraFlags = toString [
+    "--write-kubeconfig-mode=644"
+  ];
+
+  environment.variables = {
+      KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+    };
+
+
+  system.stateVersion = "23.11";
 }

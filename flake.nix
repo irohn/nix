@@ -59,7 +59,11 @@
       nixosConfigurations = {
         linux-x86 = mkNixosConfiguration {
           system = "x86_64-linux";
-          hostname = "desktop";
+          hostname = "computer";
+        };
+        rpi = mkNixosConfiguration {
+          system = "aarch64-linux";
+          hostname = "raspberry-pi"
         };
       };
 
