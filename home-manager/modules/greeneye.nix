@@ -16,11 +16,20 @@
 
   programs.zsh.initExtra = lib.mkAfter ''
     find_rt_versions() {
+      if ! command -v fd &> /dev/null; then
+        echo "error: fd command not found"
+        return 1
+      fi
       local rt_versions_path=$(fd -1 -t d rt-versions "$HOME")
       echo $rt_versions_path
     }
 
     list_clusters() {
+    if ! command -v rg &> /dev/null; then
+      echo "error: rg command not found"
+      return 1
+    fi
+
     fd -t f 'cluster-vars-cm.yaml' "$1" -x sh -c '
       cluster_name=$(rg -m1 "CLUSTER_NAME:" {} | cut -d: -f2 | tr -d " \r")
       sprayer_group=$(rg -m1 "SPRAYER_GROUP:" {} | cut -d: -f2 | tr -d " \r")
@@ -28,7 +37,6 @@
       printf "%s %s-%s\n" "$cluster_name" "$sprayer_group" "$boom_location"
     '
     }
-
 
     tailscale_clusters_match() {
       # Check if tailscale is installed
@@ -114,6 +122,10 @@
     }
 
     tkx() {
+      if ! command -v kubectl &> /dev/null; then
+        echo "error: kubectl command not found"
+        return 1
+      fi
       local selection=$(tailscale_clusters_match --kubeconfig)
       if [ ! -z "$selection" ]; then
         tailscale configure kubeconfig $(echo "$selection" | cut -d " " -f1)
