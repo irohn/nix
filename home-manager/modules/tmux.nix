@@ -1,8 +1,32 @@
 # home-manager/tmux.nix
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    tmux
+  ];
+
+  programs.zsh.shellAliases = lib.mkMerge [
+    (lib.mkIf (config.programs.zsh.enable) {
+      tmux = "tmux -u";
+      tm = "tmux -u attach";
+    })
+  ];
+
+  programs.zsh.initExtra = lib.mkAfter ''
+      sessionizer() {
+        local selected=$(fd -H -t d '^.git$' ~ --exclude .local -x echo {//} | fzf --preview "eza -A --color=always {}")
+        [ -z "$selected" ] && echo "Error: empty selection..." && return 1
+        local session_name=$(basename "$selected" | tr . _)
+        if ! tmux has-session -t="$session_name" 2>/dev/null; then
+          tmux new-session -ds "$session_name" -c "$selected"
+        fi
+        [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
+      }
+      bindkey -s '^S' 'sessionizer\n'
+  '';
+
   programs.tmux = {
     enable = true;
     extraConfig = ''

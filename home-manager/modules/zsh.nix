@@ -31,24 +31,10 @@
       bindkey "^[[B" down-line-or-beginning-search
 
       setopt completealiases
-
-      sessionizer() {
-        local selected=$(fd -H -t d '^.git$' ~ --exclude .local -x echo {//} | fzf --preview "eza -A --color=always {}")
-        [ -z "$selected" ] && echo "Error: empty selection..." && return 1
-        local session_name=$(basename "$selected" | tr . _)
-        if ! tmux has-session -t="$session_name" 2>/dev/null; then
-          tmux new-session -ds "$session_name" -c "$selected"
-        fi
-        [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
-      }
-      bindkey -s '^S' 'sessionizer\n'
-
-      bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
     '';
 
     shellAliases = {
       v = "nvim";
-      tmux = "tmux -u";
       ls = "eza";
       ll = "eza -lAh";
       la = "eza -laa";

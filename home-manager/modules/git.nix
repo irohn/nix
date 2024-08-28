@@ -1,6 +1,21 @@
 { config, pkgs, lib, defaults, ... }:
 
 {
+  home.packages = with pkgs; [
+    git
+    lazygit
+  ];
+
+  programs.zsh.shellAliases = lib.mkMerge [
+    (lib.mkIf (config.programs.zsh.enable) {
+      gs = "git status";
+    })
+  ];
+
+  programs.zsh.initExtra = lib.mkAfter ''
+    bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
+  '';
+
   programs.git = {
     enable = true;
     userName = defaults.username;
