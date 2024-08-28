@@ -2,9 +2,20 @@
 
 {
   home.packages = with pkgs; [
-    git
-    lazygit
+    diff-so-fancy
   ];
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git = {
+        paging = {
+          colorArg = "always";
+          pager = "diff-so-fancy";
+        };
+      };
+    };
+  };
 
   programs.zsh.shellAliases = lib.mkMerge [
     (lib.mkIf (config.programs.zsh.enable) {
@@ -31,6 +42,12 @@
       }; f";
     };
     extraConfig = {
+      core = {
+        pager = "diff-so-fancy | less --tabs=4 -RF";
+      };
+      interactive = {
+        diffFilter = "diff-so-fancy --patch";
+      };
       pull = {
         rebase = true;
       };
