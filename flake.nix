@@ -63,7 +63,7 @@
         };
         rpi = mkNixosConfiguration {
           system = "aarch64-linux";
-          hostname = "raspberry-pi"
+          hostname = "raspberry-pi";
         };
       };
 
