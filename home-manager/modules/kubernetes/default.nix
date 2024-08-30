@@ -8,13 +8,6 @@
     kubernetes-helm
   ];
 
-    programs.zsh.sessionVariables = lib.mkMerge [
-    (lib.mkIf (config.programs.zsh.enable) {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    })
-  ];
-
   programs.zsh.shellAliases = lib.mkMerge [
     (lib.mkIf (config.programs.zsh.enable) {
       k = "kubectl";

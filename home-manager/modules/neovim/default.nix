@@ -1,8 +1,8 @@
 { pkgs, config, lib, ... }:
 
 {
+  # Dependencies for ./config/nvim
   home.packages = with pkgs; [
-    neovim
     ripgrep
     fd
     nodejs
@@ -10,11 +10,13 @@
     gcc
   ];
 
-  programs.zsh.sessionVariables = lib.mkMerge [
-    (lib.mkIf (config.programs.zsh.enable) {
-      EDITOR = "nvim";
-    })
-  ];
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+  };
 
   home.file = {
     # neovim's config

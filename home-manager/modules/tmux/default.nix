@@ -3,10 +3,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    tmux
-  ];
-
   programs.zsh.shellAliases = lib.mkMerge [
     (lib.mkIf (config.programs.zsh.enable) {
       tmux = "tmux -u";
