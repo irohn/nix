@@ -45,6 +45,7 @@
     casks = [
       # Add any Homebrew casks you want to install
       "rectangle"
+      "wezterm"
     ];
   };
 
