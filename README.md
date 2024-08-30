@@ -1,16 +1,14 @@
 # Nix and Home Manager Configurations
 
-This repository contains Nix, Home Manager, and Darwin configurations for managing system and user environments.
-
 ## Overview
 
 This configuration uses [Nix](https://nixos.org/), [Home Manager](https://github.com/nix-community/home-manager), and [nix-darwin](https://github.com/LnL7/nix-darwin) to manage system and user configurations across different machines.
 
 ## Prerequisites
 
-- nix
-- home-manager
-- nix-darwin (on MacOS)
+- [Nix](https://nixos.org/)
+- [Home Manager](https://github.com/nix-community/home-manager)
+- [nix-darwin](https://github.com/LnL7/nix-darwin) (on MacOS)
 
 You can also install these using the install script
 
@@ -22,7 +20,7 @@ You can also install these using the install script
 ./install.sh home-manager
 ```
 
-Also make sure you have [Flakes](https://nixos.wiki/wiki/Flakes) enabled you can also set the `NIX_CONFIG` environment variable:
+Also make sure you have [Flakes](https://nixos.wiki/wiki/Flakes) enabled you can also set the `NIX_CONFIG` environment variable in your current shell:
 
 ```bash
 # Should be 2.4+
@@ -32,14 +30,14 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 
 ## Usage
 
-Each command will be suffixed by a `.#<config-name>` these are defined in the main `flake.nix` (the one in the root of the repository) the examples shown are a specific configuration, change them according to your own.
+This is basic usage of already created configurations, see [Customization](https://github.com/irohn/nix?tab=readme-ov-file#customization) section for adding your own configurations
 
 ### Home Manager
 
 To build and activate a Home Manager configuration:
 
 ```bash
-home-manager switch --flake .#ori-macbook
+home-manager switch --flake .#<config-name>
 ```
 
 Note that if you are not managing your users with nixos or darwin-nix, and you are customizing any shells with home-manager, you will have to manually set your user's shell with nix's shell, for example, with zsh:
@@ -56,35 +54,128 @@ chsh -s $(which zsh)
 To build and activate a Darwin configuration:
 
 ```bash
-darwin-rebuild switch --flake .#ori-macbook
+darwin-rebuild switch --flake .#<config-name>
 ```
 
 ### NixOS
 
 Work in progress...
 
+## Customization
+
 ### Structure
-- `flake.nix`: The main entry point for the Nix flake
-- `home-manager/`: Contains Home Manager configurations
-    - `home.nix`: Main Home Manager configuration file
-    - `modules/`: Directory containing various configuration modules
-- `darwin`: Contains Darwin-specific configurations
-    - `configuration.nix`: Main Darwin configuration file
-    - `modules/`: Directory containing various configuration modules
-- `nixos`: Contains NixOS-specific configurations
-    - `configuration.nix`: Main NixOS configuration file
-    - `modules/`: Directory containing various configuration modules
 
-### Customization
+```
+├── flake.nix # The main entry point for the Nix flake
+├── home-manager # Home Manager configurations
+│   ├── home.nix # main configuration file
+│   └── modules # configuration modules for home-manager
+│       ├── module1
+│       └── module2
+├── darwin # Darwin configurations
+│   ├── configuration.nix # Main configuration file
+│   └── modules # darwin configuration modules
+│       ├── module1
+│       └── module2
+└── nixos # NixOS configurations
+    ├── configuration.nix # main configuration file
+    └── modules # nixos configuration modules
+        ├── module1
+        └── module2
+```
 
-To add a new user or modify existing configurations:
-1. Add the user's common modules to the `commonModules` attribute in `flake.nix`
-2. Create new configurations in `homeConfigurations`, `nixosConfigurations` and/or `darwinConfigurations` as needed
+### Adding a New User Configuration
 
+in `flake.nix`, add a new user and their configurations, for example:
+
+```nix
+# ... previous code ...
+
+      commonModules = {
+        ori = { ... };
+        alice = {
+          homeManager = [
+            ./home-manager/modules/git
+            ./home-manager/modules/zsh
+            ./home-manager/modules/tmux
+          ];
+        };
+      };
+
+# ... previous code ...
+
+      homeConfigurations = {
+        # ... existing configurations ...
+        alice-laptop = mkHomeConfiguration {
+          system = "x86_64-linux";
+          username = "alice";
+          email = "alice@example.com";
+          extraModules = [ ];
+        };
+      };
+
+# ... previous code ...
+
+      darwinConfigurations = {
+        # ... existing configurations ...
+        alice-macbook = mkDarwinConfiguration {
+          system = "aarch64-darwin";
+          username = "alice";
+          email = "alice@example.com";
+          extraModules = [
+            ./darwin/modules/system
+            ./darwin/modules/apps
+          ];
+        };
+      };
+
+# ... rest of flake.nix ...
+```
+
+### Adding a New Module
+
+1. Create a new module file, e.g., `home-manager/modules/tmux/default.nix`:
+
+```nix
+{ config, lib, pkgs, ... }:
+
+{
+  options.programs.tmux = {
+    enable = lib.mkEnableOption "tmux terminal multiplexer";
+    shortcut = lib.mkOption {
+      type = lib.types.str;
+      default = "a";
+      description = "Set prefix key to Ctrl+<shortcut>";
+    };
+  };
+
+  config = lib.mkIf config.programs.tmux.enable {
+    home.packages = [ pkgs.tmux ];
+    home.file.".tmux.conf".text = ''
+      set -g prefix C-${config.programs.tmux.shortcut}
+      unbind C-b
+      bind C-${config.programs.tmux.shortcut} send-prefix
+    '';
+  };
+}
+```
+
+2. Add the module to a user configuration in `flake.nix` like `commonModules` or `extraModules`:
+
+```nix
+      commonModules = {
+        ori = {
+          homeManager = [
+            # ... existing modules ...
+            ./home-manager/modules/tmux
+          ];
+        };
+      };
+```
 
 ## TODO
 
-Add NixOS configurations
-Implement Darwin-specific modules (system, apps, etc.)
-Combine overlapping arguments in configurations
+- Add NixOS configurations
+- Implement Darwin-specific modules (system, apps, etc.)
+- Combine overlapping arguments in configurations
 
