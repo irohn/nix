@@ -59,16 +59,6 @@
   # Enable some system services
   services = {
     nix-daemon.enable = true;
-    # yabai = {
-    #   enable = true;
-    #   package = pkgs.yabai;
-    #   config = {
-    #     layout = "bsp";
-    #     auto_balance = "on";
-    #     window_placement = "second_child";
-    #     focus_follows_mouse = "autoraise";
-    #     mouse_follows_focus = "on";
-    #   };
     };
   };
 
