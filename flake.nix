@@ -20,20 +20,22 @@
 
       # Define common modules for each user
       commonModules = {
-        ori.homeManager = [
-          ./home-manager/modules/git
-          ./home-manager/modules/zsh
-          ./home-manager/modules/eza
-          ./home-manager/modules/bat
-          ./home-manager/modules/zoxide
-          ./home-manager/modules/fonts
-          ./home-manager/modules/starship
-          ./home-manager/modules/tmux
-          ./home-manager/modules/neovim
-          ./home-manager/modules/kubernetes
-          ./home-manager/modules/wezterm
-          ./home-manager/modules/greeneye
-        ];
+        ori = {
+          homeManager = [
+            ./home-manager/modules/git
+            ./home-manager/modules/zsh
+            ./home-manager/modules/eza
+            ./home-manager/modules/bat
+            ./home-manager/modules/zoxide
+            ./home-manager/modules/fonts
+            ./home-manager/modules/starship
+            ./home-manager/modules/tmux
+            ./home-manager/modules/neovim
+            ./home-manager/modules/kubernetes
+            ./home-manager/modules/wezterm
+            ./home-manager/modules/greeneye
+          ];
+        };
         # Add other users here
         # anotheruser.homeManager = [ ... ];
       };
