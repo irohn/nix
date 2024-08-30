@@ -15,8 +15,28 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, darwin, ... }:
     let
+
+      # Define common modules for each user
+      commonModules = {
+        ori.homeManager = [
+          ./home-manager/modules/git
+          ./home-manager/modules/zsh
+          ./home-manager/modules/eza
+          ./home-manager/modules/bat
+          ./home-manager/modules/zoxide
+          ./home-manager/modules/fonts
+          ./home-manager/modules/starship
+          ./home-manager/modules/tmux
+          ./home-manager/modules/neovim
+          ./home-manager/modules/kubernetes
+          ./home-manager/modules/wezterm
+          ./home-manager/modules/greeneye
+        ];
+        # Add other users here
+        # anotheruser.homeManager = [ ... ];
+      };
 
       # Helper function to create home-manager configuration
       mkHomeConfiguration = { system, username, email, extraModules ? [] }:
@@ -36,13 +56,42 @@
                 inherit username email;
               };
             }
+          ] ++ (commonModules.${username}.homeManager or []) ++ extraModules;
+        };
+
+      # TODO: Add helper function for nixos configurations
+
+      # Helper function to create darwin configuration
+      mkDarwinConfiguration = { system, username, email, extraModules ? [] }:
+        darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            ./darwin/configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              users.users.${username}.home = "/Users/${username}";
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = { ... }: {
+                  imports = [ ./home-manager/home.nix ] 
+                    ++ (commonModules.${username}.homeManager or []);
+                  home = {
+                    inherit username;
+                    homeDirectory = "/Users/${username}";
+                    stateVersion = "24.05";
+                  };
+                  _module.args = {
+                    inherit username email;
+                  };
+                };
+              };
+            }
           ] ++ extraModules;
         };
 
-      # TODO: Add helper function for nixos and darwin-nix configurations
-
     in {
-      # TODO: Add nixos / darwin conigurations, maybe combine overlapping arguments?
+      # TODO: Add nixos conigurations, maybe combine overlapping arguments?
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#<config-name>'
@@ -51,40 +100,30 @@
           system = "aarch64-darwin";
           username = "ori";
           email = "orisne@greeneye.ag";
-          extraModules = [
-            ./home-manager/modules/git
-            ./home-manager/modules/zsh
-            ./home-manager/modules/eza
-            ./home-manager/modules/bat
-            ./home-manager/modules/zoxide
-            ./home-manager/modules/fonts
-            ./home-manager/modules/starship
-            ./home-manager/modules/tmux
-            ./home-manager/modules/neovim
-            ./home-manager/modules/kubernetes
-            ./home-manager/modules/wezterm
-            ./home-manager/modules/greeneye
-          ];
+          extraModules = [ ];
         };
         ori-desktop = mkHomeConfiguration {
           system = "x86_64-linux";
           username = "ori";
           email = "orisneh@gmail.com";
+          extraModules = [ ];
+        };
+      };
+
+      # Darwin configuration entrypoint
+      # Available through 'darwin-rebuild switch --flake .#<config-name>'
+      darwinConfigurations = {
+        ori-macbook = mkDarwinConfiguration {
+          system = "aarch64-darwin";
+          username = "ori";
+          email = "orisne@greeneye.ag";
           extraModules = [
-            ./home-manager/modules/git
-            ./home-manager/modules/eza
-            ./home-manager/modules/bat
-            ./home-manager/modules/zsh
-            ./home-manager/modules/zoxide
-            ./home-manager/modules/fonts
-            ./home-manager/modules/starship
-            ./home-manager/modules/tmux
-            ./home-manager/modules/neovim
-            ./home-manager/modules/kubernetes
-            ./home-manager/modules/wezterm
-            ./home-manager/modules/greeneye
+            # ./darwin/modules/system
+            # ./darwin/modules/apps
+            # ... (other Darwin-specific modules)
           ];
         };
       };
+
     };
 }
