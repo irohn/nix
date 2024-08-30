@@ -6,11 +6,12 @@ _print_help() {
     cat << EOF
 Usage: $0 [options] <component>
 
-Install Nix package manager or Home Manager (standalone)
+Install Nix package manager, Home Manager (standalone), or nix-darwin
 
 Components:
     nix             Install Nix package manager
     home-manager    Install Home Manager
+    darwin          Install nix-darwin (macOS only)
 
 Options:
     -h, --help      Show this help message and exit
@@ -30,6 +31,15 @@ _check_nix_installed() {
 _check_home_manager_installed() {
     if command -v home-manager >/dev/null 2>&1; then
         echo "Home Manager is already installed."
+        return 0
+    else
+        return 1
+    fi
+}
+
+_check_darwin_installed() {
+    if command -v darwin-rebuild >/dev/null 2>&1; then
+        echo "nix-darwin is already installed."
         return 0
     else
         return 1
@@ -70,11 +80,30 @@ _install_home_manager() {
     echo "Home Manager installation completed!"
 }
 
+_install_darwin() {
+    echo "Installing nix-darwin..."
+    
+    if ! _check_nix_installed; then
+        echo "Error: Nix is required but not installed. Please install Nix first using '$0 nix'."
+        exit 1
+    fi
+
+    # Source nix
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    
+    nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+    ./result/bin/darwin-installer
+
+    echo "nix-darwin installation completed!"
+}
+
 _check_os() {
     if [ "$(uname)" = "Darwin" ]; then
         echo "macOS detected"
+        IS_MACOS=true
     elif [ "$(uname)" = "Linux" ]; then
         echo "Linux detected"
+        IS_MACOS=false
     else
         echo "Error: Unsupported operating system. This script only works on macOS and Linux."
         exit 1
@@ -83,6 +112,7 @@ _check_os() {
 
 _main() {
     local COMPONENT=""
+    local IS_MACOS=false
 
     # Parse command-line arguments
     while [ $# -gt 0 ]; do
@@ -94,7 +124,7 @@ _main() {
             -d|--debug)
                 DEBUG=true
                 ;;
-            nix|home-manager)
+            nix|home-manager|darwin)
                 COMPONENT="$1"
                 ;;
             *)
@@ -135,8 +165,18 @@ _main() {
                 _install_home_manager
             fi
             ;;
+        darwin)
+            if [ "$IS_MACOS" = false ]; then
+                echo "Error: nix-darwin can only be installed on macOS."
+                exit 1
+            fi
+            if _check_darwin_installed; then
+                echo "nix-darwin is already installed. Skipping installation."
+            else
+                _install_darwin
+            fi
+            ;;
     esac
 }
 
 _main "$@"
-
