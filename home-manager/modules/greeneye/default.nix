@@ -60,15 +60,34 @@ in
       fi
 
       local kubeconfig="false"
+      local query=""
 
-      while test $# != 0; do
+      while [[ $# -gt 0 ]]; do
         case "$1" in
-          -k|--kubeconfig) kubeconfig="true" ;;
-          --) shift; break ;;
-          *) echo "unknown arg $1" ;;
+          -k|--kubeconfig)
+            kubeconfig="true"
+            shift
+            ;;
+          --)
+            shift
+            break
+            ;;
+          -*)
+            echo "unknown option: $1" >&2
+            return 1
+            ;;
+          *)
+            # Collect non-option arguments for the query
+            query+="$1 "
+            shift
+            ;;
         esac
-        shift
       done
+
+      # Collect any remaining arguments after '--' for the query
+      query+="$* "
+      # Trim trailing space from query
+      query="''${query% }"
 
       local rt_versions_path=$(find_rt_versions)
       if [ -z "$rt_versions_path" ]; then echo "error: couldn't find rt-versions" && return 1; fi
@@ -121,12 +140,12 @@ in
                   print mac, "unknown", statuses[mac]
               }
           }
-      }' <(echo "$clusters_info") <(echo "$clusters_information") | sort | fzf --select-1 --exit-0 --query "$1")
+      }' <(echo "$clusters_info") <(echo "$clusters_information") | sort | fzf --select-1 --exit-0 --query "$query")
       echo "$selection"
     }
 
     tssh() {
-      selection=$(tailscale_clusters_match)
+      selection=$(tailscale_clusters_match "''${@}")
       if [ ! -z "$selection" ]; then
         ssh -i "''${HOME}/.ssh/greenboard" green@$(echo "$selection" | cut -d " " -f1)
       else
@@ -140,7 +159,7 @@ in
         echo "error: kubectl command not found"
         return 1
       fi
-      local selection=$(tailscale_clusters_match --kubeconfig)
+      local selection=$(tailscale_clusters_match --kubeconfig "''${@}")
       if [ ! -z "$selection" ]; then
         tailscale configure kubeconfig $(echo "$selection" | cut -d " " -f1)
       else
