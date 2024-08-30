@@ -1,77 +1,86 @@
 {
-  description = "nix and home-manager config";
+  description = "Nix and Home-manager configurations";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Home manager
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-    } @ inputs: let
-      inherit (self) outputs;
-
-      # Define defaults here
-      defaults = {
-        username = "ori";
-        email = "orisneh@gmail.com";
-      };
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
 
       # Helper function to create home-manager configuration
-      mkHomeConfiguration = system: home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = {
-          inherit inputs outputs defaults;
-        };
-        modules = [
-          ./home-manager/home.nix
-        ];
-      };
-
-      # Helper function to create NixOS configuration
-      mkNixosConfiguration = {
-        system,
-        hostname,
-        extraModules ? [],
-        }: nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs outputs defaults;
-          };
+      mkHomeConfiguration = { system, username, email, extraModules ? [] }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            ./nixos/configuration.nix
-            {networking.hostName = hostname;}
+            ./home-manager/home.nix
+            {
+              home = {
+                inherit username;
+                homeDirectory = if nixpkgs.legacyPackages.${system}.stdenv.isDarwin
+                  then "/Users/${username}"
+                  else "/home/${username}";
+                stateVersion = "24.05";
+              };
+              _module.args = {
+                inherit username email;
+              };
+            }
           ] ++ extraModules;
         };
 
+      # TODO: Add helper function for nixos and darwin-nix configurations
+
     in {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#hostname'
-      nixosConfigurations = {
-        linux-x86 = mkNixosConfiguration {
-          system = "x86_64-linux";
-          hostname = "computer";
-        };
-        rpi = mkNixosConfiguration {
-          system = "aarch64-linux";
-          hostname = "raspberry-pi";
-        };
-      };
+      # TODO: Add nixos / darwin conigurations, maybe combine overlapping arguments?
 
       # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#default'
+      # Available through 'home-manager --flake .#<config-name>'
       homeConfigurations = {
-        linux-x86 = mkHomeConfiguration "x86_64-linux";
-        darwin-aarch64 = mkHomeConfiguration "aarch64-darwin";
+        ori-macbook = mkHomeConfiguration {
+          system = "aarch64-darwin";
+          username = "ori";
+          email = "orisne@greeneye.ag";
+          extraModules = [
+            ./home-manager/modules/core
+            ./home-manager/modules/git
+            ./home-manager/modules/zsh
+            ./home-manager/modules/zoxide
+            ./home-manager/modules/fonts
+            ./home-manager/modules/starship
+            ./home-manager/modules/tmux
+            ./home-manager/modules/neovim
+            ./home-manager/modules/kubernetes
+            ./home-manager/modules/wezterm
+            ./home-manager/modules/greeneye
+          ]; # modules specific to this machine
+        };
+        ori-desktop = mkHomeConfiguration {
+          system = "x86_64-linux";
+          username = "ori";
+          email = "orisneh@gmail.com";
+          extraModules = [
+            ./home-manager/modules/core
+            ./home-manager/modules/git
+            ./home-manager/modules/zsh
+            ./home-manager/modules/zoxide
+            ./home-manager/modules/fonts
+            ./home-manager/modules/starship
+            ./home-manager/modules/tmux
+            ./home-manager/modules/neovim
+            ./home-manager/modules/kubernetes
+            ./home-manager/modules/wezterm
+          ];
+        };
       };
     };
 }

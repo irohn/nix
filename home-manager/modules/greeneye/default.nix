@@ -10,7 +10,7 @@
 
   programs.zsh.shellAliases = lib.mkMerge [
     (lib.mkIf (config.programs.zsh.enable) {
-      gcli = "echo greeneye";
+      whoarewe = "echo greeneye";
     })
   ];
 

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, defaults, ... }:
+{ config, pkgs, lib, username, email, ... }:
 
 {
   home.packages = with pkgs; [
@@ -29,8 +29,8 @@
 
   programs.git = {
     enable = true;
-    userName = defaults.username;
-    userEmail = defaults.email;
+    userName = username;
+    userEmail = email;
     aliases = {
       unstage = "reset HEAD --";
       sync = "!f() { \
