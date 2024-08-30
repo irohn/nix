@@ -1,5 +1,4 @@
-# home-manager/starship.nix
-
+# Cross-shell prompt with extensive customization options
 { config, pkgs, ... }:
 
 {

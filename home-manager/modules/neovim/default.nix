@@ -1,14 +1,19 @@
+# Highly extensible Vim-based text editor
 { pkgs, config, lib, ... }:
 
-{
-  # Dependencies for ./config/nvim
-  home.packages = with pkgs; [
+let
+  requiredDependencies = with pkgs; [
     ripgrep
     fd
     nodejs
     unzip
     gcc
   ];
+in
+
+{
+  # Dependencies for ./config/nvim
+  home.packages = requiredDependencies;
 
   programs.neovim = {
     enable = true;
@@ -24,5 +29,9 @@
       source = ./config/nvim;
       recursive = true;
     };
+  };
+
+  programs.zsh.shellAliases = lib.mkIf (config.programs.neovim.enable && config.programs.zsh.enable) {
+    v = "nvim";
   };
 }

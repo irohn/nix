@@ -1,3 +1,4 @@
+# Distributed version control system
 { config, pkgs, lib, username, email, ... }:
 
 {

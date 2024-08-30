@@ -1,6 +1,20 @@
+# Custom module for greeneye specific needs
 { pkgs, config, lib, ... }:
 
+let
+  requiredDependencies = with pkgs; [
+    fd
+    ripgrep
+    tailscale
+    kubectl
+    gawk
+    fzf
+  ];
+
+in
 {
+  # Only add packages that aren't already present
+  home.packages = requiredDependencies;
 
   programs.zsh.sessionVariables = lib.mkMerge [
     (lib.mkIf (config.programs.zsh.enable) {

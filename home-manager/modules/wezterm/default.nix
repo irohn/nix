@@ -1,3 +1,4 @@
+# GPU-accelerated cross-platform terminal emulator and multiplexer
 { pkgs, ... }:
 
 {

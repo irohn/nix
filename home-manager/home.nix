@@ -5,18 +5,17 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = _: true;
     };
   };
 
   home.packages = with pkgs; [
+    # Core packages to install in all homes
     curl
     wget
+    vim
     jq
     yq
-    gawk
-    bat
-    eza
+    gawk # ensure gnu-awk for uniformity across systems
   ];
 
   # Let Home Manager install and manage itself.

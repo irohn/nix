@@ -1,3 +1,4 @@
+# A smarter cd command that learns your habits
 { config, pkgs, lib, ... }:
 
 {
@@ -6,10 +7,7 @@
     enableZshIntegration = true;
   };
 
-  programs.zsh.shellAliases = lib.mkMerge [
-    (lib.mkIf (config.programs.zsh.enable) {
-      gs = "git status";
-      cd = "__zoxide_z";
-    })
-  ];
+  programs.zsh.shellAliases = lib.mkIf (config.programs.zoxide.enable && config.programs.zsh.enable) {
+    cd = "__zoxide_z";
+  };
 }

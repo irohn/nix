@@ -1,5 +1,4 @@
-# home-manager/zsh.nix
-
+# Z shell configuration with enhanced features over bash
 { config, pkgs, ... }:
 
 {
@@ -34,12 +33,6 @@
     '';
 
     shellAliases = {
-      v = "nvim";
-      ls = "eza";
-      ll = "eza -lAh";
-      la = "eza -laa";
-      lt = "eza --almost-all --tree --color=auto --icons=auto --git-ignore --smart-group --mounts --level=5";
-      cat = "bat";
       ai = "ollama run deepseek-coder-v2:latest";
     };
 

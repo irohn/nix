@@ -2,12 +2,13 @@
   description = "Nix and Home-manager configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,8 +52,28 @@
           username = "ori";
           email = "orisne@greeneye.ag";
           extraModules = [
-            ./home-manager/modules/core
             ./home-manager/modules/git
+            ./home-manager/modules/zsh
+            ./home-manager/modules/eza
+            ./home-manager/modules/bat
+            ./home-manager/modules/zoxide
+            ./home-manager/modules/fonts
+            ./home-manager/modules/starship
+            ./home-manager/modules/tmux
+            ./home-manager/modules/neovim
+            ./home-manager/modules/kubernetes
+            ./home-manager/modules/wezterm
+            ./home-manager/modules/greeneye
+          ];
+        };
+        ori-desktop = mkHomeConfiguration {
+          system = "x86_64-linux";
+          username = "ori";
+          email = "orisneh@gmail.com";
+          extraModules = [
+            ./home-manager/modules/git
+            ./home-manager/modules/eza
+            ./home-manager/modules/bat
             ./home-manager/modules/zsh
             ./home-manager/modules/zoxide
             ./home-manager/modules/fonts
@@ -62,23 +83,6 @@
             ./home-manager/modules/kubernetes
             ./home-manager/modules/wezterm
             ./home-manager/modules/greeneye
-          ]; # modules specific to this machine
-        };
-        ori-desktop = mkHomeConfiguration {
-          system = "x86_64-linux";
-          username = "ori";
-          email = "orisneh@gmail.com";
-          extraModules = [
-            ./home-manager/modules/core
-            ./home-manager/modules/git
-            ./home-manager/modules/zsh
-            ./home-manager/modules/zoxide
-            ./home-manager/modules/fonts
-            ./home-manager/modules/starship
-            ./home-manager/modules/tmux
-            ./home-manager/modules/neovim
-            ./home-manager/modules/kubernetes
-            ./home-manager/modules/wezterm
           ];
         };
       };

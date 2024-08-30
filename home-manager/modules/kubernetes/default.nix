@@ -1,3 +1,4 @@
+# Container orchestration platform configuration
 { pkgs, config, lib, ... }:
 
 {
