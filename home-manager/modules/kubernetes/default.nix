@@ -22,7 +22,32 @@
       initExtra = lib.mkAfter ''
         unalias kl 2>/dev/null
         kl() {
-          kubectl logs -n $(kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name --no-headers | fzf --select-1) "''${@}"
+          local query=""
+          local kubectl_args=()
+
+          while [[ $# -gt 0 ]]; do
+            case "$1" in
+              -q|--query)
+                query="$2"
+                shift 2
+                ;;
+              *)
+                kubectl_args+=("$1")
+                shift
+                ;;
+            esac
+          done
+
+          local selected_pod=$(kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name --no-headers | 
+            fzf --select-1 --query="$query")
+
+          if [[ -n $selected_pod ]]; then
+            local namespace=$(echo $selected_pod | awk '{print $1}')
+            local pod_name=$(echo $selected_pod | awk '{print $2}')
+            kubectl logs -n "$namespace" "$pod_name" "''${kubectl_args[@]}"
+          else
+            echo "No pod selected."
+          fi
         }
       '';
     };
