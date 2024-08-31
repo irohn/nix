@@ -25,11 +25,35 @@
           local query=""
           local kubectl_args=()
 
+          kl_help() {
+            echo "Usage: kl [OPTIONS] [-- KUBECTL_ARGS]"
+            echo
+            echo "View logs of a Kubernetes pod."
+            echo
+            echo "Options:"
+            echo "  -q, --query QUERY    Pre-fill the pod selection search"
+            echo "  -h, --help           Display this help message"
+            echo
+            echo "Examples:"
+            echo "  kl                   # Interactive pod selection"
+            echo "  kl -q nginx          # Pre-fill 'nginx' in pod selection"
+            echo "  kl -- --tail=100     # Show last 100 lines of logs"
+          }
+
           while [[ $# -gt 0 ]]; do
             case "$1" in
+              -h|--help)
+                kl_help
+                return 0
+                ;;
               -q|--query)
                 query="$2"
                 shift 2
+                ;;
+              --)
+                shift
+                kubectl_args+=("$@")
+                break
                 ;;
               *)
                 kubectl_args+=("$1")
@@ -56,8 +80,29 @@
           local resource_type="pod"
           local kubectl_args=()
 
+          kd_help() {
+            echo "Usage: kd [OPTIONS] [-- KUBECTL_ARGS]"
+            echo
+            echo "Describe a Kubernetes resource."
+            echo
+            echo "Options:"
+            echo "  -q, --query QUERY    Pre-fill the resource selection search"
+            echo "  -t, --type TYPE      Specify the resource type (default: pod)"
+            echo "  -h, --help           Display this help message"
+            echo
+            echo "Examples:"
+            echo "  kd                   # Describe a pod (interactive selection)"
+            echo "  kd -q nginx          # Describe a pod, pre-fill 'nginx' in selection"
+            echo "  kd -t deployment     # Describe a deployment (interactive selection)"
+            echo "  kd -t service -q web # Describe a service, pre-fill 'web' in selection"
+          }
+
           while [[ $# -gt 0 ]]; do
             case "$1" in
+              -h|--help)
+                kd_help
+                return 0
+                ;;
               -q|--query)
                 query="$2"
                 shift 2
@@ -66,17 +111,17 @@
                 resource_type="$2"
                 shift 2
                 ;;
+              --)
+                shift
+                kubectl_args+=("$@")
+                break
+                ;;
               *)
                 kubectl_args+=("$1")
                 shift
                 ;;
             esac
           done
-
-          if [[ -z $resource_type ]]; then
-            echo "Error: Resource type is required. Use -t or --type to specify (e.g., pod, deployment, statefulset)."
-            return 1
-          fi
 
           local selected_resource=$(kubectl get $resource_type --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name --no-headers | 
             fzf --select-1 --query="$query")
@@ -96,8 +141,30 @@
           local shell="/bin/sh"
           local kubectl_args=()
 
+          kexec_help() {
+            echo "Usage: kexec [OPTIONS] [-- KUBECTL_EXEC_ARGS]"
+            echo
+            echo "Execute a shell in a Kubernetes pod."
+            echo
+            echo "Options:"
+            echo "  -q, --query QUERY    Pre-fill the pod selection search"
+            echo "  -s, --shell SHELL    Specify the shell to use (default: /bin/sh)"
+            echo "  -h, --help           Display this help message"
+            echo
+            echo "Examples:"
+            echo "  kexec                            # Interactive pod and container selection"
+            echo "  kexec -q nginx                   # Pre-fill 'nginx' in pod selection"
+            echo "  kexec -s /bin/bash               # Use bash instead of sh"
+            echo "  kexec -q backend -s /bin/bash    # Combine query and shell options"
+            echo "  kexec -- env                     # Run 'env' command instead of interactive shell"
+          }
+
           while [[ $# -gt 0 ]]; do
             case "$1" in
+              -h|--help)
+                kexec_help
+                return 0
+                ;;
               -q|--query)
                 query="$2"
                 shift 2
@@ -105,6 +172,11 @@
               -s|--shell)
                 shell="$2"
                 shift 2
+                ;;
+              --)
+                shift
+                kubectl_args+=("$@")
+                break
                 ;;
               *)
                 kubectl_args+=("$1")
@@ -131,7 +203,11 @@
 
             if [[ -n $container ]]; then
               echo "Executing into $namespace/$pod_name:$container"
-              kubectl exec -it -n "$namespace" "$pod_name" -c "$container" "''${kubectl_args[@]}" -- $shell
+              if [[ ''${#kubectl_args[@]} -eq 0 ]]; then
+                kubectl exec -it -n "$namespace" "$pod_name" -c "$container" -- $shell
+              else
+                kubectl exec -it -n "$namespace" "$pod_name" -c "$container" -- "''${kubectl_args[@]}"
+              fi
             else
               echo "No container selected."
             fi
