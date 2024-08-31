@@ -8,18 +8,23 @@
 {
 
   system = {
-    # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
-    activationScripts.postUserActivation.text = ''
-      # activateSettings -u will reload the settings from the database and apply them to the current session,
-      # so we do not need to logout and login again to make the changes take effect.
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    '';
-
     defaults = {
       menuExtraClock.Show24Hour = true;  # show 24 hour clock
 
-      # other macOS's defaults configuration.
-      # ......
+      dock = {
+        autohide = true;
+        orientation = "left";
+        show-process-indicators = false;
+        show-recents = false;
+        static-only = true;
+      };
+
+      finder = {
+        AppleShowAllExtensions = true;
+        ShowPathbar = true;
+        FXEnableExtensionChangeWarning = false;
+      };
+
     };
   };
 

@@ -41,6 +41,7 @@
       "karabiner-elements"
       "rectangle"
       "scroll-reverser"
+      "raycast"
     ];
   };
 }
