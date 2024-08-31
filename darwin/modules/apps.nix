@@ -10,12 +10,13 @@
 
   environment.systemPackages = with pkgs; [
     git
+    vim
   ];
 
   # Homebrew need to be installed manually, see https://brew.sh
 
   # The apps installed by homebrew are not managed by nix, and not reproducible!
-  # I mainly use this for GUI apps
+  # I mainly use this for GUI apps (casks)
   homebrew = {
     enable = true;
 
@@ -30,14 +31,12 @@
     ];
 
     # `brew install`
-    brews = [
-      "coreutils"
-    ];
+    brews = [ ];
 
     # `brew install --cask`
     casks = [
       "alt-tab"
-      "wezterm"
+      "wezterm" # configured in home-manager
       "karabiner-elements"
       "rectangle"
       "scroll-reverser"
