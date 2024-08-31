@@ -215,6 +215,83 @@
             echo "No pod selected."
           fi
         }
+
+        unalias kpf 2>/dev/null
+        kpf() {
+          local query=""
+          local local_port=""
+          local remote_port=""
+          local resource_type="pod"
+          local kubectl_args=()
+
+          kpf_help() {
+            echo "Usage: kpf [OPTIONS] LOCAL_PORT[:REMOTE_PORT]"
+            echo
+            echo "Port forward to a Kubernetes resource."
+            echo
+            echo "Options:"
+            echo "  -q, --query QUERY    Pre-fill the resource selection search"
+            echo "  -t, --type TYPE      Specify the resource type (default: pod)"
+            echo "  -h, --help           Display this help message"
+            echo
+            echo "Arguments:"
+            echo "  LOCAL_PORT[:REMOTE_PORT]  Specify the local port and optionally the remote port"
+            echo "                            If REMOTE_PORT is not specified, it will be the same as LOCAL_PORT"
+            echo
+            echo "Examples:"
+            echo "  kpf 8080                  # Forward local port 8080 to port 8080 of a pod"
+            echo "  kpf 8080:80               # Forward local port 8080 to port 80 of a pod"
+            echo "  kpf -q nginx 8080         # Forward to a pod, pre-fill 'nginx' in selection"
+            echo "  kpf -t service 8080       # Forward to a service instead of a pod"
+            echo "  kpf -t deployment 8080    # Forward to a deployment instead of a pod"
+          }
+
+          while [[ $# -gt 0 ]]; do
+            case "$1" in
+              -h|--help)
+                kpf_help
+                return 0
+                ;;
+              -q|--query)
+                query="$2"
+                shift 2
+                ;;
+              -t|--type)
+                resource_type="$2"
+                shift 2
+                ;;
+              *)
+                if [[ -z "$local_port" ]]; then
+                  IFS=':' read -r local_port remote_port <<< "$1"
+                  if [[ -z "$remote_port" ]]; then
+                    remote_port="$local_port"
+                  fi
+                else
+                  kubectl_args+=("$1")
+                fi
+                shift
+                ;;
+            esac
+          done
+
+          if [[ -z "$local_port" ]]; then
+            echo "Error: Local port must be specified."
+            kpf_help
+            return 1
+          fi
+
+          local selected_resource=$(kubectl get $resource_type --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name --no-headers | 
+            fzf --select-1 --query="$query")
+
+          if [[ -n $selected_resource ]]; then
+            local namespace=$(echo $selected_resource | awk '{print $1}')
+            local resource_name=$(echo $selected_resource | awk '{print $2}')
+            echo "Port forwarding to $resource_type $namespace/$resource_name: $local_port:$remote_port"
+            kubectl port-forward -n "$namespace" "$resource_type/$resource_name" "$local_port:$remote_port" "''${kubectl_args[@]}"
+          else
+            echo "No $resource_type selected."
+          fi
+        }
       '';
     };
   };
