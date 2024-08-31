@@ -73,7 +73,6 @@
             ./darwin/configuration.nix
             ({ pkgs, ... }: {
               nixpkgs.hostPlatform = system;
-
               system = {
                 # Set Git commit hash for darwin-version
                 configurationRevision = self.rev or self.dirtyRev or null;
@@ -83,15 +82,6 @@
             {
               _module.args = {
                 inherit hostname username email;
-              };
-            }
-            home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                # note that this will NOT load extraModules defined in homeConfigurations!
-                users.${username}.imports = [ ./home-manager/home.nix ] ++ (commonModules.${username}.homeManager or []);
               };
             }
           ]
