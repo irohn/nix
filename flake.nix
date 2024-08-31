@@ -92,8 +92,6 @@
       # TODO: Add helper function for nixos configurations
 
     in {
-      # TODO: Add nixos conigurations, maybe combine overlapping arguments?
-
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#<config-name>'
       homeConfigurations = {
@@ -113,7 +111,7 @@
 
 
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#<config-name>
+      # Available through `darwin-rebuild build --flake .#<config-name>`
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
           system = "aarch64-darwin";

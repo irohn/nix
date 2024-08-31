@@ -12,10 +12,10 @@
     git
   ];
 
-  # TODO To make this work, homebrew need to be installed manually, see https://brew.sh
+  # Homebrew need to be installed manually, see https://brew.sh
 
   # The apps installed by homebrew are not managed by nix, and not reproducible!
-  # But on macOS, homebrew has a much larger selection of apps than nixpkgs, especially for GUI apps!
+  # I mainly use this for GUI apps
   homebrew = {
     enable = true;
 
