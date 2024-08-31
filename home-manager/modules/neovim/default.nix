@@ -33,7 +33,7 @@ in
       vimdiffAlias = true;
     };
 
-    zsh.shellAliases = lib.mkIf (config.programs.neovim.enable && config.programs.zsh.enable) {
+    zsh.shellAliases = {
       v = "nvim";
     };
   };

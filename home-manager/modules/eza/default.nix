@@ -14,7 +14,7 @@
       ];
     };
 
-    zsh.shellAliases = lib.mkIf config.programs.eza.enable {
+    zsh.shellAliases = {
       ls = "eza";
       ll = "eza -lAh";
       la = "eza -laa";

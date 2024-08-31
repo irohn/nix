@@ -11,7 +11,7 @@
 
   programs = {
     zsh = {
-      shellAliases = lib.mkIf config.programs.zsh.enable {
+      shellAliases = {
         k = "kubectl";
         pods = "kubectl get pods --all-namespaces";
         wp = "watch -n 0.1 'kubectl get pods --all-namespaces'";

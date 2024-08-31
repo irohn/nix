@@ -8,7 +8,7 @@
       enableZshIntegration = true;
     };
 
-    zsh.shellAliases = lib.mkIf (config.programs.zoxide.enable && config.programs.zsh.enable) {
+    zsh.shellAliases = {
       cd = "__zoxide_z";
     };
   };

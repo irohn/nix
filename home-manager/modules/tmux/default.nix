@@ -94,12 +94,12 @@
     };
 
     zsh = {
-      shellAliases = lib.mkIf config.programs.tmux.enable {
+      shellAliases = {
         tmux = "tmux -u";
         tm = "tmux -u attach";
       };
 
-      initExtra = lib.mkIf config.programs.tmux.enable ''
+      initExtra = lib.mkAfter ''
       sessionizer() {
         local selected=$(fd -H -t d '^.git$' ~ --exclude .local -x echo {//} | fzf --preview "eza -A --color=always {}")
         [ -z "$selected" ] && echo "Error: empty selection..." && return 1

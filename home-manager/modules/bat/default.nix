@@ -13,7 +13,7 @@
       };
     };
 
-    zsh.shellAliases = lib.mkIf config.programs.bat.enable {
+    zsh.shellAliases = {
       cat = "bat";
     };
   };
