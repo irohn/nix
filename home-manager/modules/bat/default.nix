@@ -2,16 +2,19 @@
 { pkgs, lib, config, ... }:
 
 {
-  programs.bat = {
-    enable = true;
-    config = {
-      pager = "never";
-      style = "plain";
-      theme = "OneHalfDark";
-    };
-  };
 
-  programs.zsh.shellAliases = lib.mkIf config.programs.bat.enable {
-    cat = "bat";
+  programs = {
+    bat = {
+      enable = true;
+      config = {
+        pager = "never";
+        style = "plain";
+        theme = "OneHalfDark";
+      };
+    };
+
+    zsh.shellAliases = lib.mkIf config.programs.bat.enable {
+      cat = "bat";
+    };
   };
 }

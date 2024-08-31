@@ -3,9 +3,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.tmux = {
-    enable = true;
-    extraConfig = ''
+  programs = {
+    tmux = {
+      enable = true;
+      extraConfig = ''
       # Address vim mode switching delay (http://superuser.com/a/252717/65504)
       set -s escape-time 0
 
@@ -89,15 +90,16 @@
       set -g status-right-length 40
       set -g status-right "#[fg=#7E9CD8,bg=#16161D] %H:%M:%S"
       set -g message-style "fg=#1F1F28,bg=#E6C384"
-    '';
-  };
+      '';
+    };
 
-  programs.zsh.shellAliases = lib.mkIf config.programs.tmux.enable {
-    tmux = "tmux -u";
-    tm = "tmux -u attach";
-  };
+    zsh = {
+      shellAliases = lib.mkIf config.programs.tmux.enable {
+        tmux = "tmux -u";
+        tm = "tmux -u attach";
+      };
 
-  programs.zsh.initExtra = lib.mkIf config.programs.tmux.enable ''
+      initExtra = lib.mkIf config.programs.tmux.enable ''
       sessionizer() {
         local selected=$(fd -H -t d '^.git$' ~ --exclude .local -x echo {//} | fzf --preview "eza -A --color=always {}")
         [ -z "$selected" ] && echo "Error: empty selection..." && return 1
@@ -108,5 +110,7 @@
         [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
       }
       bindkey -s '^S' 'sessionizer\n'
-  '';
+      '';
+    };
+  };
 }
