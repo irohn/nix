@@ -85,6 +85,15 @@
                 inherit hostname username email;
               };
             }
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                # note that this will NOT load extraModules defined in homeConfigurations!
+                users.${username}.imports = [ ./home-manager/home.nix ] ++ (commonModules.${username}.homeManager or []);
+              };
+            }
           ]
           ++ (commonModules.${username}.darwin or []) ++ extraModules;
         };
@@ -109,8 +118,7 @@
         };
       };
 
-
-      # Build darwin flake using:
+      # Darwin configuration entrypoint
       # Available through `darwin-rebuild build --flake .#<config-name>`
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
