@@ -60,7 +60,6 @@
   # Enable some system services
   services = {
     nix-daemon.enable = true;
-    };
   };
 
   # Configure Nix
