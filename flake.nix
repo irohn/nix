@@ -80,6 +80,7 @@
               };
             })
             {
+              # expose inputs to submodules
               _module.args = {
                 inherit hostname username email;
               };
