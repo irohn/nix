@@ -36,7 +36,6 @@
             ./home-manager/modules/greeneye
           ];
           darwin = [
-            ./darwin/modules/nix-core.nix
             ./darwin/modules/system.nix
             ./darwin/modules/host-users.nix
             ./darwin/modules/apps.nix
@@ -71,6 +70,7 @@
         darwin.lib.darwinSystem {
           inherit system;
           modules = [
+            ./darwin/configuration.nix
             ({ pkgs, ... }: {
               nixpkgs.hostPlatform = system;
 
