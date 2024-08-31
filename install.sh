@@ -48,7 +48,7 @@ _check_darwin_installed() {
 
 _install_nix() {
     echo "Installing Nix..."
-    
+
     if ! command -v curl >/dev/null 2>&1; then
         echo "Error: curl is required but not installed. Please install curl and try again."
         exit 1
@@ -62,7 +62,7 @@ _install_nix() {
 
 _install_home_manager() {
     echo "Installing Home Manager..."
-    
+
     if ! _check_nix_installed; then
         echo "Error: Nix is required but not installed. Please install Nix first using '$0 nix'."
         exit 1
@@ -70,10 +70,10 @@ _install_home_manager() {
 
     # Source nix
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-    
+
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
     nix-channel --update
-    
+
     export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
     nix-shell '<home-manager>' -A install
 
@@ -82,15 +82,17 @@ _install_home_manager() {
 
 _install_darwin() {
     echo "Installing nix-darwin..."
-    
+
     if ! _check_nix_installed; then
         echo "Error: Nix is required but not installed. Please install Nix first using '$0 nix'."
         exit 1
     fi
 
     # Source nix
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-    
+    if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    fi
+
     nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
     ./result/bin/darwin-installer
 

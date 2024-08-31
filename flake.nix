@@ -35,6 +35,12 @@
             ./home-manager/modules/wezterm
             ./home-manager/modules/greeneye
           ];
+          darwin = [
+            ./darwin/modules/nix-core.nix
+            ./darwin/modules/system.nix
+            ./darwin/modules/host-users.nix
+            ./darwin/modules/apps.nix
+          ];
         };
         # Add other users here
         # anotheruser.homeManager = [ ... ];
@@ -61,36 +67,29 @@
           ] ++ (commonModules.${username}.homeManager or []) ++ extraModules;
         };
 
-      # TODO: Add helper function for nixos configurations
-
-      # Helper function to create darwin configuration
-      mkDarwinConfiguration = { system, username, email, extraModules ? [] }:
+      mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
         darwin.lib.darwinSystem {
           inherit system;
           modules = [
-            ./darwin/configuration.nix
-            home-manager.darwinModules.home-manager
+            ({ pkgs, ... }: {
+              nixpkgs.hostPlatform = system;
+
+              system = {
+                # Set Git commit hash for darwin-version
+                configurationRevision = self.rev or self.dirtyRev or null;
+                stateVersion = 4;
+              };
+            })
             {
-              users.users.${username}.home = "/Users/${username}";
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = { ... }: {
-                  imports = [ ./home-manager/home.nix ] 
-                    ++ (commonModules.${username}.homeManager or []);
-                  home = {
-                    inherit username;
-                    homeDirectory = "/Users/${username}";
-                    stateVersion = "24.05";
-                  };
-                  _module.args = {
-                    inherit username email;
-                  };
-                };
+              _module.args = {
+                inherit hostname username email;
               };
             }
-          ] ++ extraModules;
+          ]
+          ++ (commonModules.${username}.darwin or []) ++ extraModules;
         };
+
+      # TODO: Add helper function for nixos configurations
 
     in {
       # TODO: Add nixos conigurations, maybe combine overlapping arguments?
@@ -112,20 +111,17 @@
         };
       };
 
-      # Darwin configuration entrypoint
-      # Available through 'darwin-rebuild switch --flake .#<config-name>'
+
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#<config-name>
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
           system = "aarch64-darwin";
           username = "ori";
+          hostname = "macbook";
           email = "orisne@greeneye.ag";
-          extraModules = [
-            # ./darwin/modules/system
-            # ./darwin/modules/apps
-            # ... (other Darwin-specific modules)
-          ];
+          extraModules = [ ];
         };
       };
-
     };
 }
