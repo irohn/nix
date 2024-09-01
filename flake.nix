@@ -110,7 +110,7 @@
       };
 
       # Darwin configuration entrypoint
-      # Available through `darwin-rebuild build --flake .#<config-name>`
+      # Available through `darwin-rebuild switch --flake .#<config-name>`
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
           system = "aarch64-darwin";
