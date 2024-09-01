@@ -23,7 +23,7 @@ opt.clipboard = "unnamedplus"
 
 -- Show trailing spaces
 opt.list = true
-opt.listchars = { trail = '·'}
+opt.listchars = { tab = '  ', trail = '·', nbsp = '␣'}
 
 -- Show which line your cursor is on
 opt.cursorline = true
