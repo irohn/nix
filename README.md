@@ -10,6 +10,7 @@ This configuration uses [Nix](https://nixos.org/), [Home Manager](https://github
 - [Home Manager](https://github.com/nix-community/home-manager)
 - [nix-darwin](https://github.com/LnL7/nix-darwin) (on MacOS)
 - Enable [Flakes](https://nixos.wiki/wiki/Flakes) (Optional but recommended)
+- [NerdFonts](https://www.nerdfonts.com/) installed and enabled on your terminal emulator
 
 ## Installation
 
@@ -36,6 +37,7 @@ After installing nix, we can install home-manager using flakes:
 ./install home-manager
 ```
 
+This should have installed home-manager as well as created your first generation!
 Once installed restart your shell and verify installation:
 
 ```bash
@@ -76,6 +78,8 @@ Note that if you are not managing your users with nixos or darwin-nix, and you a
 echo "$(which zsh)" | sudo tee -a /etc/shells
 chsh -s $(which zsh)
 ```
+
+then restart your shell and you should see your new prompt activated
 
 ### Darwin
 
