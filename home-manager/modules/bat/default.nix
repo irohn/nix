@@ -9,7 +9,7 @@
       config = {
         pager = "never";
         style = "plain";
-        theme = "OneHalfDark";
+        theme = "TwoDark";
       };
     };
 
