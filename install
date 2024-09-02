@@ -92,7 +92,12 @@ _install_darwin() {
     fi
 
     if $FLAKES; then
-        nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .
+        rm -rf ~/.config/nix-darwin
+        mkdir -p ~/.config/nix-darwin
+        cd ~/.config/nix-darwin
+        nix flake init -t nix-darwin
+        sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
+        nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake ~/.config/nix-darwin
     else
         nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
         ./result/bin/darwin-installer
