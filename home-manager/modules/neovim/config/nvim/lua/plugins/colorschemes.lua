@@ -1,8 +1,13 @@
 return {
   {
-    "rebelot/kanagawa.nvim",
+    "navarasu/onedark.nvim",
     config = function()
-      vim.cmd.colorscheme("kanagawa")
+      local onedark = require("onedark")
+      onedark.setup({ style = "darker" })
+      onedark.load()
     end
+  },
+  {
+    "rebelot/kanagawa.nvim",
   },
 }

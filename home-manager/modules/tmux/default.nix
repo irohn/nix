@@ -6,7 +6,7 @@
   programs = {
     tmux = {
       enable = true;
-      extraConfig = ''
+      extraConfig = /* tmux */ ''
       # Address vim mode switching delay (http://superuser.com/a/252717/65504)
       set -s escape-time 0
 
@@ -99,7 +99,7 @@
         tm = "tmux -u attach";
       };
 
-      initExtra = lib.mkAfter ''
+      initExtra = lib.mkAfter /* bash */ ''
       sessionizer() {
         local selected=$(fd -H -t d '^.git$' ~ --exclude .local -x echo {//} | fzf --preview "eza -A --color=always {}")
         [ -z "$selected" ] && echo "Error: empty selection..." && return 1

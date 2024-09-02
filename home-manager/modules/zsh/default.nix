@@ -21,7 +21,7 @@
       sessionVariables = {
         TEST = "test";
       };
-      initExtra = ''
+      initExtra = /* bash */ ''
       stty -ixon
 
       autoload -U up-line-or-beginning-search

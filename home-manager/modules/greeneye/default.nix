@@ -27,7 +27,7 @@ in
         whoarewe = "echo greeneye";
       };
 
-      initExtra = lib.mkAfter ''
+      initExtra = lib.mkAfter /* bash */ ''
         find_rt_versions() {
           if ! command -v fd &> /dev/null; then
             echo "error: fd command not found"

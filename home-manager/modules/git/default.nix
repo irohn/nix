@@ -24,7 +24,7 @@
         gs = "git status";
       };
 
-      initExtra = lib.mkAfter ''
+      initExtra = lib.mkAfter /* bash */ ''
     bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
       '';
     };
@@ -35,7 +35,7 @@
       userEmail = email;
       aliases = {
         unstage = "reset HEAD --";
-        sync = "!f() { \
+        sync = /* bash */ "!f() { \
           local branch=$(git rev-parse --abbrev-ref HEAD); \
           git fetch origin $branch:$branch; \
           git merge-base --is-ancestor $branch origin/$branch || \
