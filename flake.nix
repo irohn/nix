@@ -77,7 +77,28 @@
           ++ (settings.${username}.darwin or []) ++ extraModules;
         };
 
-      # TODO: Add helper function for nixos configurations
+      mkNixosConfiguration = { system, hostname, username, email, extraModules ? [] }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./nixos/configuration.nix
+            ({ pkgs, ... }: {
+              nixpkgs.hostPlatform = system;
+              system = {
+                # Set Git commit hash for nixos-version
+                configurationRevision = self.rev or self.dirtyRev or null;
+                stateVersion = "24.05";
+              };
+            })
+            {
+              # expose inputs to submodules
+              _module.args = {
+                inherit hostname username email;
+              };
+            }
+          ]
+            ++ (settings.${username}.nixos or []) ++ extraModules;
+        };
 
     in {
       # Standalone home-manager configuration entrypoint
@@ -108,5 +129,18 @@
           extraModules = [ ];
         };
       };
+
+      # NixOS configuration entrypoint
+      # Available through `nixos-rebuild switch --flake .#<config-name>`
+      nixosConfigurations = {
+        ori-wsl = mkNixosConfiguration {
+          system = settings.ori.defaults.system;
+          username = settings.ori.defaults.username;
+          hostname = "nixos-wsl";
+          email = settings.ori.defaults.email;
+          extraModules = [ ];
+        };
+      };
+
     };
 }
