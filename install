@@ -16,6 +16,7 @@ Components:
 Options:
     -h, --help      Show this help message and exit
     -d, --debug     Enable debug mode
+    --no-flakes     Disable flakes (not recommended)
 EOF
 }
 
@@ -54,7 +55,7 @@ _install_nix() {
         exit 1
     fi
 
-    curl -L https://nixos.org/nix/install | sh -s -- --daemon
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
     echo "Nix installation completed!"
     echo "Please restart your shell to use Nix."
@@ -68,14 +69,15 @@ _install_home_manager() {
         exit 1
     fi
 
-    # Source nix
-    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    if $FLAKES; then
+        nix --extra-experimental-features "nix-command flakes" run home-manager/master -- init --switch
+    else
+        nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+        nix-channel --update
 
-    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-    nix-channel --update
-
-    export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-    nix-shell '<home-manager>' -A install
+        export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+        nix-shell '<home-manager>' -A install
+    fi
 
     echo "Home Manager installation completed!"
     echo "Please restart your shell to use home-manager."
@@ -89,13 +91,12 @@ _install_darwin() {
         exit 1
     fi
 
-    # Source nix
-    if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    if $FLAKES; then
+        nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .
+    else
+        nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+        ./result/bin/darwin-installer
     fi
-
-    nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-    ./result/bin/darwin-installer
 
     echo "nix-darwin installation completed!"
     echo "Please restart your shell to use nix-darwin."
@@ -117,6 +118,7 @@ _check_os() {
 _main() {
     local COMPONENT=""
     local IS_MACOS=false
+    local FLAKES=true
 
     # Parse command-line arguments
     while [ $# -gt 0 ]; do
@@ -127,6 +129,9 @@ _main() {
                 ;;
             -d|--debug)
                 DEBUG=true
+                ;;
+            --no-flakes)
+                FLAKES=false
                 ;;
             nix|home-manager|darwin)
                 COMPONENT="$1"

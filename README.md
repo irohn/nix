@@ -9,23 +9,51 @@ This configuration uses [Nix](https://nixos.org/), [Home Manager](https://github
 - [Nix](https://nixos.org/)
 - [Home Manager](https://github.com/nix-community/home-manager)
 - [nix-darwin](https://github.com/LnL7/nix-darwin) (on MacOS)
+- Enable [Flakes](https://nixos.wiki/wiki/Flakes) (Optional but recommended)
 
-You can also install these using the install script
+## Installation
+
+### nix
+
+First thing first, if you are not on NixOS, install Nix itself:
 
 ```bash
-# note that a shell restart is required between these commands!
-# use them one by one and reopen the terminal between them
-./install.sh nix
-./install.sh darwin
-./install.sh home-manager
+./install nix
 ```
 
-Also make sure you have [Flakes](https://nixos.wiki/wiki/Flakes) enabled you can also set the `NIX_CONFIG` environment variable in your current shell:
+Once nix is installed, restart your shell and verify installation:
 
 ```bash
-# Should be 2.4+
-nix --version
-export NIX_CONFIG="experimental-features = nix-command flakes"
+nix --version # Should be 2.4+
+nix flake info # Show flake metadata
+```
+
+### home-manager
+
+After installing nix, we can install home-manager using flakes:
+
+```bash
+./install home-manager
+```
+
+Once installed restart your shell and verify installation:
+
+```bash
+home-manager --version
+```
+
+### darwin
+
+After installing nix, we can install nix-darwin using flakes:
+
+```bash
+./install darwin
+```
+
+Once installed restart your shell and verify installation:
+
+```bash
+darwin-version --version
 ```
 
 ## Usage
@@ -69,16 +97,19 @@ Work in progress...
 ├── flake.nix # The main entry point for the Nix flake
 ├── home-manager # Home Manager configurations
 │   ├── home.nix # main configuration file
+│   ├── alice.nix # defaults home override for alice
 │   └── modules # configuration modules for home-manager
 │       ├── module1
 │       └── module2
 ├── darwin # Darwin configurations
 │   ├── configuration.nix # Main configuration file
+│   ├── alice.nix # defaults darwin configuration override for alice
 │   └── modules # darwin configuration modules
 │       ├── module1
 │       └── module2
 └── nixos # NixOS configurations
     ├── configuration.nix # main configuration file
+│   ├── alice.nix # defaults nixos configuration override for alice
     └── modules # nixos configuration modules
         ├── module1
         └── module2
@@ -89,16 +120,23 @@ Work in progress...
 in `flake.nix`, add a new user and their configurations, for example:
 
 ```nix
+# flake.nix
 # ... previous code ...
 
-      commonModules = {
-        ori = { ... };
-        alice = {
-          homeManager = [
-            ./home-manager/modules/git
-            ./home-manager/modules/zsh
-            ./home-manager/modules/tmux
-          ];
+      # Define user level settings
+      settings = {
+        example = {
+          defaults = {
+            username = "exam";
+            email = "example@mail.com";
+            # get this with `nix eval --impure --raw --expr 'builtins.currentSystem'`
+            system = "x86_64-linux";
+          };
+          modules = {
+            homeManager = [ ./home-manager/alice.nix ];
+            darwin = [ ./darwin/alice.nix ];
+            nixos = [ ./nixos/alice.nix ];
+          };
         };
       };
 
@@ -110,7 +148,9 @@ in `flake.nix`, add a new user and their configurations, for example:
           system = "x86_64-linux";
           username = "alice";
           email = "alice@example.com";
-          extraModules = [ ];
+          extraModules = [
+            ./home-manager/modules/greeneye # load the greeneye module specifically on alice's laptop home config
+          ]; # Extra modules that applies just for alice-laptop home config
         };
       };
 
@@ -123,13 +163,35 @@ in `flake.nix`, add a new user and their configurations, for example:
           username = "alice";
           email = "alice@example.com";
           extraModules = [
-            ./darwin/modules/system
-            ./darwin/modules/apps
+            ./darwin/modules/custom_module # Module that applies specifically to alice-macbook darwin config
           ];
         };
       };
 
 # ... rest of flake.nix ...
+```
+
+Then in <config>/alice.nix for example `./home-manager/alice.nix` you can import all default modules for alice's home configuration
+
+```nix
+# ./home-manager/alice.nix
+{ config, pkgs, username, email, ... }:
+
+{
+  imports = [
+    ./modules/git
+    ./modules/zsh
+    ./modules/eza
+    ./modules/bat
+    ./modules/zoxide
+    ./modules/fonts
+    ./modules/starship
+    ./modules/tmux
+    ./modules/neovim
+    ./modules/kubernetes
+    ./modules/wezterm
+  ];
+}
 ```
 
 ### Adding a New Module
@@ -160,22 +222,12 @@ in `flake.nix`, add a new user and their configurations, for example:
 }
 ```
 
-2. Add the module to a user configuration in `flake.nix` like `commonModules` or `extraModules`:
-
-```nix
-      commonModules = {
-        ori = {
-          homeManager = [
-            # ... existing modules ...
-            ./home-manager/modules/tmux
-          ];
-        };
-      };
-```
+2. Then import that module in one of the many available ways depending on your needs
+  - in `flake.nix` settings.<name>.modules.home-manager = [ ... ./home-manager/modules/tmux ... ];
+  - in `flake.nix` as an extraModule in machine scope (e.g. alice-laptop)
+  - as a default module for a user for example `home-manager/alice.nix` in the imports list
 
 ## TODO
 
 - Add NixOS configurations
-- Implement Darwin-specific modules (system, apps, etc.)
-- Combine overlapping arguments in configurations
 
