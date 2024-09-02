@@ -17,7 +17,7 @@
   # Homebrew need to be installed manually, see https://brew.sh
 
   # The apps installed by homebrew are not managed by nix, and not reproducible!
-  # I mainly use this for GUI apps (casks)
+  # This is mainly used for GUI apps (casks)
   homebrew = {
     enable = true;
 
@@ -36,12 +36,12 @@
 
     # `brew install --cask`
     casks = [
-      "alt-tab"
-      "wezterm" # configured in home-manager
-      "karabiner-elements"
-      "rectangle"
-      "scroll-reverser"
-      "raycast"
+      "alt-tab" # Windows 11 style alt+tab
+      "wezterm" # GPU accelerated terminal emulator (config in home-manager)
+      "karabiner-elements" # Keyboard manager
+      "rectangle" # Window snapping app with keybindings
+      "mac-mouse-fix" # Fix mouse scrolling
+      "raycast" # Spotlight alternative
     ];
   };
 }
