@@ -18,28 +18,16 @@
   outputs = { self, nixpkgs, home-manager, darwin, ... }:
     let
 
-      # Define common modules for each user
-      commonModules = {
+      # Define user level settings
+      settings = {
         ori = {
-          homeManager = [
-            ./home-manager/modules/git
-            ./home-manager/modules/zsh
-            ./home-manager/modules/eza
-            ./home-manager/modules/bat
-            ./home-manager/modules/zoxide
-            ./home-manager/modules/fonts
-            ./home-manager/modules/starship
-            ./home-manager/modules/tmux
-            ./home-manager/modules/neovim
-            ./home-manager/modules/kubernetes
-            ./home-manager/modules/wezterm
-            ./home-manager/modules/greeneye
-          ];
-          darwin = [
-            ./darwin/modules/system.nix
-            ./darwin/modules/host-users.nix
-            ./darwin/modules/apps.nix
-          ];
+          defaults = {
+            username = "ori";
+            email = "orisneh@gmail.com";
+            system = "x86_64-linux";
+          };
+          homeManager = [ ./home-manager/ori.nix ];
+          darwin = [ ./darwin/ori.nix ];
         };
         # Add other users here
         # anotheruser.homeManager = [ ... ];
@@ -63,7 +51,7 @@
                 inherit username email;
               };
             }
-          ] ++ (commonModules.${username}.homeManager or []) ++ extraModules;
+          ] ++ (settings.${username}.homeManager or []) ++ extraModules;
         };
 
       mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
@@ -86,7 +74,7 @@
               };
             }
           ]
-          ++ (commonModules.${username}.darwin or []) ++ extraModules;
+          ++ (settings.${username}.darwin or []) ++ extraModules;
         };
 
       # TODO: Add helper function for nixos configurations
@@ -95,17 +83,17 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#<config-name>'
       homeConfigurations = {
-        ori-macbook = mkHomeConfiguration {
-          system = "aarch64-darwin";
-          username = "ori";
-          email = "orisne@greeneye.ag";
+        ori-pc = mkHomeConfiguration {
+          system = settings.ori.defaults.system;
+          username = settings.ori.defaults.username;
+          email = settings.ori.defaults.email;
           extraModules = [ ];
         };
-        ori-desktop = mkHomeConfiguration {
-          system = "x86_64-linux";
-          username = "ori";
-          email = "orisneh@gmail.com";
-          extraModules = [ ];
+        ori-macbook = mkHomeConfiguration {
+          system = "aarch64-darwin";
+          username = settings.ori.defaults.username;
+          email = "orisne@greeneye.ag";
+          extraModules = [ ./home-manager/modules/greeneye ];
         };
       };
 
@@ -114,7 +102,7 @@
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
           system = "aarch64-darwin";
-          username = "ori";
+          username = settings.ori.defaults.username;
           hostname = "macbook";
           email = "orisne@greeneye.ag";
           extraModules = [ ];

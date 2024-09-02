@@ -57,7 +57,7 @@ _install_nix() {
     curl -L https://nixos.org/nix/install | sh -s -- --daemon
 
     echo "Nix installation completed!"
-    echo "Please restart your shell or run 'source $HOME/.nix-profile/etc/profile.d/nix.sh' to use Nix."
+    echo "Please restart your shell to use Nix."
 }
 
 _install_home_manager() {
@@ -78,6 +78,7 @@ _install_home_manager() {
     nix-shell '<home-manager>' -A install
 
     echo "Home Manager installation completed!"
+    echo "Please restart your shell to use home-manager."
 }
 
 _install_darwin() {
@@ -97,6 +98,7 @@ _install_darwin() {
     ./result/bin/darwin-installer
 
     echo "nix-darwin installation completed!"
+    echo "Please restart your shell to use nix-darwin."
 }
 
 _check_os() {
