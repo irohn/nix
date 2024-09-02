@@ -72,24 +72,24 @@
       bind j select-pane -D
 
       # Pane borders
-      set -g pane-border-style 'fg=#DCD7BA'
-      set -g pane-active-border-style 'fg=#6A9589'
-      set -g pane-border-lines "double"
+      set -g pane-border-style 'fg=#30363f'
+      set -g pane-active-border-style 'fg=#4fa6ed'
+      set -g pane-border-lines "single"
 
       # Status bar colors and configuration
       set -g status-position top
       set -g status on
       set -g status-interval 1
-      set -g status-style "fg=#DCD7BA,bg=#1F1F28"
+      set -g status-style "fg=#a0a8b7,bg=#1f2329"
       set -g status-left-length 40
-      set -g status-left "#[fg=#7E9CD8,bg=#16161D] #{session_name} #[fg=#C8C093,bg=#1F1F28] "
-      set -g window-status-format "#[fg=#C8C093,bg=#1F1F28] #I #W "
-      set -g window-status-current-format "#[fg=#E6C384,bg=#2A2A37,bold] #I #W "
-      set -g window-status-separator "#[fg=#54546D,bg=#1F1F28]|"
+      set -g status-left "#[fg=#4fa6ed,bg=#181b20] #{session_name} #[fg=#a0a8b7,bg=#1f2329] "
+      set -g window-status-format "#[fg=#a0a8b7,bg=#1f2329] #I #W "
+      set -g window-status-current-format "#[fg=#e2b86b,bg=#30363f,bold] #I #W "
+      set -g window-status-separator "#[fg=#535965,bg=#1f2329]|"
       set -g status-justify centre
       set -g status-right-length 40
-      set -g status-right "#[fg=#7E9CD8,bg=#16161D] %H:%M:%S"
-      set -g message-style "fg=#1F1F28,bg=#E6C384"
+      set -g status-right "#[fg=#4fa6ed,bg=#181b20] %H:%M:%S"
+      set -g message-style "fg=#1f2329,bg=#e2b86b"
       '';
     };
 
