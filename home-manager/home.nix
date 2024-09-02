@@ -23,7 +23,12 @@
     stateVersion = "24.05"; # Please read the comment before changing.
   };
 
+  nix = {
+    package = pkgs.nix;
+    # Enable flakes
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
 }
