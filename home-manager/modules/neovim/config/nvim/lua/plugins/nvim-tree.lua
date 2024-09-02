@@ -12,12 +12,20 @@ return {
     local gheight = vim.api.nvim_list_uis()[1].height
     local width = 60
     local height = 20
+
+    vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
+
     nvimtree.setup({
       filters = {
         dotfiles = false,
       },
+      renderer = {
+        root_folder_label = function(path)
+          return vim.fn.fnamemodify(path, ':t')
+        end,
+      },
       view = {
-        side = "right",
+        side = "left",
         float = {
           enable = false,
           open_win_config = {
@@ -28,12 +36,8 @@ return {
             col = (gwidth - width) * 0.5,
           },
         },
-        --side = "right",
       },
     })
-
-    -- mappings
-    vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
 
   end,
 }
