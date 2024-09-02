@@ -17,6 +17,7 @@
       jq
       yq
       gawk # ensure gnu-awk for uniformity across systems
+      unixtools.watch
     ];
 
     stateVersion = "24.05"; # Please read the comment before changing.
