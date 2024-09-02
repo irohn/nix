@@ -26,8 +26,10 @@
             email = "orisneh@gmail.com";
             system = "x86_64-linux";
           };
-          homeManager = [ ./home-manager/ori.nix ];
-          darwin = [ ./darwin/ori.nix ];
+          modules = {
+            homeManager = [ ./home-manager/ori.nix ];
+            darwin = [ ./darwin/ori.nix ];
+          };
         };
         # Add other users here
         # anotheruser.homeManager = [ ... ];
@@ -51,7 +53,7 @@
                 inherit username email;
               };
             }
-          ] ++ (settings.${username}.homeManager or []) ++ extraModules;
+          ] ++ (settings.${username}.modules.homeManager or []) ++ extraModules;
         };
 
       mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
@@ -74,7 +76,7 @@
               };
             }
           ]
-          ++ (settings.${username}.darwin or []) ++ extraModules;
+          ++ (settings.${username}.modules.darwin or []) ++ extraModules;
         };
 
       mkNixosConfiguration = { system, hostname, username, email, extraModules ? [] }:
@@ -97,7 +99,7 @@
               };
             }
           ]
-            ++ (settings.${username}.nixos or []) ++ extraModules;
+            ++ (settings.${username}.modules.nixos or []) ++ extraModules;
         };
 
     in {
