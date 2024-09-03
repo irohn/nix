@@ -46,3 +46,6 @@ opt.termguicolors = true
 
 -- show only 1 status line
 opt.laststatus = 3
+
+-- Allow going past end of lines in visual block mode
+opt.virtualedit = "block"
