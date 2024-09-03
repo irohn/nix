@@ -1,5 +1,5 @@
 # home-manager configuration file
-{ config, pkgs, username, email, ... }:
+{ pkgs, username, ... }:
 
 {
   nixpkgs = {
@@ -8,9 +8,27 @@
     };
   };
 
+  imports = [
+    ./modules/git
+    ./modules/zsh
+    ./modules/eza
+    ./modules/bat
+    ./modules/zoxide
+    ./modules/fonts
+    ./modules/starship
+    ./modules/tmux
+    ./modules/neovim
+    ./modules/kubernetes
+    ./modules/wezterm
+  ];
+
   home = {
+    inherit username;
+    homeDirectory = if pkgs.stdenv.isDarwin
+      then "/Users/${username}" else "/home/${username}";
+
     packages = with pkgs; [
-      # Core packages to install in all homes
+      # Core packages
       curl
       wget
       vim
@@ -20,7 +38,7 @@
       unixtools.watch
     ];
 
-    stateVersion = "24.05"; # Please read the comment before changing.
+    stateVersion = "24.05";
   };
 
   nix = {

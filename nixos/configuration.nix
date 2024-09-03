@@ -2,12 +2,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    # This file is required and you should probably
-    # copy it from /etc/nixos/hardware-configuration.nix
-    # unless you know what you are doing.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ];
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [

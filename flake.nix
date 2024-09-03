@@ -24,69 +24,28 @@
   outputs = { self, nixpkgs, home-manager, darwin, agenix, ... }:
     let
 
-      # Define user level settings
       settings = {
-        ori = {
-          defaults = {
-            username = "ori";
-            email = "orisneh@gmail.com";
-            system = "x86_64-linux";
-          };
-          modules = {
-            homeManager = [ ./home-manager/ori.nix ];
-            darwin = [ ./darwin/ori.nix ];
-          };
+        defaults = {
+          username = "ori";
+          email = "orisneh@gmail.com";
+          system = "x86_64-linux";
         };
-        # Add other users here
-        # anotheruser.homeManager = [ ... ];
       };
 
-      # Helper function to create home-manager configuration
+      # Helper function to create a home-manager configuration
       mkHomeConfiguration = { system, username, email, extraModules ? [] }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          modules = [
-            ./home-manager/home.nix
-            {
-              home = {
-                inherit username;
-                homeDirectory = if nixpkgs.legacyPackages.${system}.stdenv.isDarwin
-                  then "/Users/${username}"
-                  else "/home/${username}";
-                stateVersion = "24.05";
-              };
-              _module.args = {
-                inherit username email;
-              };
-            }
-          ] ++ (settings.${username}.modules.homeManager or []) ++ extraModules;
+          modules = [ ./home-manager/home.nix ] ++ extraModules;
+          extraSpecialArgs = { inherit username email; };
         };
 
+      # Helper function to create a darwin configuration
       mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
         darwin.lib.darwinSystem {
           inherit system;
-          modules = [
-            ./darwin/configuration.nix
-            agenix.darwinModules.default
-            ({ pkgs, ... }: {
-              nixpkgs.hostPlatform = system;
-              system = {
-                # Set Git commit hash for darwin-version
-                configurationRevision = self.rev or self.dirtyRev or null;
-                stateVersion = 4;
-              };
-            })
-            {
-              # expose inputs to submodules
-              _module.args = {
-                inherit hostname username email;
-              };
-            }
-            {
-              environment.systemPackages = [ agenix.packages.${system}.default ];
-            }
-          ]
-          ++ (settings.${username}.modules.darwin or []) ++ extraModules;
+          modules = [ ./darwin/configuration.nix ] ++ extraModules;
+          specialArgs = { inherit hostname username email; };
         };
 
       mkNixosConfiguration = { system, hostname, username, email, extraModules ? [] }:
@@ -112,8 +71,7 @@
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
-          ]
-            ++ (settings.${username}.modules.nixos or []) ++ extraModules;
+          ] ++ extraModules;
         };
 
     in {
@@ -121,14 +79,14 @@
       # Available through 'home-manager --flake .#<config-name>'
       homeConfigurations = {
         ori-pc = mkHomeConfiguration {
-          system = settings.ori.defaults.system;
-          username = settings.ori.defaults.username;
-          email = settings.ori.defaults.email;
+          system = settings.defaults.system;
+          username = settings.defaults.username;
+          email = settings.defaults.email;
           extraModules = [ ];
         };
         ori-macbook = mkHomeConfiguration {
           system = "aarch64-darwin";
-          username = settings.ori.defaults.username;
+          username = settings.defaults.username;
           email = "orisne@greeneye.ag";
           extraModules = [ ./home-manager/modules/greeneye ];
         };
@@ -139,7 +97,7 @@
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
           system = "aarch64-darwin";
-          username = settings.ori.defaults.username;
+          username = settings.defaults.username;
           hostname = "macbook";
           email = "orisne@greeneye.ag";
           extraModules = [ ];
@@ -148,15 +106,15 @@
 
       # NixOS configuration entrypoint
       # Available through `nixos-rebuild switch --flake .#<config-name>`
-      nixosConfigurations = {
-        ori-wsl = mkNixosConfiguration {
-          system = settings.ori.defaults.system;
-          username = settings.ori.defaults.username;
-          hostname = "nixos-wsl";
-          email = settings.ori.defaults.email;
-          extraModules = [ ];
-        };
-      };
+      # nixosConfigurations = {
+      #   ori-wsl = mkNixosConfiguration {
+      #     system = settings.defaults.system;
+      #     username = settings.defaults.username;
+      #     hostname = "nixos-wsl";
+      #     email = settings.defaults.email;
+      #     extraModules = [ ];
+      #   };
+      # };
 
     };
 }
