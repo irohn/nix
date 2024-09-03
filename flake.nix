@@ -82,6 +82,9 @@
                 inherit hostname username email;
               };
             }
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
+            }
           ]
           ++ (settings.${username}.modules.darwin or []) ++ extraModules;
         };
@@ -105,6 +108,9 @@
               _module.args = {
                 inherit hostname username email;
               };
+            }
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
             }
           ]
             ++ (settings.${username}.modules.nixos or []) ++ extraModules;
