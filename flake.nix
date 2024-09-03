@@ -13,9 +13,15 @@
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # age-encrypted secrets for Nix https://github.com/ryantm/agenix
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }:
+  outputs = { self, nixpkgs, home-manager, darwin, agenix, ... }:
     let
 
       # Define user level settings
@@ -61,6 +67,7 @@
           inherit system;
           modules = [
             ./darwin/configuration.nix
+            agenix.darwinModules.default
             ({ pkgs, ... }: {
               nixpkgs.hostPlatform = system;
               system = {
@@ -84,6 +91,7 @@
           inherit system;
           modules = [
             ./nixos/configuration.nix
+            agenix.nixosModules.default
             ({ pkgs, ... }: {
               nixpkgs.hostPlatform = system;
               system = {
