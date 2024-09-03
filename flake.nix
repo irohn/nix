@@ -44,7 +44,12 @@
       mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
         darwin.lib.darwinSystem {
           inherit system;
-          modules = [ ./darwin/configuration.nix ] ++ extraModules;
+          modules = [
+            ./darwin/configuration.nix
+            agenix.darwinModules.default
+            { environment.systemPackages = [ agenix.packages.${system}.default ];
+              nixpkgs.hostPlatform = system; }
+          ] ++ extraModules;
           specialArgs = { inherit hostname username email; };
         };
 
@@ -54,24 +59,10 @@
           modules = [
             ./nixos/configuration.nix
             agenix.nixosModules.default
-            ({ pkgs, ... }: {
-              nixpkgs.hostPlatform = system;
-              system = {
-                # Set Git commit hash for nixos-version
-                configurationRevision = self.rev or self.dirtyRev or null;
-                stateVersion = "24.05";
-              };
-            })
-            {
-              # expose inputs to submodules
-              _module.args = {
-                inherit hostname username email;
-              };
-            }
-            {
-              environment.systemPackages = [ agenix.packages.${system}.default ];
-            }
+            { environment.systemPackages = [ agenix.packages.${system}.default ];
+              nixpkgs.hostPlatform = system; }
           ] ++ extraModules;
+          specialArgs = { inherit hostname username email; };
         };
 
     in {
