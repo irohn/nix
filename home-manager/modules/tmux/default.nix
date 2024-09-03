@@ -1,8 +1,9 @@
 # Terminal multiplexer for managing multiple terminal sessions
-
-{ config, lib, pkgs, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   programs = {
     tmux = {
       enable = true;

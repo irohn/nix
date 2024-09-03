@@ -1,7 +1,8 @@
 # Z shell configuration with enhanced features over bash
-{ config, pkgs, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   programs = {
 
     zsh = {

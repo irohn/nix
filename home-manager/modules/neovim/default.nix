@@ -1,20 +1,18 @@
 # Highly extensible Vim-based text editor
-{ pkgs, config, lib, ... }:
-
-let
-  requiredDependencies = with pkgs; [
-    ripgrep
-    fd
-    nodejs
-    unzip
-    gcc
-  ];
-in
-
-  {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Dependencies for ./config/nvim
   home = {
-    packages = requiredDependencies;
+    packages = with pkgs; [
+      ripgrep
+      fd
+      nodejs
+      unzip
+      gcc
+    ];
     file = {
       # neovim's config
       ".config/nvim" = {

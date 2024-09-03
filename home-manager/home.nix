@@ -1,7 +1,10 @@
 # home-manager configuration file
-{ pkgs, username, ... }:
-
 {
+  pkgs,
+  username,
+  email,
+  ...
+}: {
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -23,7 +26,7 @@
   ];
 
   home = {
-    inherit username;
+    username = username;
     homeDirectory = if pkgs.stdenv.isDarwin
       then "/Users/${username}" else "/home/${username}";
 

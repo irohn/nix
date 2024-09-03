@@ -1,7 +1,8 @@
 # Cross-shell prompt with extensive customization options
-{ config, pkgs, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;

@@ -1,7 +1,8 @@
 # Configuration for user fonts
-{ pkgs, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   # required to autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true; 
 

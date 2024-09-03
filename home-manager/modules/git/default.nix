@@ -1,7 +1,11 @@
 # Distributed version control system
-{ config, pkgs, lib, username, email, ... }:
-
 {
+  pkgs,
+  lib,
+  username,
+  email,
+  ...
+}: {
   home.packages = with pkgs; [
     diff-so-fancy
   ];

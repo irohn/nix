@@ -1,7 +1,8 @@
 # A smarter cd command that learns your habits
-{ config, pkgs, lib, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   programs = {
     zoxide = {
       enable = true;

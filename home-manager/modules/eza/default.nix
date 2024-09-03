@@ -1,7 +1,8 @@
 # A modern replacement for 'ls' with color support and Git integration
-{ pkgs, lib, config, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   programs = {
 
     eza = {
