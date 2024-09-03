@@ -1,6 +1,7 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  ...
+}: {
   imports = [
     ./modules/system.nix
     ./modules/host-users.nix
@@ -10,6 +11,10 @@
   nix.settings = {
     # enable flakes globally
     experimental-features = ["nix-command" "flakes"];
+  };
+
+  age.secrets = {
+    test.file = ../secrets/test.age;
   };
 
   # Auto upgrade nix package and the daemon service.

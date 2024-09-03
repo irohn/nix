@@ -1,12 +1,12 @@
-{ pkgs, system, ... }:
-
+{
+  pkgs,
+  system,
+  ...
+}: {
   #  macOS's System configuration
 
   #  All the configuration options are documented here:
   #    https://daiderd.com/nix-darwin/manual/index.html#sec-options
-
-{
-
   system = {
     defaults = {
       menuExtraClock.Show24Hour = true;  # show 24 hour clock
@@ -24,7 +24,6 @@
         ShowPathbar = true;
         FXEnableExtensionChangeWarning = false;
       };
-
     };
   };
 
@@ -34,5 +33,4 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   # this is required if you want to use darwin's default shell - zsh
   programs.zsh.enable = true;
-
 }
