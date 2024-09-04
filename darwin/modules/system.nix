@@ -1,6 +1,5 @@
 {
   pkgs,
-  system,
   ...
 }: {
   #  macOS's System configuration

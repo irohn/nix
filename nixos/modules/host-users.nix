@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ username, ... }:
 
 {
   age.secrets.device_password = {
