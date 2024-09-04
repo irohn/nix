@@ -10,6 +10,7 @@
       ripgrep
       fd
       nodejs
+      cargo
       unzip
       gcc
     ];

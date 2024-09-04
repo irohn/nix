@@ -87,7 +87,7 @@
 
     in {
       # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#<config-name>'
+      # Available through 'home-manager switch --flake .#<config-name>'
       homeConfigurations = {
         ori-pc = mkHomeConfiguration {
           system = settings.defaults.system;
@@ -117,15 +117,15 @@
 
       # NixOS configuration entrypoint
       # Available through `nixos-rebuild switch --flake .#<config-name>`
-      # nixosConfigurations = {
-      #   ori-wsl = mkNixosConfiguration {
-      #     system = settings.defaults.system;
-      #     username = settings.defaults.username;
-      #     hostname = "nixos-wsl";
-      #     email = settings.defaults.email;
-      #     extraModules = [ ];
-      #   };
-      # };
+      nixosConfigurations = {
+        ori-wsl = mkNixosConfiguration {
+          system = settings.defaults.system;
+          username = settings.defaults.username;
+          hostname = "nixos-wsl";
+          email = settings.defaults.email;
+          extraModules = [ ];
+        };
+      };
 
     };
 }
