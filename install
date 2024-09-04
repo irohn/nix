@@ -9,14 +9,21 @@ Usage: $0 [options] <component>
 Install Nix package manager, Home Manager (standalone), or nix-darwin
 
 Components:
-    nix             Install Nix package manager
-    home-manager    Install Home Manager
-    darwin          Install nix-darwin (macOS only)
+    nix                         Install Nix package manager
+    home-manager                Install Home Manager
+    darwin                      Install nix-darwin (macOS only)
 
 Options:
-    -h, --help      Show this help message and exit
-    -d, --debug     Enable debug mode
-    --no-flakes     Disable flakes (not recommended)
+    -h, --help                  Show this help message and exit
+    -d, --debug                 Enable debug mode
+    -c, --config NAME           Specify the configuration name as described in the flake
+                                (this is required for a darwin installation)
+
+Examples:
+    ./install nix               Installs nix the package manager (with flakes)
+    ./install home-manager      Installs home-manager
+    ./install -c alice darwin   Installs nix-darwin with Alice's darwinConfiguration
+                                as described in the main flake.nix file
 EOF
 }
 
@@ -55,6 +62,9 @@ _install_nix() {
         exit 1
     fi
 
+
+    # Use the Determinate Nix Installer to enable flakes by default
+    # https://github.com/DeterminateSystems/nix-installer
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
     echo "Nix installation completed!"
@@ -69,15 +79,7 @@ _install_home_manager() {
         exit 1
     fi
 
-    if $FLAKES; then
-        nix --extra-experimental-features "nix-command flakes" run home-manager/master -- init --switch
-    else
-        nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-        nix-channel --update
-
-        export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-        nix-shell '<home-manager>' -A install
-    fi
+    nix --extra-experimental-features "nix-command flakes" run home-manager/master -- init --switch
 
     echo "Home Manager installation completed!"
     echo "Please restart your shell to use home-manager."
@@ -91,17 +93,7 @@ _install_darwin() {
         exit 1
     fi
 
-    if $FLAKES; then
-        rm -rf ~/.config/nix-darwin
-        mkdir -p ~/.config/nix-darwin
-        cd ~/.config/nix-darwin
-        nix flake init -t nix-darwin
-        sed -i '' "s/simple/$(scutil --get LocalHostName)/" flake.nix
-        nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake ~/.config/nix-darwin
-    else
-        nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-        ./result/bin/darwin-installer
-    fi
+    nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .#"${FLAKE_CONFIG}"
 
     echo "nix-darwin installation completed!"
     echo "Please restart your shell to use nix-darwin."
@@ -122,8 +114,8 @@ _check_os() {
 
 _main() {
     local COMPONENT=""
+    local FLAKE_CONFIG=""
     local IS_MACOS=false
-    local FLAKES=true
 
     # Parse command-line arguments
     while [ $# -gt 0 ]; do
@@ -135,8 +127,14 @@ _main() {
             -d|--debug)
                 DEBUG=true
                 ;;
-            --no-flakes)
-                FLAKES=false
+            -c|--config)
+                if [ -n "$2" ]; then
+                    FLAKE_CONFIG="$2"
+                    shift
+                else
+                    echo "Error: --config requires an argument."
+                    exit 1
+                fi
                 ;;
             nix|home-manager|darwin)
                 COMPONENT="$1"
@@ -182,6 +180,10 @@ _main() {
         darwin)
             if [ "$IS_MACOS" = false ]; then
                 echo "Error: nix-darwin can only be installed on macOS."
+                exit 1
+            fi
+            if [ -z "$FLAKE_CONFIG" ]; then
+                echo "Error: no configuration sepcified. Please use the -c or --config option."
                 exit 1
             fi
             if _check_darwin_installed; then
