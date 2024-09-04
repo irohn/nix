@@ -41,6 +41,7 @@
       "rectangle" # Window snapping app with keybindings
       "mac-mouse-fix" # Fix mouse scrolling
       "raycast" # Spotlight alternative
+      "caffeine" # Prevent screen from turning off
     ];
   };
 }
