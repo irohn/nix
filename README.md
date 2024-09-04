@@ -2,15 +2,12 @@
 
 ## Overview
 
-This configuration uses [Nix](https://nixos.org/), [Home Manager](https://github.com/nix-community/home-manager), and [nix-darwin](https://github.com/LnL7/nix-darwin) to manage system and user configurations across different machines.
+This configuration uses [Nix](https://nixos.org/), [Home Manager](https://github.com/nix-community/home-manager), and [nix-darwin](https://github.com/LnL7/nix-darwin) to manage system and user configurations across different machines using [flakes](https://nixos.wiki/wiki/Flakes).
 
 ## Prerequisites
 
-- [Nix](https://nixos.org/)
-- [Home Manager](https://github.com/nix-community/home-manager)
-- [nix-darwin](https://github.com/LnL7/nix-darwin) (on MacOS)
-- Enable [Flakes](https://nixos.wiki/wiki/Flakes) (Optional but recommended)
-- [NerdFonts](https://www.nerdfonts.com/) installed and enabled on your terminal emulator
+- git
+- curl
 
 ## Installation
 
