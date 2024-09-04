@@ -1,6 +1,5 @@
 # Terminal multiplexer for managing multiple terminal sessions
 {
-  pkgs,
   lib,
   ...
 }: {

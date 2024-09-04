@@ -1,6 +1,5 @@
 # A cat clone with syntax highlighting and Git integration
 {
-  pkgs,
   ...
 }: {
   programs = {

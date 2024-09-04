@@ -1,7 +1,7 @@
 # Highly extensible Vim-based text editor
 {
   pkgs,
-  lib,
+  pkgs-unstable,
   ...
 }: {
   # Dependencies for ./config/nvim
@@ -25,6 +25,7 @@
 
   programs = {
     neovim = {
+      package = pkgs-unstable.neovim;
       enable = true;
       defaultEditor = true;
       viAlias = true;

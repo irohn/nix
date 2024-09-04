@@ -1,10 +1,18 @@
 # home-manager configuration file
 {
   pkgs,
+  config,
   username,
-  email,
+  inputs,
   ...
-}: {
+}: let
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config = config.nixpkgs.config;
+  };
+in {
+  _module.args.pkgs-unstable = pkgs-unstable;
+
   nixpkgs = {
     config = {
       allowUnfree = true;

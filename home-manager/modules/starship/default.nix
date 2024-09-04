@@ -1,6 +1,5 @@
 # Cross-shell prompt with extensive customization options
 {
-  pkgs,
   ...
 }: {
   programs.starship = {

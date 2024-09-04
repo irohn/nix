@@ -1,6 +1,5 @@
 # A smarter cd command that learns your habits
 {
-  pkgs,
   ...
 }: {
   programs = {
