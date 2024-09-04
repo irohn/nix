@@ -28,9 +28,6 @@
       package = pkgs-unstable.neovim;
       enable = true;
       defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
     };
 
     zsh.shellAliases = {
