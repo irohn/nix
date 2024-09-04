@@ -137,7 +137,7 @@
                       print mac, "unknown", statuses[mac]
                   }
               }
-          }' <(echo "$clusters_info") <(echo "$clusters_information") | sort | fzf --select-1 --exit-0 --query "$query")
+          }' <(echo "$clusters_info") <(echo "$clusters_information") | sort | fzf --select-1 --exit-0 --exact --query "$query")
           echo "$selection"
         }
 

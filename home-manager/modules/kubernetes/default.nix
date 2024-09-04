@@ -9,7 +9,6 @@
     kubectx
     fluxcd
     kubernetes-helm
-    k9s
   ];
 
   programs = {
@@ -23,7 +22,6 @@
       };
 
       initExtra = lib.mkAfter /* bash */ ''
-        bindkey -s "^K" 'tmux popup -E -h 90% -w 90% "k9s"^M'
         unalias kl 2>/dev/null
         kl() {
           local query=""
