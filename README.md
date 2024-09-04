@@ -19,10 +19,10 @@ git clone https://github.com/irohn/nix.git ~/nix && cd ~/nix
 
 ### nix
 
-First thing first, if you are not on NixOS, install Nix itself
-You can use the install script provided here
+First thing first, if you are not on NixOS, install Nix itself. There is an install script provided in the repository
 
 ```bash
+chmod +x ./install
 ./install nix
 ```
 
@@ -43,8 +43,7 @@ cd ~/nix
 ./install home-manager
 ```
 
-This should have installed home-manager as well as created your first generation!
-Once installed restart your shell and verify installation:
+This should have installed home-manager as well as created your first generation! Once installed restart your shell and verify installation:
 
 ```bash
 home-manager --version
@@ -79,6 +78,7 @@ Note that the `<config_name>` is the darwinConfiguration described in the flake.
 ```
 
 To make your own configuration see [Customization](#Customization)
+
 Once installed restart your shell and verify installation:
 
 ```bash
@@ -97,11 +97,9 @@ To build and activate a Home Manager configuration:
 home-manager switch --flake .#<config-name>
 ```
 
-Note that if you are not managing your users with nixos or darwin-nix, and you are customizing any shells with home-manager, you will have to manually set your user's shell with nix's shell, for example, with zsh:
+Note that if you are not managing your users with nixos or darwin-nix, and you are customizing any shells with home-manager, you will have to manually set your user's shell with nix's shell after running the home-manager switch command, for example, with zsh:
 
 ```bash
-# after running:
-# $ home-manager switch --flake .#<config-name>
 echo "$(which zsh)" | sudo tee -a /etc/shells
 chsh -s $(which zsh)
 ```
@@ -110,7 +108,7 @@ Then restart your shell and you should see your new prompt activated
 
 ### Darwin
 
-To build and activate a Darwin configuration:
+To build and activate a darwin configuration:
 
 ```bash
 darwin-rebuild switch --flake .#<config-name>
@@ -122,9 +120,9 @@ Work in progress...
 
 ## Customization
 
-### Adding a New User Configuration
+### Settings customizations
 
-In `flake.nix`, add a new user and their configurations, for example:
+In `flake.nix`, change the default settings to your own:
 
 ```nix
 # flake.nix
