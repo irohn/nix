@@ -13,5 +13,5 @@ let
 
 in
 {
-  "secrets/test.age".publicKeys = ori ++ systems;
+  "secrets/test".publicKeys = ori ++ systems;
 }

@@ -14,7 +14,9 @@
   };
 
   age.secrets = {
-    test.file = ../secrets/test.age;
+    test = {
+      file = ../secrets/test;
+    };
   };
 
   # Auto upgrade nix package and the daemon service.
