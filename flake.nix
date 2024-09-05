@@ -9,8 +9,14 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -27,6 +33,7 @@
     nixpkgs-unstable,
     home-manager,
     darwin,
+    nixos-wsl,
     agenix,
     ...
     } @inputs: let
@@ -74,24 +81,30 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager switch --flake .#<config-name>'
       homeConfigurations = {
-        ori-pc = mkHomeConfiguration {
+        linux = mkHomeConfiguration {
           system = settings.defaults.system;
           username = settings.defaults.username;
           email = settings.defaults.email;
           extraModules = [ ];
         };
-        ori-macbook = mkHomeConfiguration {
+        macbook = mkHomeConfiguration {
           system = "aarch64-darwin";
           username = settings.defaults.username;
           email = "orisne@greeneye.ag";
           extraModules = [ ./home-manager/modules/greeneye ];
+        };
+        nixos = mkHomeConfiguration {
+          system = settings.defaults.system;
+          username = "nixos";
+          email = settings.defaults.email;
+          extraModules = [ ];
         };
       };
 
       # Darwin configuration entrypoint
       # Available through `darwin-rebuild switch --flake .#<config-name>`
       darwinConfigurations = {
-        ori-macbook = mkDarwinConfiguration {
+        macbook = mkDarwinConfiguration {
           hostname = "macbook";
           system = "aarch64-darwin";
           username = settings.defaults.username;
@@ -103,12 +116,12 @@
       # NixOS configuration entrypoint
       # Available through `nixos-rebuild switch --flake .#<config-name>`
       nixosConfigurations = {
-        ori-wsl = mkNixosConfiguration {
-          hostname = "nixos-wsl";
+        nixos-wsl = mkNixosConfiguration {
+          hostname = "nixos";
           system = settings.defaults.system;
           username = "nixos";
           email = settings.defaults.email;
-          extraModules = [ ];
+          extraModules = [ nixos-wsl.nixosModules.wsl ./nixos/wsl.nix ];
         };
       };
 
