@@ -31,6 +31,7 @@ in {
     ./modules/neovim
     ./modules/kubernetes
     ./modules/wezterm
+    ./modules/greeneye
   ];
 
   home = {

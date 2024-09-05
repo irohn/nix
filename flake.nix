@@ -109,7 +109,7 @@
           system = "aarch64-darwin";
           username = settings.defaults.username;
           email = "orisne@greeneye.ag";
-          extraModules = [ ./home-manager/modules/greeneye ];
+          extraModules = [ ];
         };
         nixos = mkHomeConfiguration {
           system = settings.defaults.system;
