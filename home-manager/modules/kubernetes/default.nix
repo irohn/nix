@@ -13,6 +13,7 @@
 
   programs = {
     zsh = {
+      oh-my-zsh.plugins = [ "kubectl" ];
       shellAliases = {
         k = "kubectl";
         pods = "kubectl get pods --all-namespaces";

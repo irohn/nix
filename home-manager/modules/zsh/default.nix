@@ -12,11 +12,6 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [
-          "git"
-          "docker"
-          "kubectl"
-        ]; # Add or remove plugins as needed
         theme = "robbyrussell"; # You can change this to your preferred theme
       };
       sessionVariables = {

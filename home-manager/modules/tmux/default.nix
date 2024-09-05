@@ -22,7 +22,8 @@
       set -g status-interval 5
 
       # Upgrade $TERM
-      set -g default-terminal "screen-256color"
+      set -g default-terminal "tmux-256color"
+      set-option -sa terminal-overrides ",xterm-256color:RGB"
 
       # Emacs key bindings in tmux command prompt (prefix + :) are better than
       # vi keys, even for vim users

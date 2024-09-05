@@ -24,6 +24,8 @@
     };
 
     zsh = {
+      oh-my-zsh.plugins = [ "git" ];
+
       shellAliases = {
         gs = "git status";
       };
