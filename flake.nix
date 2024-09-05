@@ -66,7 +66,6 @@
             ./nixos/configuration.nix
             agenix.nixosModules.default
             { environment.systemPackages = [ agenix.packages.${system}.default ]; }
-          specialArgs = { inherit inputs outputs hostname username email; };
           ] ++ extraModules;
           specialArgs = { inherit inputs outputs hostname username email; };
         };
