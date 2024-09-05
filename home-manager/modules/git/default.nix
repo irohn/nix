@@ -29,7 +29,7 @@
       };
 
       initExtra = lib.mkAfter /* bash */ ''
-        bindkey -s "^L" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
+        bindkey -s "^G" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
       '';
     };
 
