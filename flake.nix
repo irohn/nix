@@ -106,7 +106,7 @@
         ori-wsl = mkNixosConfiguration {
           hostname = "nixos-wsl";
           system = settings.defaults.system;
-          username = settings.defaults.username;
+          username = "nixos";
           email = settings.defaults.email;
           extraModules = [ ];
         };
