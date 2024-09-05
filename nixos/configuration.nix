@@ -4,6 +4,7 @@
 }: {
   imports = [
     ./modules/host-users.nix
+    ./modules/networking.nix
     ./modules/system.nix
   ];
 

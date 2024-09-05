@@ -19,10 +19,9 @@
   # Enable the OpenSSH daemon
   services.openssh = {
     enable = true;
-    # Permit root login through SSH to set-up the system
-    # Remember to disable this after initial setup!
-    permitRootLogin = "yes";
-    # Use keys only. Remove this if you want to SSH using a password
-    passwordAuthentication = true;
+    settings = {
+      PermitRootLogin = "yes";
+      PasswordAuthentication = true;
+    };
   };
 }
