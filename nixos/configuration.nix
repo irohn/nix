@@ -31,12 +31,6 @@
     };
   };
 
-  system.activationScripts = lib.optionalAttrs (builtins.pathExists /etc/nixos/hardware-configuration.nix) {
-    linkHardwareConfig = ''
-      ln -sfn /etc/nixos/hardware-configuration.nix $HOME/.etc-nixos-hardware-configuration.nix
-    '';
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
