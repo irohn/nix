@@ -1,12 +1,14 @@
 {
   pkgs,
+  lib,
   ...
 }: {
   imports = [
     ./modules/host-users.nix
     ./modules/networking.nix
     ./modules/system.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists /etc/nixos/hardware-configuration.nix)
+    /etc/nixos/hardware-configuration.nix;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -27,6 +29,12 @@
         file = ../secrets/master_password;
       };
     };
+  };
+
+  system.activationScripts = lib.optionalAttrs (builtins.pathExists /etc/nixos/hardware-configuration.nix) {
+    linkHardwareConfig = ''
+      ln -sfn /etc/nixos/hardware-configuration.nix $HOME/.etc-nixos-hardware-configuration.nix
+    '';
   };
 
   # This value determines the NixOS release from which the default

@@ -116,6 +116,13 @@
       # NixOS configuration entrypoint
       # Available through `nixos-rebuild switch --flake .#<config-name>`
       nixosConfigurations = {
+        nixos = mkNixosConfiguration {
+          hostname = "nixos";
+          system = settings.defaults.system;
+          username = "nixos";
+          email = settings.defaults.email;
+          extraModules = [ ];
+        };
         nixos-wsl = mkNixosConfiguration {
           hostname = "nixos";
           system = settings.defaults.system;
