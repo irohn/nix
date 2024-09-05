@@ -73,6 +73,15 @@
             ./nixos/configuration.nix
             agenix.nixosModules.default
             { environment.systemPackages = [ agenix.packages.${system}.default ]; }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs outputs username email; };
+                users.${username} = import ./home-manager/home.nix;
+              };
+            }
           ] ++ extraModules;
           specialArgs = { inherit inputs outputs hostname username email; };
         };
