@@ -23,6 +23,9 @@
       test = {
         file = ../secrets/test;
       };
+      master_password = {
+        file = ../secrets/master_password;
+      };
     };
   };
 

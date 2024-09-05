@@ -14,4 +14,5 @@ let
 in
 {
   "secrets/test".publicKeys = ori ++ systems;
+  "secrets/master_password".publicKeys = ori ++ systems;
 }
