@@ -18,14 +18,14 @@ set("n", "<S-l>", "<cmd>bn<CR>", { desc = "Next buffer" })
 set("n", "<S-x>", "<cmd>bd<CR>", { desc = "Delete buffer" })
 
 -- Move between splits
-set("n", "<C-h", "<C-w>h")
-set("n", "<C-j", "<C-w>j")
-set("n", "<C-k", "<C-w>k")
-set("n", "<C-l", "<C-w>l")
-set("t", "<C-h", "C-\\><C-n><C-w>h")
-set("t", "<C-j", "C-\\><C-n><C-w>j")
-set("t", "<C-k", "C-\\><C-n><C-w>k")
-set("t", "<C-l", "C-\\><C-n><C-w>l")
+set("n", "<C-h>", "<C-w><left>")
+set("n", "<C-j>", "<C-w><down>")
+set("n", "<C-k>", "<C-w><up>")
+set("n", "<C-l>", "<C-w><right>")
+set("t", "<C-h>", "<C-\\><C-n><C-w><left>")
+set("t", "<C-j>", "<C-\\><C-n><C-w><down>")
+set("t", "<C-k>", "<C-\\><C-n><C-w><up>")
+set("t", "<C-l>", "<C-\\><C-n><C-w><right>")
 
 -- Stay in visual mode when indenting/dedenting
 set("v", "<", "<gv")
