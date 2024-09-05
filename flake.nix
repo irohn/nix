@@ -62,6 +62,15 @@
             ./darwin/configuration.nix
             agenix.darwinModules.default
             { environment.systemPackages = [ agenix.packages.${system}.default ]; }
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = import ./home-manager/home.nix;
+                extraSpecialArgs = { inherit inputs outputs username email; };
+              };
+            }
           ] ++ extraModules;
           specialArgs = { inherit inputs outputs hostname username email; };
         };
@@ -78,8 +87,8 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit inputs outputs username email; };
                 users.${username} = import ./home-manager/home.nix;
+                extraSpecialArgs = { inherit inputs outputs username email; };
               };
             }
           ] ++ extraModules;
