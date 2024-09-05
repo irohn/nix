@@ -65,24 +65,10 @@
           modules = [
             ./nixos/configuration.nix
             agenix.nixosModules.default
-            ({ pkgs, ... }: {
-              nixpkgs.hostPlatform = system;
-              system = {
-                # Set Git commit hash for nixos-version
-                configurationRevision = self.rev or self.dirtyRev or null;
-                stateVersion = "24.05";
-              };
-            })
-            {
-              # expose inputs to submodules
-              _module.args = {
-                inherit hostname username email;
-              };
-            }
-            {
-              environment.systemPackages = [ agenix.packages.${system}.default ];
-            }
+            { environment.systemPackages = [ agenix.packages.${system}.default ]; }
+          specialArgs = { inherit inputs outputs hostname username email; };
           ] ++ extraModules;
+          specialArgs = { inherit inputs outputs hostname username email; };
         };
 
     in {
@@ -107,9 +93,9 @@
       # Available through `darwin-rebuild switch --flake .#<config-name>`
       darwinConfigurations = {
         ori-macbook = mkDarwinConfiguration {
+          hostname = "macbook";
           system = "aarch64-darwin";
           username = settings.defaults.username;
-          hostname = "macbook";
           email = "orisne@greeneye.ag";
           extraModules = [ ];
         };
@@ -119,9 +105,9 @@
       # Available through `nixos-rebuild switch --flake .#<config-name>`
       nixosConfigurations = {
         ori-wsl = mkNixosConfiguration {
+          hostname = "nixos-wsl";
           system = settings.defaults.system;
           username = settings.defaults.username;
-          hostname = "nixos-wsl";
           email = settings.defaults.email;
           extraModules = [ ];
         };
