@@ -43,6 +43,7 @@ in {
       curl
       wget
       vim
+      fzf
       jq
       yq
       gawk # ensure gnu-awk for uniformity across systems
