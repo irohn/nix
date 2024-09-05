@@ -1,6 +1,7 @@
-{ hostname, ... }:
-
 {
+  hostname,
+  ...
+}: {
   networking = {
     hostName = hostname; # Define your hostname.
     networkmanager.enable = true; # Enables wireless support via NetworkManager.
