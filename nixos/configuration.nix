@@ -16,9 +16,12 @@
     git
   ];
 
-  age.secrets = {
-    test = {
-      file = ../secrets/test;
+  age = {
+    identityPaths = [ "/etc/ssh/id_ed25519" ];
+    secrets = {
+      test = {
+        file = ../secrets/test;
+      };
     };
   };
 
