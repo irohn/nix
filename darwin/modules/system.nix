@@ -9,7 +9,6 @@
   system = {
     defaults = {
       NSGlobalDomain = {
-        _HIHideMenuBar = true;
         NSAutomaticCapitalizationEnabled = false;  # disable auto capitalization
         NSAutomaticDashSubstitutionEnabled = false;  # disable auto dash substitution
         NSAutomaticPeriodSubstitutionEnabled = false;  # disable auto period substitution
