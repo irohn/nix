@@ -1,13 +1,17 @@
 return {
   {
-    "navarasu/onedark.nvim",
+    "norcalli/nvim-colorizer.lua",
     config = function()
-      local onedark = require("onedark")
-      onedark.setup({ style = "darker" })
-      onedark.load()
-    end
+      require("colorizer").setup()
+    end,
   },
   {
-    "rebelot/kanagawa.nvim",
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+      vim.cmd("colorscheme tokyonight-night")
+    end
   },
 }

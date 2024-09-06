@@ -1,95 +1,74 @@
 # Terminal multiplexer for managing multiple terminal sessions
 {
+  pkgs,
   lib,
   ...
 }: {
   programs = {
     tmux = {
       enable = true;
-      extraConfig = /* tmux */ ''
-      # Address vim mode switching delay (http://superuser.com/a/252717/65504)
-      set -s escape-time 0
+      baseIndex = 1;
+      prefix = "C-Space";
+      clock24 = true;
+      plugins = with pkgs; [
+        tmuxPlugins.sensible
+        tmuxPlugins.better-mouse-mode
+        {
+          plugin = tmuxPlugins.catppuccin;
+          extraConfig = ''
+            set-option -g status-position top
 
-      # Increase scrollback buffer size from 2000 to 50000 lines
-      # set history file path
-      set -g history-limit 50000
-      set -g history-file ~/.config/tmux/log/tmuxhistory
+            # Override windows status icons
+            set -g @catppuccin_icon_window_last "󰖰"
+            set -g @catppuccin_icon_window_current "󰖯"
+            set -g @catppuccin_icon_window_zoom "󰁌"
+            set -g @catppuccin_icon_window_mark "󰃀"
+            set -g @catppuccin_icon_window_silent "󰂛"
+            set -g @catppuccin_icon_window_activity "󱅫"
+            set -g @catppuccin_icon_window_bell "󰂞"
 
-      # Increase tmux messages display duration from 750ms to 4s
-      set -g display-time 4000
+            set -g @catppuccin_window_left_separator "█"
+            set -g @catppuccin_window_right_separator "█"
+            set -g @catppuccin_window_middle_separator " █"
+            set -g @catppuccin_window_number_position "right"
 
-      # Refresh 'status-left' and 'status-right' more often, from every 15s to 5s
-      set -g status-interval 5
+            set -g @catppuccin_window_default_fill "number"
+            set -g @catppuccin_window_default_text "#W"
 
-      # Upgrade $TERM
-      set -g default-terminal "screen-256color"
+            set -g @catppuccin_window_current_fill "number"
+            set -g @catppuccin_window_current_text "#W"
 
-      # Emacs key bindings in tmux command prompt (prefix + :) are better than
-      # vi keys, even for vim users
-      set -g status-keys emacs
+            set -g @catppuccin_status_modules_right "user session"
+            set -g @catppuccin_status_left_separator  " "
+            set -g @catppuccin_status_right_separator ""
+            set -g @catppuccin_status_fill "icon"
+            set -g @catppuccin_status_connect_separator "no"
 
-      # Focus events enabled for terminals that support them
-      set -g focus-events on
+            set -g @catppuccin_status_background "default"
 
-      # Super useful when using "grouped sessions" and multi-monitor setup
-      setw -g aggressive-resize on
+            set -g @catppuccin_status_justify "left"
 
-      # Start from index 1 for easier tab switching
-      set -g base-index 1
-      set -g renumber-windows on
+            # Colors
+            set -g @catppuccin_window_default_color "#7f848e" # text color
+            set -g @catppuccin_window_default_background "#5c6370"
 
-      # Enable mouse
-      set -g mouse on
+            set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,#[fg=#a48cf2]  ,}#{?pane_synchronized,#[fg=#a48cf2]  ,}"
+          '';
+        }
+      ];
+      extraConfig = ''
+        set -as terminal-features ",xterm-256color:RGB"
 
-      # Easier and faster switching between next/prev window
-      bind C-p previous-window
-      bind C-n next-window
+        # Pane navigation
+        bind h select-pane -L
+        bind j select-pane -D
+        bind k select-pane -U
+        bind l select-pane -R
 
-      # Prefix
-      unbind C-b
-      set-option -g prefix C-space
-      bind C-Space send-prefix
-      bind space last-window
-
-      # Sync system clipboard with tmux's
-      set -g set-clipboard external
-
-      # Prevent tmux from displaying "Activity in window n"
-      set -g monitor-activity off
-      set -g visual-activity off
-
-      # remove bell alerts
-      setw -g monitor-bell off
-      set -g bell-action none
-
-      # Source tmux config
-      bind r source-file ~/.config/tmux/tmux.conf
-
-      # Pane navigation
-      bind h select-pane -L
-      bind l select-pane -R
-      bind k select-pane -U
-      bind j select-pane -D
-
-      # Pane borders
-      set -g pane-border-style 'fg=#30363f'
-      set -g pane-active-border-style 'fg=#4fa6ed'
-      set -g pane-border-lines "single"
-
-      # Status bar colors and configuration
-      set -g status-position top
-      set -g status on
-      set -g status-interval 1
-      set -g status-style "fg=#a0a8b7,bg=#1f2329"
-      set -g status-left-length 40
-      set -g status-left "#[fg=#4fa6ed,bg=#181b20] #{session_name} #[fg=#a0a8b7,bg=#1f2329] "
-      set -g window-status-format "#[fg=#a0a8b7,bg=#1f2329] #I #W "
-      set -g window-status-current-format "#[fg=#e2b86b,bg=#30363f,bold] #I #W "
-      set -g window-status-separator "#[fg=#535965,bg=#1f2329]|"
-      set -g status-justify centre
-      set -g status-right-length 40
-      set -g status-right "#[fg=#4fa6ed,bg=#181b20] %H:%M:%S"
-      set -g message-style "fg=#1f2329,bg=#e2b86b"
+        # synchronize all panes in a window (multi-exec)
+        # Prefix + Shift-M
+        unbind M
+        bind M set-window-option synchronize-panes
       '';
     };
 
@@ -100,16 +79,16 @@
       };
 
       initExtra = lib.mkAfter /* bash */ ''
-      sessionizer() {
-        local selected=$(fd -H -t d '^.git$' ~ --exclude .local --exclude .cargo -x echo {//} | fzf --preview "eza -A --color=always {}")
-        [ -z "$selected" ] && echo "Error: empty selection..." && return 1
-        local session_name=$(basename "$selected" | tr . _)
-        if ! tmux has-session -t="$session_name" 2>/dev/null; then
-          tmux new-session -ds "$session_name" -c "$selected"
-        fi
-        [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
-      }
-      bindkey -s '^S' 'sessionizer\n'
+        sessionizer() {
+          local selected=$(fd -H -t d '^.git$' ~ --exclude .local --exclude .cargo -x echo {//} | fzf --preview "eza -A --color=always {}")
+          [ -z "$selected" ] && echo "Error: empty selection..." && return 1
+          local session_name=$(basename "$selected" | tr . _)
+          if ! tmux has-session -t="$session_name" 2>/dev/null; then
+            tmux new-session -ds "$session_name" -c "$selected"
+          fi
+          [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
+        }
+        bindkey -s '^S' 'sessionizer\n'
       '';
     };
   };

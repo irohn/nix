@@ -8,6 +8,12 @@ end
 
 config.window_decorations = "RESIZE"
 
+config.window_padding = {
+  left = 2,
+  right = 2,
+  top = 0,
+  bottom = 0,
+}
 config.enable_tab_bar = false
 
 config.color_scheme = "One Dark (Gogh)"
