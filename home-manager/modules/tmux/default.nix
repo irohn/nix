@@ -59,6 +59,15 @@
       extraConfig = ''
         set -as terminal-features ",xterm-256color:RGB"
 
+        set -g renumber-windows on
+
+        set -g mouse on
+
+        set-window-option -g mode-keys vi
+
+        unbind R
+        bind R source-file ~/.config/tmux/tmux.conf
+
         # Pane navigation
         bind h select-pane -L
         bind j select-pane -D
