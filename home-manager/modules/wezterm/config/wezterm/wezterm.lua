@@ -9,14 +9,14 @@ end
 config.window_decorations = "RESIZE"
 
 config.window_padding = {
-  left = 2,
-  right = 2,
+  left = 1,
+  right = 1,
   top = 0,
   bottom = 0,
 }
 config.enable_tab_bar = false
 
-config.color_scheme = "One Dark (Gogh)"
+config.color_scheme = "Tokyo Night"
 
 config.font_size = 16.0
 
