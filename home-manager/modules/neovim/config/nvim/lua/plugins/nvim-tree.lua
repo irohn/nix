@@ -3,7 +3,7 @@ return {
   version = "*",
   lazy = false,
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    { 'echasnovski/mini.icons', version = false },
   },
   config = function()
     local nvimtree = require("nvim-tree")
