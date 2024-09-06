@@ -13,6 +13,7 @@
       cargo
       unzip
       gcc
+      nil # lsp server for nix language
     ];
     file = {
       # neovim's config

@@ -43,7 +43,11 @@ return {
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           require("lspconfig")[server_name].setup({})
-        end
+        end,
+        -- Explicitly set up the nil language server
+        ["nil_ls"] = function()
+          require("lspconfig").nil_ls.setup({})
+        end,
       })
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
