@@ -11,6 +11,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Enable unpatched dynamic binaries on NixOS
+  programs.nix-ld.enable = true;
+
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
     vim
