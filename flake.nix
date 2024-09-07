@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -31,6 +32,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
+    nixos-hardware,
     home-manager,
     darwin,
     nixos-wsl,
@@ -134,12 +136,12 @@
       # NixOS configuration entrypoint
       # Available through `nixos-rebuild switch --flake .#<config-name>`
       nixosConfigurations = {
-        nixos = mkNixosConfiguration {
+        pinix = mkNixosConfiguration {
           hostname = "nixos";
-          system = settings.defaults.system;
-          username = "nixos";
+          system = "aarch64-linux";
+          username = "ori";
           email = settings.defaults.email;
-          extraModules = [ ];
+          extraModules = [ nixos-hardware.nixosModules.raspberry-pi-4 ./nixos/raspberrypi.nix ];
         };
         nixos-wsl = mkNixosConfiguration {
           hostname = "nixos";

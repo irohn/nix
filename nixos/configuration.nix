@@ -7,8 +7,7 @@
     ./modules/host-users.nix
     ./modules/networking.nix
     ./modules/system.nix
-  ] ++ lib.optional (builtins.pathExists /etc/nixos/hardware-configuration.nix)
-    /etc/nixos/hardware-configuration.nix;
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

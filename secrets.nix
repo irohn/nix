@@ -9,6 +9,7 @@ let
     # public keys (system level /etc/ssh)
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPjGVE8CXIupUSSzv7gX25FOM7u6AMWG63LeJKX2EmX6" # github (1password)
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdFUkUYAgMzaGpSDRa35Dm8Ti+i8wX9Utbyk6yiB+w3" # macbook pro
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEF/kDDUaylmFWqlgaBsuHVNUwunJk6beHmC0jur8raY" # Raspberry pi
   ];
 
 in
