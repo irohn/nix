@@ -29,8 +29,8 @@
 
             set -g @catppuccin_window_left_separator "█"
             set -g @catppuccin_window_right_separator "█"
-            set -g @catppuccin_window_middle_separator " █"
-            set -g @catppuccin_window_number_position "right"
+            set -g @catppuccin_window_middle_separator "█ "
+            set -g @catppuccin_window_number_position "left"
 
             set -g @catppuccin_window_default_fill "number"
             set -g @catppuccin_window_default_text "#W"
@@ -51,6 +51,9 @@
             # Colors
             set -g @catppuccin_window_default_color "#7f848e" # text color
             set -g @catppuccin_window_default_background "#5c6370"
+
+            set -g @catppuccin_window_current_color "#9ece6a" # text color
+            set -g @catppuccin_window_current_background "#24283b"
 
             set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,#[fg=#a48cf2]  ,}#{?pane_synchronized,#[fg=#a48cf2]  ,}"
           '';
