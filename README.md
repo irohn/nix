@@ -114,6 +114,8 @@ To build and activate a darwin configuration:
 darwin-rebuild switch --flake .#<config-name>
 ```
 
+Note that darwin-rebuild now integrates home-manager, this means that if you are running darwin-rebuild you don't need to run home-manager switch.
+
 ### NixOS
 
 Work in progress...
