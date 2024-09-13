@@ -28,10 +28,13 @@
 
     taps = [
       "homebrew/services"
+      "hashicorp/tap"
     ];
 
     # `brew install`
-    brews = [ ];
+    brews = [
+      "hashicorp/tap/hcp"
+    ];
 
     # `brew install --cask`
     casks = [
