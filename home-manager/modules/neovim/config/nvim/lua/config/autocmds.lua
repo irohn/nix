@@ -124,3 +124,13 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+-- Local terminal settings
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  group = augroup("terminal_open"),
+  callback = function(event)
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+  end
+})
+

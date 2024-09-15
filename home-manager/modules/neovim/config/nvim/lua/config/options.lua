@@ -1,5 +1,12 @@
 local opt = vim.opt
 
+-- Set leader keys
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- netrw settings
+vim.g.netrw_banner = 0
+
 -- Preview substitutions live, as you type!
 opt.inccommand = "split"
 
@@ -36,10 +43,6 @@ opt.breakindent = true
 
 -- Save undo history
 opt.undofile = true
-
--- Disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 -- Enable 24-bit colour
 opt.termguicolors = true

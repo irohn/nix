@@ -1,37 +1,55 @@
-local set = vim.keymap.set
+local function map(mode, lhs, rhs, opts)
+    local options = { noremap = true, silent = true }
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    vim.keymap.set(mode, lhs, rhs, options)
+end
 
 -- Clear highlights on search when pressing <Esc> in normal mode
-set("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear highlights" })
+map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear highlights" })
 
 -- Enter command mode pressing `;`
-set("n", ";", ":", { desc = "CMD enter command mode" })
+map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- Diagnostic keymaps
-set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+
+-- Toggle netrw if enabled
+local function is_netrw_enabled()
+    return vim.g.loaded_netrw ~= 1 and vim.g.loaded_netrwPlugin ~= 1
+end
+if is_netrw_enabled() then
+  map("n", "<leader>e", function()
+    if vim.bo.filetype == "netrw" then
+      vim.cmd("Rex")
+    else
+      vim.cmd("Ex")
+    end
+  end, { desc = "Toggle file explorer" })
+end
 
 -- Exit terminal mode in the builtin terminal
-set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
+map("t", "<C-w>", "<C-\\><C-o><C-w>", { desc = "Enter C-w mode in terminal" })
+map("t", "::", "<C-\\><C-n>:", { desc = "Enter command mode from terminal mode" })
 
 -- Buffers control
-set("n", "<S-h>", "<cmd>bp<CR>", { desc = "Previous buffer" })
-set("n", "<S-l>", "<cmd>bn<CR>", { desc = "Next buffer" })
-set("n", "<S-x>", "<cmd>bd<CR>", { desc = "Delete buffer" })
+map("n", "<s-h>", "<cmd>bp<cr>", { desc = "Previous buffer" })
+map("n", "<s-l>", "<cmd>bn<cr>", { desc = "Next buffer" })
+map("n", "<s-x>", "<cmd>bd<cr>", { desc = "Delete buffer" })
 
 -- Move between splits
-set("n", "<C-h>", "<C-w><left>")
-set("n", "<C-j>", "<C-w><down>")
-set("n", "<C-k>", "<C-w><up>")
-set("n", "<C-l>", "<C-w><right>")
-set("t", "<C-h>", "<C-\\><C-n><C-w><left>")
-set("t", "<C-j>", "<C-\\><C-n><C-w><down>")
-set("t", "<C-k>", "<C-\\><C-n><C-w><up>")
-set("t", "<C-l>", "<C-\\><C-n><C-w><right>")
+map({"n", "t"}, "<c-h>", "<c-\\><c-n><c-w><left>")
+map({"n", "t"}, "<c-j>", "<c-\\><c-n><c-w><down>")
+map({"n", "t"}, "<c-k>", "<c-\\><c-n><c-w><up>")
+map({"n", "t"}, "<c-l>", "<c-\\><c-n><c-w><right>")
 
 -- Stay in visual mode when indenting/dedenting
-set("v", "<", "<gv")
-set("v", ">", ">gv")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 -- Better movement in wrapped lines
-set("n", "j", "gj")
-set("n", "k", "gk")
+map("n", "j", "gj")
+map("n", "k", "gk")
 
