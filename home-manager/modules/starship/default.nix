@@ -6,7 +6,15 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
-      format = "$os$all";
+      format = "$os$all$custom$character";
+      custom = {
+        vim = {
+          command = "if [ -n \"$NVIM\" ]; then echo ' '; elif [ -n \"$VIM\" ]; then echo ' '; fi";
+          when = "test -n \"$NVIM\" || test -n \"$VIM\"";
+          format = "[$output]($style) ";
+          style = "bold blue";
+        };
+      };
       add_newline = false;
       line_break = { disabled = true; };
       username = {
