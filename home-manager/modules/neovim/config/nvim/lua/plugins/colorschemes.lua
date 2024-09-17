@@ -6,6 +6,9 @@ return {
     end,
   },
   {
+    "xiyaowong/transparent.nvim",
+  },
+  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
