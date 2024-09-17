@@ -13,6 +13,7 @@
       cargo
       unzip
       gcc
+      sshpass # for ssh.nvim password authentication
     ];
     file = {
       # neovim's config
