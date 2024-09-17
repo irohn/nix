@@ -29,7 +29,6 @@
         ShowPathbar = true;
         ShowStatusBar = true;  # show status bar
         FXEnableExtensionChangeWarning = false;
-        QuitMenuItem = true;  # enable quit menu item
       };
       trackpad = {
         Clicking = true;  # enable tap to click
