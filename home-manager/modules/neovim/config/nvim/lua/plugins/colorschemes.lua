@@ -7,6 +7,9 @@ return {
   },
   {
     "xiyaowong/transparent.nvim",
+    config = function()
+      vim.keymap.set("n", "<leader>tt", "<cmd>TransparentToggle<cr>", { silent = true, noremap = true, desc = "Toggle Transparent background" })
+    end,
   },
   {
     "folke/tokyonight.nvim",
