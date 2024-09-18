@@ -31,7 +31,7 @@
             echo "error: fd command not found"
             return 1
           fi
-          local rt_versions_path=$(fd -1 -t d rt-versions "$HOME")
+          local rt_versions_path=$(fd -1 -t d rt-versions$ "$HOME")
           echo $rt_versions_path
         }
 
