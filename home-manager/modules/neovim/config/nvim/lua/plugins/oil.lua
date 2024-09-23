@@ -23,7 +23,7 @@ return {
           max_height = 25,
           border = "none",
           win_options = {
-            winblend = 3,
+            winblend = 0,
           },
         },
         keymaps = {
