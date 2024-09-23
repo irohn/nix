@@ -25,7 +25,6 @@ return {
       local servers = {
         yamlls = {},
         pyright = {},
-        nil_ls = {},
         lua_ls = {
           settings = {
             Lua = {
