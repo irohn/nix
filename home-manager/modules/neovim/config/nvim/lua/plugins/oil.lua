@@ -1,9 +1,10 @@
 return {
   {
     "stevearc/oil.nvim",
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
     opts = {},
     config = function()
-      oil = require("oil")
+      local oil = require("oil")
 
       local detail = false
 
@@ -18,11 +19,11 @@ return {
         float = {
           -- Padding around the floating window
           padding = 2,
-          max_width = 0,
-          max_height = 0,
-          border = "rounded",
+          max_width = 90,
+          max_height = 25,
+          border = "none",
           win_options = {
-            winblend = 0,
+            winblend = 3,
           },
         },
         keymaps = {

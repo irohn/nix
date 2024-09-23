@@ -32,6 +32,8 @@ opt.clipboard = "unnamedplus"
 opt.list = true
 opt.listchars = { tab = '  ', trail = '·', nbsp = '␣'}
 
+opt.fillchars = { eob = " " }
+
 -- Show which line your cursor is on
 opt.cursorline = true
 
