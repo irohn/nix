@@ -15,7 +15,6 @@ return {
       end
 
       oil.setup({
-        skip_confirm_for_simple_edits = true,
         float = {
           -- Padding around the floating window
           padding = 2,
