@@ -43,7 +43,7 @@ return {
           }
         end,
       })
-      vim.cmd.color("tokyonight")
+      vim.cmd.color("tokyonight-storm")
     end
   },
 }
