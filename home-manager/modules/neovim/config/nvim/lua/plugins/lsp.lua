@@ -19,11 +19,41 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", opts = {} },
       "hrsh7th/cmp-nvim-lsp",
+      { 'towolf/vim-helm', ft = 'helm' },
+      "b0o/schemastore.nvim",
     },
     config = function()
 
       local servers = {
-        yamlls = {},
+        helm_ls = {
+          settings = {
+            ["helm-ls"] = {
+              yamlls = {
+                enabled = true,
+                path = "yaml-language-server",
+              },
+            },
+          },
+        },
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = false,
+                url = "",
+              },
+              schemas = require('schemastore').yaml.schemas(),
+            },
+          },
+        },
         pyright = {},
         lua_ls = {
           settings = {
@@ -62,6 +92,7 @@ return {
           map("gi", function() vim.lsp.buf.implementation() end, "Go to implementation")
           map("gt", function() vim.lsp.buf.type_definition() end, "Type definition")
           map("<leader>rn", function() vim.lsp.buf.rename() end, "Rename")
+          map("<space>d", vim.diagnostic.open_float, "Open diagnostics")
 
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
