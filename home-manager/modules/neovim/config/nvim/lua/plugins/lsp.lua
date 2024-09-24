@@ -34,6 +34,10 @@ return {
               diagnostics = { disable = { "missing-fields" } },
             },
           },
+          -- Disable semantic tokens for lua_ls
+          capabilities = {
+            semanticTokensProvider = nil,
+          },
         },
       }
 
@@ -44,9 +48,12 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
           local map = function(keys, func, desc)
             vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
+
           map("gd", function() vim.lsp.buf.definition() end, "Go to definition")
           map("gD", function() vim.lsp.buf.declaration() end, "Go to declaration")
           map("K", function() vim.lsp.buf.hover() end, "Hover")
@@ -56,7 +63,6 @@ return {
           map("gt", function() vim.lsp.buf.type_definition() end, "Type definition")
           map("<leader>rn", function() vim.lsp.buf.rename() end, "Rename")
 
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {

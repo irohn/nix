@@ -43,12 +43,12 @@ return {
           signcolumn = "yes:2",
         },
         float = {
-          padding = 2,
           max_width = 90,
           max_height = 25,
           border = "none",
         },
         keymaps = {
+          ["<C-p>"] = { desc = "Disabled" }, -- disable preview (https://github.com/stevearc/oil.nvim/issues/435)
           ["gr"] = {
             desc = "Go to project's root",
             callback = function()
