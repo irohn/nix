@@ -15,15 +15,15 @@ return {
       end
 
       oil.setup({
+        skip_confirm_for_simple_edits = true,
+        win_options = {
+          signcolumn = "yes:2",
+        },
         float = {
-          -- Padding around the floating window
           padding = 2,
           max_width = 90,
           max_height = 25,
           border = "none",
-          win_options = {
-            winblend = 0,
-          },
         },
         keymaps = {
           ["gr"] = {
@@ -53,4 +53,13 @@ return {
 
     end,
   },
+
+  {
+    "refractalize/oil-git-status.nvim",
+    dependencies = {
+      "stevearc/oil.nvim",
+    },
+    config = true,
+  },
+
 }
