@@ -9,6 +9,7 @@
     kubectx
     fluxcd
     kubernetes-helm
+    kustomize_4
   ];
 
   programs = {
