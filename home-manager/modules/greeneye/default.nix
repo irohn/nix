@@ -9,6 +9,7 @@
     fd
     ripgrep
     tailscale
+    azure-cli
     kubectl
     gawk
     fzf
