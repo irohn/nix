@@ -31,8 +31,9 @@ return {
           ["<C-p>"] = cmp.mapping.select_prev_item(),
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-u>"] = cmp.mapping.scroll_docs(4),
-          ["<C-y>"] = cmp.mapping.confirm { select = true },
-          ["<S-space>"] = cmp.mapping.complete {},
+          ["<C-a>"] = cmp.mapping.complete {},
+          ['<C-x>'] = cmp.mapping.close(),
+          ["<C-y>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
         },
         sources = {
           {
@@ -43,6 +44,7 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
+          { name = "buffer" },
         },
       })
     end

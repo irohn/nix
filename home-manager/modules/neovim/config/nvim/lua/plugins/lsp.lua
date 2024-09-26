@@ -22,16 +22,14 @@ return {
       { 'towolf/vim-helm', ft = 'helm' },
       "b0o/schemastore.nvim",
     },
+    event = { "BufReadPre", "BufNewFile", "BufEnter" },
     config = function()
 
       local servers = {
         helm_ls = {
           settings = {
-            ["helm-ls"] = {
-              yamlls = {
-                enabled = true,
-                path = "yaml-language-server",
-              },
+            ['helm-ls'] = {
+              yamlls = { path = "yaml-language-server", },
             },
           },
         },
@@ -51,6 +49,7 @@ return {
                 url = "",
               },
               schemas = require('schemastore').yaml.schemas(),
+              validate = { enable = true },
             },
           },
         },
