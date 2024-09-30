@@ -5,6 +5,11 @@
 }: {
   programs = {
 
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -14,6 +19,7 @@
         enable = true;
         theme = "robbyrussell"; # You can change this to your preferred theme
       };
+
       sessionVariables = {
         TEST = "test";
       };
