@@ -46,6 +46,7 @@
       "raycast" # Spotlight alternative
       "caffeine" # Prevent screen from turning off
       "docker" # Docker Desktop
+      "xquartz"
     ];
   };
 }
