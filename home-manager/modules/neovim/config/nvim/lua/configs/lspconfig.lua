@@ -26,6 +26,8 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
+lspconfig.nil_ls.setup {}
+
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
