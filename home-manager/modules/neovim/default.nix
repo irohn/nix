@@ -20,6 +20,7 @@
       pyright
       yaml-language-server
       helm-ls
+      nil # nix (nil_ls)
     ];
     file = {
       # neovim's config
