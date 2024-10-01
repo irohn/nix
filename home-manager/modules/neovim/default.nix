@@ -14,6 +14,12 @@
       unzip
       gcc
       sshpass # for ssh.nvim password authentication
+
+      # Language servers (LSP)
+      lua-language-server
+      pyright
+      yaml-language-server
+      helm-ls
     ];
     file = {
       # neovim's config

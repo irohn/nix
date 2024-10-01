@@ -15,20 +15,6 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 -- Diagnostic keymaps
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
--- Toggle netrw if enabled
-local function is_netrw_enabled()
-    return vim.g.loaded_netrw ~= 1 and vim.g.loaded_netrwPlugin ~= 1
-end
-if is_netrw_enabled() then
-  map("n", "<leader>e", function()
-    if vim.bo.filetype == "netrw" then
-      vim.cmd("Rex")
-    else
-      vim.cmd("Ex")
-    end
-  end, { desc = "Toggle file explorer" })
-end
-
 -- Exit terminal mode in the builtin terminal
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
 map("t", "<C-w>", "<C-\\><C-o><C-w>", { desc = "Enter C-w mode in terminal" })
@@ -40,10 +26,10 @@ map("n", "<s-l>", "<cmd>bn<cr>", { desc = "Next buffer" })
 map("n", "<s-x>", "<cmd>bd<cr>", { desc = "Delete buffer" })
 
 -- Move between splits
-map({"n", "t"}, "<c-h>", "<c-\\><c-n><c-w><left>")
-map({"n", "t"}, "<c-j>", "<c-\\><c-n><c-w><down>")
-map({"n", "t"}, "<c-k>", "<c-\\><c-n><c-w><up>")
-map({"n", "t"}, "<c-l>", "<c-\\><c-n><c-w><right>")
+map("n", "<c-h>", "<c-w><left>")
+map("n", "<c-j>", "<c-w><down>")
+map("n", "<c-k>", "<c-w><up>")
+map("n", "<c-l>", "<c-w><right>")
 
 -- Stay in visual mode when indenting/dedenting
 map("v", "<", "<gv")

@@ -1,12 +1,5 @@
 local opt = vim.opt
 
--- Set leader keys
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- netrw settings
-vim.g.netrw_banner = 0
-
 -- Preview substitutions live, as you type!
 opt.inccommand = "split"
 
@@ -30,15 +23,17 @@ opt.clipboard = "unnamedplus"
 
 -- Show trailing spaces
 opt.list = true
-opt.listchars = { tab = '  ', trail = '·', nbsp = '␣'}
+opt.listchars = { tab = "  ", trail = "·", nbsp = "␣"}
 
+-- Remove end of buffer `~` symbols
 opt.fillchars = { eob = " " }
 
--- Show which line your cursor is on
+-- Highlight cursor line
 opt.cursorline = true
+opt.cursorlineopt = "both"
 
 -- Minimal number of screen lines to keep above and below the cursor.
-opt.scrolloff = 10
+opt.scrolloff = 6
 
 -- Enable break indent
 opt.breakindent = true
