@@ -67,4 +67,3 @@ oil.setup(options)
 vim.keymap.set("n", "<leader>e", function()
   oil.toggle_float()
 end, { noremap = true, silent = true, desc = "Open parent directory" })
-

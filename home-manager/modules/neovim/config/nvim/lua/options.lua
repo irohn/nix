@@ -1,5 +1,12 @@
 local opt = vim.opt
 
+-- Default tab behavior (overwritten in ftplugin)
+local tab_len = 4
+opt.tabstop = tab_len
+opt.softtabstop = tab_len
+opt.shiftwidth = tab_len
+opt.expandtab = true
+
 -- Preview substitutions live, as you type!
 opt.inccommand = "split"
 
@@ -23,7 +30,7 @@ opt.clipboard = "unnamedplus"
 
 -- Show trailing spaces
 opt.list = true
-opt.listchars = { tab = "  ", trail = "·", nbsp = "␣"}
+opt.listchars = { tab = "  ", trail = "·", nbsp = "␣" }
 
 -- Remove end of buffer `~` symbols
 opt.fillchars = { eob = " " }
@@ -49,3 +56,4 @@ opt.laststatus = 3
 
 -- Allow going past end of lines in visual block mode
 opt.virtualedit = "block"
+

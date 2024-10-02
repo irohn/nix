@@ -38,4 +38,3 @@ map("v", ">", ">gv")
 -- Better movement in wrapped lines
 map("n", "j", "gj")
 map("n", "k", "gk")
-
