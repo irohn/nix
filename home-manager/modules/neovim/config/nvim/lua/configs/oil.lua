@@ -34,9 +34,11 @@ local options = {
   win_options = {
     winbar = "%!v:lua.get_oil_winbar()",
     signcolumn = "yes:2",
+    number = false,
+    relativenumber = false,
   },
   float = {
-    padding = 0,
+    padding = 2,
     border = "none",
   },
   keymaps = {
