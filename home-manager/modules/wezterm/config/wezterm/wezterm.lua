@@ -1,29 +1,16 @@
-local wezterm = require("wezterm")
+local wezterm = require 'wezterm'
+local platform = require 'platform'
+local mappings = require 'mappings'
+local appearance = require 'appearance'
 
-local config = wezterm.config_builder()
-
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-  config.default_prog = { "wsl", "~" }
+local config = {}
+if wezterm.config_builder then
+  config = wezterm.config_builder()
 end
 
-config.window_decorations = "RESIZE"
-
-config.window_padding = {
-  left = 1,
-  right = 1,
-  top = 0,
-  bottom = 0,
-}
-
-config.window_background_opacity = 1.0
-
-config.enable_tab_bar = false
-
-config.color_scheme = "Tokyo Night"
-
-config.font_size = 16.0
-
-config.audible_bell = "Disabled"
+platform.apply_to_config(config)
+mappings.apply_to_config(config)
+appearance.apply_to_config(config)
 
 return config
 
