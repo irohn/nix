@@ -92,7 +92,7 @@
 
       initExtra = lib.mkAfter /* bash */ ''
         sessionizer() {
-          local selected=$(fd -H -t d '^.git$' ~ --exclude .local --exclude .cargo -x echo {//} | fzf --preview "eza -A --color=always {}")
+          local selected=$(fd -H -t d '^.git$' ~ --exclude .local --exclude .cargo --max-depth 4 -x echo {//} | fzf --preview "eza -A --color=always {}")
           [ -z "$selected" ] && echo "Error: empty selection..." && return 1
           local session_name=$(basename "$selected" | tr . _)
           if ! tmux has-session -t="$session_name" 2>/dev/null; then
