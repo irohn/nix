@@ -47,6 +47,10 @@
       "caffeine" # Prevent screen from turning off
       "docker" # Docker Desktop
       "xquartz"
+
+      # Gaming
+      "steam"
+      "discord"
     ];
   };
 }
