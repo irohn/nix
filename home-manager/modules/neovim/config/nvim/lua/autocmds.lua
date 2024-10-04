@@ -133,3 +133,4 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     vim.opt_local.signcolumn = "no"
   end
 })
+

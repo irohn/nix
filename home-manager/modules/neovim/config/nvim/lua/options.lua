@@ -51,7 +51,7 @@ opt.undofile = true
 -- Enable 24-bit colour
 opt.termguicolors = true
 
--- show only 1 status line
+-- Make statusline global
 opt.laststatus = 3
 
 -- Allow going past end of lines in visual block mode

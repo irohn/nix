@@ -20,4 +20,21 @@ return {
     end,
   },
 
+  -- File explorer (the slower type of navigation)
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
+    dependencies = {
+      { "echasnovski/mini.icons", opts = {}, }
+    },
+    config = function()
+      require("configs.oil")
+    end,
+  },
+  {
+    "refractalize/oil-git-status.nvim",
+    lazy = false,
+    config = true,
+  },
+
 }
