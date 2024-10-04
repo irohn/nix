@@ -94,6 +94,7 @@
                 users.${username} = import ./home-manager/home.nix;
                 extraSpecialArgs = { inherit inputs outputs username email; };
               };
+              environment.systemPackages = [ home-manager.packages.${system}.home-manager ];
             }
           ] ++ extraModules;
           specialArgs = { inherit inputs outputs hostname username email; };
