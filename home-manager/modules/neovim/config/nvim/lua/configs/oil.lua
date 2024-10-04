@@ -38,7 +38,7 @@ local options = {
     relativenumber = false,
   },
   float = {
-    padding = 2,
+    padding = 0,
     border = "none",
   },
   keymaps = {
@@ -67,5 +67,9 @@ local options = {
 oil.setup(options)
 
 vim.keymap.set("n", "<leader>e", function()
-  oil.toggle_float()
-end, { noremap = true, silent = true, desc = "Open parent directory" })
+  if vim.bo.filetype == "oil" then
+    oil.close()
+  else
+    oil.open()
+  end
+end, { noremap = true, silent = true, desc = "Toggle Oil Explorer" })
