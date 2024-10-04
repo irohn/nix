@@ -15,7 +15,7 @@
         tmuxPlugins.better-mouse-mode
         {
           plugin = tmuxPlugins.catppuccin;
-          extraConfig = ''
+          extraConfig = /* bash */ ''
             set-option -g status-position top
 
             # Override windows status icons
@@ -59,7 +59,7 @@
           '';
         }
       ];
-      extraConfig = ''
+      extraConfig = /* bash */ ''
         set -as terminal-features ",xterm-256color:RGB"
 
         set -g renumber-windows on

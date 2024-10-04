@@ -3,7 +3,8 @@ local act = wezterm.action
 
 local M = {}
 
-M.leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 }
+M.leader = { key = 'a', mods = 'CTRL|SHIFT', timeout_milliseconds = 1000 }
+
 M.keys = {
   {
     key = 'x',
