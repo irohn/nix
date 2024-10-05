@@ -77,10 +77,15 @@
         bind k select-pane -U
         bind l select-pane -R
 
+        # Join last used pane into current window
+        bind-key @ join-pane -h -s '!'
+        # bind-key ! break-pane -t '!' # <- this is set by default
+
         # synchronize all panes in a window (multi-exec)
         # Prefix + Shift-M
         unbind M
         bind M set-window-option synchronize-panes
+
       '';
     };
 
