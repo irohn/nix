@@ -48,6 +48,9 @@
       "docker" # Docker Desktop
       "xquartz"
 
+      # AI
+      "ollama"
+
       # Gaming
       "steam"
       "discord"
