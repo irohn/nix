@@ -1,6 +1,6 @@
 local gen = require("gen")
 
 gen.setup({
-  model = "deepseek-coder-v2",
+  model = "qwen2.5-coder",
 })
 
