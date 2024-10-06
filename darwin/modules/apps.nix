@@ -46,7 +46,9 @@
       "raycast" # Spotlight alternative
       "caffeine" # Prevent screen from turning off
       "docker" # Docker Desktop
-      "xquartz"
+      "xquartz" # X11 server
+      "mullvadvpn" # VPN client
+      "iina" # Modern media player
 
       # AI
       "ollama"
