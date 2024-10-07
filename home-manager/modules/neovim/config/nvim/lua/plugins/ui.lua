@@ -6,7 +6,7 @@ return {
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require "nvchad" 
+      require "nvchad"
     end
   },
   {
