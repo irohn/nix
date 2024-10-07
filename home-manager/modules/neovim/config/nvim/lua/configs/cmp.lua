@@ -19,7 +19,7 @@ cmp.setup({
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-u>"] = cmp.mapping.scroll_docs(4),
     ["<C-a>"] = cmp.mapping.complete({}),
-    ['<C-x>'] = cmp.mapping.close(),
+    ["<C-x>"] = cmp.mapping.close(),
     ["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
   }),
   sources = {
