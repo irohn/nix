@@ -30,7 +30,8 @@ require("mason-lspconfig").setup_handlers {
       settings = {
         Lua = {
           diagnostics = {
-            globals = { "vim" }
+            globals = { "vim" },
+            disable = { 'missing-fields' }
           },
           workspace = {
             library = {
