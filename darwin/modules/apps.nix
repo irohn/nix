@@ -52,6 +52,7 @@
 
       # AI
       "ollama"
+      "diffusionbee"
 
       # Gaming
       "steam"
