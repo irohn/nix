@@ -34,6 +34,7 @@
     # `brew install`
     brews = [
       "hashicorp/tap/hcp"
+      "qemu"
     ];
 
     # `brew install --cask`
@@ -45,10 +46,12 @@
       "mac-mouse-fix" # Fix mouse scrolling
       "raycast" # Spotlight alternative
       "caffeine" # Prevent screen from turning off
-      "docker" # Docker Desktop
       "xquartz" # X11 server
       "mullvadvpn" # VPN client
       "iina" # Modern media player
+
+      # Development
+      "docker" # Docker Desktop
 
       # AI
       "ollama"
