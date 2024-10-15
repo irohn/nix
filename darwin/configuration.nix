@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }: {
   imports = [
@@ -7,6 +8,8 @@
     ./modules/host-users.nix
     ./modules/apps.nix
   ];
+
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
     # enable flakes globally

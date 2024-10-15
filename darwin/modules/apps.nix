@@ -13,6 +13,9 @@
     git
     curl
     vim
+    wezterm # GPU accelerated terminal emulator (config in home-manager)
+    utm
+    discord
   ];
 
   # Homebrew need to be installed manually, see https://brew.sh
@@ -34,13 +37,11 @@
     # `brew install`
     brews = [
       "hashicorp/tap/hcp"
-      "qemu"
     ];
 
     # `brew install --cask`
     casks = [
       "alt-tab" # Windows 11 style alt+tab
-      "wezterm" # GPU accelerated terminal emulator (config in home-manager)
       "karabiner-elements" # Keyboard manager
       "rectangle" # Window snapping app with keybindings
       "mac-mouse-fix" # Fix mouse scrolling
@@ -59,7 +60,6 @@
 
       # Gaming
       "steam"
-      "discord"
     ];
   };
 }
