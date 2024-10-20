@@ -12,7 +12,7 @@ M.apply_to_config = function(config)
 
   config.color_scheme = "duskfox"
 
-  config.font_size = 16.0
+  config.font_size = 18.0
   config.audible_bell = "Disabled"
 end
 
