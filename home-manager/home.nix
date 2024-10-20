@@ -20,6 +20,7 @@ in {
   };
 
   imports = [
+    ./modules/alacritty
     ./modules/git
     ./modules/zsh
     ./modules/eza
