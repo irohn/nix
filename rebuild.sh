@@ -4,6 +4,16 @@
 SYSTEM="nixos"
 CONFIG=""
 
+function show_help() {
+    echo "Usage: $0 [options]"
+    echo ""
+    echo "Options:"
+    echo "  --config, -c        Specify the configuration. Example: --config=macbook"
+    echo "  --system, -s        Specify the system. Options are 'nixos' (default) or 'darwin'"
+    echo "  --help, -h          Show this help message and exit"
+    echo ""
+}
+
 # Detect MacOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	SYSTEM="darwin"
@@ -21,7 +31,14 @@ while [[ "$#" -gt 0 ]]; do
 			shift
 			SYSTEM="$1"
 			;;
-		*) echo "Unknown parameter passed: $1"; exit 1 ;;
+		--help|-h)
+			show_help
+			exit 0
+			;;
+		*)
+			echo "Unknown parameter passed: $1"
+			exit 1
+			;;
 	esac
 	shift
 done
