@@ -10,7 +10,7 @@ M.apply_to_config = function(config)
   config.hide_tab_bar_if_only_one_tab = true
   config.show_new_tab_button_in_tab_bar = false
 
-  config.color_scheme = "OneDark (Gogh)"
+  config.color_scheme = "duskfox"
 
   config.font_size = 16.0
   config.audible_bell = "Disabled"
