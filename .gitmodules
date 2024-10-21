@@ -1,3 +1,0 @@
-[submodule "home-manager/modules/neovim/config/nvim"]
-	path = home-manager/modules/neovim/config/nvim
-	url = git@github.com:irohn/nvim.git
