@@ -25,7 +25,6 @@
       bell = { command = "None"; };
 
       selection.save_to_clipboard = true;
-
     };
   };
 }
