@@ -93,6 +93,7 @@
       shellAliases = {
         tmux = "tmux -u";
         tm = "tmux -u attach";
+				ss = "sessionizer";
       };
 
       initExtra = lib.mkAfter /* bash */ ''
@@ -105,6 +106,7 @@
           fi
           [ -z "$TMUX" ] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
         }
+
         bindkey -s '^S' 'sessionizer\n'
       '';
     };
