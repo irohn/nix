@@ -21,10 +21,10 @@
         TEST = "test";
       };
 
-				#   initExtra = /* bash */ ''
-				# stty -ixon
-				# setopt completealiases
-				#   '';
+			initExtra = /* bash */ ''
+				stty -ixon
+				setopt completealiases
+			'';
 
       shellAliases = {
         ai = /* bash */ "ollama run deepseek-coder-v2:latest \"$''{@}\"";
