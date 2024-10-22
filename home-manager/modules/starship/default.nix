@@ -38,6 +38,10 @@
       character = {
         success_symbol = "[\\$](white bold)";
         error_symbol = "[\\$](red bold)";
+				vimcmd_symbol = "[󰫻](blue bold)";
+				vimcmd_replace_one_symbol = "[󰫻](blue purple)";
+				vimcmd_replace_symbol = "[󰫻](blue purple)";
+				vimcmd_visual_symbol = "[󰬃](blue yellow)";
       };
       git_branch = {
         symbol = "";
