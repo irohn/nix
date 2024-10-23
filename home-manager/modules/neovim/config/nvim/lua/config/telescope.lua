@@ -25,3 +25,4 @@ vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git Commits" })
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git Branches" })
 
 vim.keymap.set("n", "<leader>j", builtin.jumplist, { desc = "Jumplist" })
+
