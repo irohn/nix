@@ -61,15 +61,15 @@
       ];
       extraConfig = /* bash */ ''
         set -as terminal-features ",xterm-256color:RGB"
-
         set -g renumber-windows on
-
         set -g mouse on
 
         set-window-option -g mode-keys vi
 
         unbind R
         bind R source-file ~/.config/tmux/tmux.conf
+
+				bind C-h set-option -g status
 
         # Pane navigation
         bind h select-pane -L
@@ -86,6 +86,7 @@
         unbind M
         bind M set-window-option synchronize-panes
 
+				set-option -g allow-passthrough on
       '';
     };
 
