@@ -10,6 +10,8 @@ local function set_tmux_status(visible)
 end
 
 return {
+	filetypes = { "markdown", "text" },
+
 	on_enter = function()
 		set_tmux_status(false)
 	end,
