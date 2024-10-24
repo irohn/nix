@@ -10,13 +10,7 @@ return {
 
 	{
 		"irohn/focus.nvim",
-		opts = {
-			keymaps = {
-				n = {
-					["<leader>z"] = true,
-				}
-			}
-		},
+		opts = require("config.focus"),
 		cmd = "Focus",
 		keys = {
 			{ "<leader>z", desc = "Toggle focus mode" },
