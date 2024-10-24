@@ -10,12 +10,6 @@ local function set_tmux_status(visible)
 end
 
 return {
-	keymaps = {
-		n = {
-			["<leader>z"] = true,
-		}
-	},
-
 	on_enter = function()
 		set_tmux_status(false)
 	end,

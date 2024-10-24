@@ -13,7 +13,7 @@ return {
 		opts = require("config.focus"),
 		cmd = "Focus",
 		keys = {
-			{ "<leader>z", desc = "Toggle focus mode" },
+			{ "<leader>z", "<cmd>Focus<cr>", desc = "Toggle focus mode" },
 		},
 	},
 
