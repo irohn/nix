@@ -5,7 +5,7 @@ return {
 	"folke/tokyonight.nvim",
 	"scottmckendry/cyberdream.nvim",
 	"rebelot/kanagawa.nvim",
-	"sainnhe/gruvbox-material",
+	"ellisonleao/gruvbox.nvim",
 	"marko-cerovac/material.nvim",
 	"sainnhe/everforest",
 	"sainnhe/edge",
@@ -15,6 +15,7 @@ return {
 	{ "catppuccin/nvim", name = "catppuccin" },
 	"navarasu/onedark.nvim",
 	"projekt0n/github-nvim-theme",
+	"pgdouyon/vim-yin-yang",
 
 	{
 		"norcalli/nvim-colorizer.lua",

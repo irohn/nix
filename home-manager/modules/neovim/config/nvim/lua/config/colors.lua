@@ -1,3 +1,5 @@
+local colorscheme_overwrite = nil
+
 local builtin = require("telescope.builtin")
 vim.opt.termguicolors = true
 
@@ -50,4 +52,8 @@ vim.keymap.set("n", "<leader>th", function()
 	})
 end, { desc = "Colorscheme picker" })
 
-load_cached_colorscheme()
+if colorscheme_overwrite then
+	vim.cmd.colorscheme(colorscheme_overwrite)
+else
+	load_cached_colorscheme()
+end
