@@ -13,7 +13,7 @@ return {
 		-- dir = "~/projects/personal/focus.nvim",
 		opts = require("config.focus"),
 		ft = { "markdown", "text" },
-		cmd = "Focus",
+		cmd = { "Focus", "FocusOn", "FocusOff" },
 		keys = {
 			{ "<leader>z", "<cmd>Focus<cr>", desc = "Toggle focus mode" },
 		},
