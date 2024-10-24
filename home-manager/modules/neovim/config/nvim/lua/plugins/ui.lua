@@ -9,11 +9,18 @@ return {
 	},
 
 	{
-		dir = vim.fn.stdpath("config") .. "lua/config/zen.lua",
-		name = "zen",
-		config = function()
-			require("config.zen").setup()
-		end,
+		"irohn/focus.nvim",
+		opts = {
+			keymaps = {
+				n = {
+					["<leader>z"] = true,
+				}
+			}
+		},
+		cmd = "Focus",
+		keys = {
+			{ "<leader>z", desc = "Toggle focus mode" },
+		},
 	},
 
 }

@@ -1,15 +1,5 @@
 local M = {}
 
-local DEFAULT_OPTIONS = {
-	number = true,
-	relativenumber = true,
-	wrap = false,
-	scrolloff = 8,
-	colorcolumn = "80,120",
-	listchars = "tab:→ ,space:·,nbsp:␣,trail:•,eol:¶",
-	-- Add more defaults
-}
-
 -- Option type handlers
 local handlers = {
 	-- Handler for comma-separated string lists that can be tables
@@ -61,7 +51,6 @@ local handlers = {
 local option_handlers = {
 	colorcolumn = handlers.number_list,
 	listchars = handlers.comma_list,
-	-- Add more option mappings as needed
 }
 
 local function get_handler(option)
@@ -82,7 +71,7 @@ local function read_cache()
 			return decoded
 		end
 	end
-	return vim.deepcopy(DEFAULT_OPTIONS)
+	return vim.deepcopy({})
 end
 
 local function write_cache(data)
@@ -142,9 +131,7 @@ function M.restore_options()
 	end
 end
 
-function M.reset_to_defaults()
-	local cache = vim.deepcopy(DEFAULT_OPTIONS)
-	write_cache(cache)
+M.setup = function()
 	M.restore_options()
 end
 

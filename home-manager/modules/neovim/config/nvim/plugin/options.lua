@@ -40,13 +40,12 @@ opt.laststatus = 3
 opt.virtualedit = "block"
 
 -- Line numbers
-opt.number = false
-opt.relativenumber = false
+opt.number = true
+opt.relativenumber = true
 
 opt.updatetime = 250
 opt.timeoutlen = 300
 
 opt.colorcolumn = {}
 
--- Overwrite default options with cached ones
-require("config.options").restore_options()
+require("custom.optoggle").setup()

@@ -1,4 +1,4 @@
-local tog = require("config.options").toggle_option
+local tog = require("custom.optoggle").toggle_option
 
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
