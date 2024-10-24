@@ -19,7 +19,7 @@
           family = "JetBrainsMono Nerd Font";
           style = "Regular";
         };
-        size = 18;
+        size = 25;
       };
 
       bell = { command = "None"; };
