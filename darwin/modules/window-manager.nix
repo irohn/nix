@@ -1,6 +1,6 @@
 {
-	pkgs,
-	...
+pkgs,
+...
 }:
 {
 	services.yabai = {
@@ -41,16 +41,16 @@
 		package = pkgs.skhd;
 		skhdConfig = ''
 			# focus window
-			alt - h : yabai -m window --focus west || yabai -m display --focus west
-			alt - j : yabai -m window --focus south || yabai -m display --focus south
-			alt - k : yabai -m window --focus north || yabai -m display --focus north
-			alt - l : yabai -m window --focus east || yabai -m display --focus east
+			cmd - h : yabai -m window --focus west || yabai -m display --focus west
+			cmd - j : yabai -m window --focus south || yabai -m display --focus south
+			cmd - k : yabai -m window --focus north || yabai -m display --focus north
+			cmd - l : yabai -m window --focus east || yabai -m display --focus east
 
 			# swap windows
-			alt + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
-			alt + shift - j : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
-			alt + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
-			alt + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
+			cmd + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
+			cmd + shift - j : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
+			cmd + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
+			cmd + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
 
 			ctrl + cmd - h : yabai -m window west --resize right:-20:0 2> /dev/null || yabai -m window --resize right:-20:0
 			ctrl + cmd - j : yabai -m window north --resize bottom:0:20 2> /dev/null || yabai -m window --resize bottom:0:20
@@ -69,50 +69,69 @@
 		'';
 	};
 
-	# services.sketchybar = {
-	# 	enable = true;
-	# 	package = pkgs.sketchybar;
-	# 	config = /* bash */ ''
-	# 		#!/usr/bin/env bash
-	#
-	# 		# Initialize sketchybar
-	# 		sketchybar --bar \
-	# 		height=32 \
-	# 		position=top \
-	# 		padding_left=10 \
-	# 		padding_right=10 \
-	# 		color=0xff1e1e2e \
-	# 		blur_radius=0
-	#
-	# 		# Default values
-	# 		sketchybar --default \
-	# 		icon.font="JetBrainsMono Nerd Font:Bold:24.0" \
-	# 		icon.color=0xffffffff \
-	# 		label.font="JetBrainsMono Nerd Font:Bold:24.0" \
-	# 		label.color=0xffffffff \
-	# 		padding_left=5 \
-	# 		padding_right=5
-	#
-	# 		# Clock item
-	# 		sketchybar --add item clock right \
-	# 		--set clock \
-	# 		update_freq=1 \
-	# 		script="echo \"%d/%m %H:%M\""
-	#
-	# 		# Battery item
-	# 		sketchybar --add item battery right \
-	# 		--set battery \
-	# 		update_freq=120 \
-	# 		script="sketchybar --set \$NAME label=\"$(pmset -g batt | grep -Eo '\d+%')\""
-	#
-	# 		# CPU usage item
-	# 		sketchybar --add item cpu right \
-	# 		--set cpu \
-	# 		update_freq=2 \
-	# 		script="sketchybar --set \$NAME label=\"$(top -l 1 | grep -o '[0-9.]* idle' | cut -d' ' -f1 | awk '{print 100-$1\"%\"}')\""
-	#
-	# 		# Start sketchybar
-	# 		sketchybar --update
-	# 	'';
-	# };
+	services.sketchybar = {
+		enable = true;
+		package = pkgs.sketchybar;
+		config = /* bash */ ''
+			#!/usr/bin/env bash
+
+			export FONT="JetBrainsMono Nerd Font"
+
+
+			sketchybar --bar height=36 \
+				blur_radius=100 \
+				position=top \
+				padding_left=10 \
+				padding_right=10 \
+				color=0x15000010 \
+				shadow=on
+
+			sketchybar --default updates=when_shown \
+				drawing=on \
+				icon.font="$FONT:Regular:18.0" \
+				icon.color=0xffffffff \
+				label.font="$FONT:Light:18.0" \
+				label.color=0xffffffff \
+				label.padding_left=4 \
+				label.padding_right=4 \
+				icon.padding_left=4 \
+				icon.padding_right=4
+
+
+			# --- RIGHT --- #
+
+			# datetime
+			sketchybar --add item clock right \
+				--set clock update_freq=1 \
+				--set clock script="sketchybar --set clock label=\"$(date '+%a %d %b %H:%M')\"" \
+				--set clock background.padding_right=10
+
+			# Add battery percentage
+			sketchybar --add item battery right \
+				--set battery icon="" \
+				--set battery update_freq=120 \
+				--set battery script="sketchybar --set battery label=\"$(pmset -g batt | grep -Eo '\d+%')\"" \
+				--set battery background.padding_left=10
+
+
+			# --- LEFT --- #
+			#
+			# Apple logo
+			sketchybar --add item apple.logo left \
+			--set apple.logo icon="󰀵" \
+			--set apple.logo icon.font="$FONT:Bold:26.0" \
+			--set apple.logo background.padding_left=10 \
+			--set apple.logo background.padding_right=0
+
+			# Add the currently running app
+			sketchybar --add item front_app left \
+				--set front_app script="sketchybar --set front_app label=\$(osascript -e 'tell application \"System Events\" to name of first application process whose frontmost is true')" \
+				--set front_app icon.drawing=off \
+				--set front_app background.padding_left=0 \
+				--set front_app background.padding_right=10 \
+				--subscribe front_app front_app_switched
+
+			sketchybar --update
+		'';
+	};
 }
