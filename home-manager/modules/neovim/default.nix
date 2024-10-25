@@ -36,10 +36,9 @@
       package = pkgs-unstable.neovim-unwrapped;
       enable = true;
       defaultEditor = true;
+			vimAlias = true;
+			viAlias = true;
     };
 
-    zsh.shellAliases = {
-      v = "nvim";
-    };
   };
 }
