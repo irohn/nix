@@ -17,6 +17,9 @@ map("v", ">", ">gv", { desc = "stay in visual mode on indent" })
 map("n", "<s-p>", "\"*p", { desc = "paste from system clipboard" })
 map("n", "<s-y>", "\"*y", { desc = "yank to system clipboard" })
 
+map("n", "<s-h>", "<cmd>bprev<cr>", { desc = "Next buffer" })
+map("n", "<s-l>", "<cmd>bnext<cr>", { desc = "Previous buffer" })
+
 -- toggles
 map("n", "<leader>tn", function()
 	tog("number")
@@ -27,9 +30,13 @@ map("n", "<leader>tw", function()
 	tog("wrap")
 end, { desc = "Toggle word wrap" })
 
+map("n", "<leader>tcc", function()
+	tog("cursorcolumn")
+end, { desc = "Toggle cursor column" })
+
 map("n", "<leader>tcl", function()
 	tog("cursorline")
-end, { desc = "Toggle cursor column" })
+end, { desc = "Toggle cursor line" })
 
 map("n", "<leader>t|", function()
 	tog("colorcolumn", {{80}, {}})
