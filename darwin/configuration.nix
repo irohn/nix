@@ -7,6 +7,7 @@
     ./modules/system.nix
     ./modules/host-users.nix
     ./modules/apps.nix
+    ./modules/window-manager.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

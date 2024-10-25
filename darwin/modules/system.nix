@@ -14,6 +14,7 @@
         NSAutomaticPeriodSubstitutionEnabled = false;  # disable auto period substitution
         NSAutomaticQuoteSubstitutionEnabled = false;  # disable auto quote substitution
         NSAutomaticSpellingCorrectionEnabled = false;  # disable auto spelling correction
+				_HIHideMenuBar = false; # hide menu bar
       };
       menuExtraClock.Show24Hour = true;  # show 24 hour clock
       dock = {
