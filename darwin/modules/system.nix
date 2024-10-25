@@ -14,12 +14,12 @@
         NSAutomaticPeriodSubstitutionEnabled = false;  # disable auto period substitution
         NSAutomaticQuoteSubstitutionEnabled = false;  # disable auto quote substitution
         NSAutomaticSpellingCorrectionEnabled = false;  # disable auto spelling correction
-				_HIHideMenuBar = false; # hide menu bar
+				# _HIHideMenuBar = true; # hide menu bar
       };
       menuExtraClock.Show24Hour = true;  # show 24 hour clock
       dock = {
         autohide = true;
-        orientation = "left";
+        orientation = "bottom";
         show-process-indicators = false;
         show-recents = false;
         static-only = true;

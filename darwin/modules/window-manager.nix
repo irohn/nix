@@ -41,21 +41,21 @@ pkgs,
 		package = pkgs.skhd;
 		skhdConfig = ''
 			# focus window
-			cmd - h : yabai -m window --focus west || yabai -m display --focus west
-			cmd - j : yabai -m window --focus south || yabai -m display --focus south
-			cmd - k : yabai -m window --focus north || yabai -m display --focus north
-			cmd - l : yabai -m window --focus east || yabai -m display --focus east
+			alt - h : yabai -m window --focus west || yabai -m display --focus west
+			alt - j : yabai -m window --focus south || yabai -m display --focus south
+			alt - k : yabai -m window --focus north || yabai -m display --focus north
+			alt - l : yabai -m window --focus east || yabai -m display --focus east
 
 			# swap windows
-			cmd + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
-			cmd + shift - j : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
-			cmd + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
-			cmd + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
+			alt + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
+			alt + shift - j : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
+			alt + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
+			alt + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
 
-			ctrl + cmd - h : yabai -m window west --resize right:-20:0 2> /dev/null || yabai -m window --resize right:-20:0
-			ctrl + cmd - j : yabai -m window north --resize bottom:0:20 2> /dev/null || yabai -m window --resize bottom:0:20
-			ctrl + cmd - k : yabai -m window south --resize top:0:-20 2> /dev/null || yabai -m window --resize top:0:-20
-			ctrl + cmd - l : yabai -m window east --resize left:20:0 2> /dev/null || yabai -m window --resize left:20:0
+		  alt + ctrl - h : yabai -m window west --resize right:-20:0 2> /dev/null || yabai -m window --resize right:-20:0
+		  alt + ctrl - j : yabai -m window north --resize bottom:0:20 2> /dev/null || yabai -m window --resize bottom:0:20
+		  alt + ctrl - k : yabai -m window south --resize top:0:-20 2> /dev/null || yabai -m window --resize top:0:-20
+		  alt + ctrl - l : yabai -m window east --resize left:20:0 2> /dev/null || yabai -m window --resize left:20:0
 
 			ctrl + alt - f : yabai -m window --grid 1:1:0:0:1:1
 
@@ -70,7 +70,7 @@ pkgs,
 	};
 
 	services.sketchybar = {
-		enable = true;
+		enable = false;
 		package = pkgs.sketchybar;
 		config = /* bash */ ''
 			#!/usr/bin/env bash
