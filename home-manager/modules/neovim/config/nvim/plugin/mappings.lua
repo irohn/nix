@@ -14,8 +14,8 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
 map("v", "<", "<gv", { desc = "stay in visual mode on dedent" })
 map("v", ">", ">gv", { desc = "stay in visual mode on indent" })
 
-map("n", "<s-p>", "\"*p", { desc = "paste from system clipboard" })
-map("n", "<s-y>", "\"*y", { desc = "yank to system clipboard" })
+map({"n", "v"}, "<s-p>", "\"*p", { desc = "paste from system clipboard" })
+map({"n", "v"}, "<s-y>", "\"*y", { desc = "yank to system clipboard" })
 
 map("n", "<s-h>", "<cmd>bprev<cr>", { desc = "Next buffer" })
 map("n", "<s-l>", "<cmd>bnext<cr>", { desc = "Previous buffer" })
