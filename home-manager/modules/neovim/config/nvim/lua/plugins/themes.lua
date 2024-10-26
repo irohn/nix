@@ -24,4 +24,9 @@ return {
 		end
 	},
 
+  {
+    "xiyaowong/transparent.nvim",
+    opts = {},
+  },
+
 }
