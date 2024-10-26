@@ -8,17 +8,37 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear highlights" })
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
+map("n", "<esc>", "<cmd>noh<cr><esc>", {
+  desc = "Clear highlights"
+})
+map("t", "<esc><esc>", "<c-\\><c-n>", {
+  desc = "Exit terminal mode"
+})
 
-map("v", "<", "<gv", { desc = "stay in visual mode on dedent" })
-map("v", ">", ">gv", { desc = "stay in visual mode on indent" })
+map("n", "<leader>q", vim.diagnostic.setloclist, {
+  desc = "diagnostics quicklist"
+})
 
-map({"n", "v"}, "<s-p>", "\"*p", { desc = "paste from system clipboard" })
-map({"n", "v"}, "<s-y>", "\"*y", { desc = "yank to system clipboard" })
+map("v", "<", "<gv", {
+  desc = "stay in visual mode on dedent"
+})
+map("v", ">", ">gv", {
+  desc = "stay in visual mode on indent"
+})
 
-map("n", "<s-h>", "<cmd>bprev<cr>", { desc = "Next buffer" })
-map("n", "<s-l>", "<cmd>bnext<cr>", { desc = "Previous buffer" })
+map({"n", "v"}, "<s-p>", "\"*p", {
+  desc = "paste from system clipboard"
+})
+map({"n", "v"}, "<s-y>", "\"*y", {
+  desc = "yank to system clipboard"
+})
+
+map("n", "<s-h>", "<cmd>bprev<cr>", {
+  desc = "Next buffer"
+})
+map("n", "<s-l>", "<cmd>bnext<cr>", {
+  desc = "Previous buffer"
+})
 
 -- toggles
 map("n", "<leader>tn", function()

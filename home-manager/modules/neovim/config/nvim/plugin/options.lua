@@ -17,6 +17,11 @@ opt.signcolumn = "yes"
 -- Remove end of buffer `~` symbols
 opt.fillchars = { eob = " " }
 
+opt.list = true
+opt.listchars = { tab = "  ", trail = '·' }
+
+opt.expandtab = true
+
 -- Highlight cursor line
 opt.cursorline = true
 opt.cursorlineopt = "both"
