@@ -11,7 +11,7 @@ M.apply_to_config = function(config)
   config.hide_tab_bar_if_only_one_tab = true
   config.show_new_tab_button_in_tab_bar = false
 
-  config.color_scheme = "duskfox"
+  config.color_scheme = "carbonfox"
 
   config.font_size = 24.0
   config.audible_bell = "Disabled"
