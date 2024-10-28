@@ -104,8 +104,8 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager switch --flake .#<config-name>'
       homeConfigurations = {
-        linux = mkHomeConfiguration {
-          system = settings.defaults.system;
+        pinix = mkHomeConfiguration {
+          system = "aarch64-linux";
           username = settings.defaults.username;
           email = settings.defaults.email;
           extraModules = [ ];
@@ -116,7 +116,7 @@
           email = "orisne@greeneye.ag";
           extraModules = [ ];
         };
-        nixos = mkHomeConfiguration {
+        wsl = mkHomeConfiguration {
           system = settings.defaults.system;
           username = "nixos";
           email = settings.defaults.email;
