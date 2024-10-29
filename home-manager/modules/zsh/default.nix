@@ -24,6 +24,11 @@
 			initExtra = /* bash */ ''
 				stty -ixon
 				setopt completealiases
+
+        # enable command editing in editor
+        autoload -z edit-command-line
+        zle -N edit-command-line
+        bindkey "^X^E" edit-command-line
 			'';
 
       shellAliases = {
