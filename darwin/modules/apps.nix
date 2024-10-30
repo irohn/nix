@@ -59,7 +59,7 @@
       "diffusionbee"
 
       # Gaming
-      "steam"
+      "whisky"
     ];
   };
 }
