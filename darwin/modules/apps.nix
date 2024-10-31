@@ -46,7 +46,7 @@
       "rectangle" # Window snapping app with keybindings
       "mac-mouse-fix" # Fix mouse scrolling
       "raycast" # Spotlight alternative
-      "caffeine" # Prevent screen from turning off
+      "keepingyouawake" # Prevent screen from turning off
       "xquartz" # X11 server
       "mullvadvpn" # VPN client
       "iina" # Modern media player
@@ -59,6 +59,7 @@
       "diffusionbee"
 
       # Gaming
+      "steam"
       "whisky"
     ];
   };
