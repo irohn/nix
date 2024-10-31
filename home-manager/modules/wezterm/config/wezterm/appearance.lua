@@ -3,7 +3,7 @@ local M = {}
 M.apply_to_config = function(config)
   config.window_decorations = "RESIZE"
   config.window_padding = { left = 1, right = 1, top = 0, bottom = 0 }
-  config.window_background_opacity = 0.9
+  config.window_background_opacity = 1.0
   config.macos_window_background_blur = 20
 
   config.enable_tab_bar = true
