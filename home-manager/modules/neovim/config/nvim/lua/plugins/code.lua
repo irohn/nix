@@ -49,4 +49,11 @@ return {
 		end,
 	},
 
+  {
+    "robitx/gp.nvim",
+    config = function()
+      require("config.gp")
+    end,
+  }
+
 }
