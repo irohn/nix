@@ -13,13 +13,8 @@
       cargo
       unzip
       gcc
-      sshpass # for ssh.nvim password authentication
 
       # Language servers (LSP)
-      lua-language-server
-      pyright
-      yaml-language-server
-      helm-ls
       nil # nix (nil_ls)
     ];
     file = {
