@@ -63,6 +63,8 @@ pkgs,
 			alt - f : yabai -m window --toggle float;\
 								yabai -m window --grid 1:1:0:0:1:1
 
+      alt - z : yabai -m window --toggle zoom-fullscreen
+
 			alt - r : yabai -m space --rotate 90
 
 			alt - m : yabai -m space --mirror y-axis

@@ -16,6 +16,7 @@
     wezterm # GPU accelerated terminal emulator (config in home-manager)
     utm
     discord
+    pam-reattach # Touch ID support in tmux
   ];
 
   # Homebrew need to be installed manually, see https://brew.sh
