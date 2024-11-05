@@ -79,6 +79,8 @@ pkgs,
 
 			export FONT="JetBrainsMono Nerd Font"
 
+      yabai -m config menubar_opacity 0.0 # disable menubar
+      yabai -m config external_bar all:22:0
 
 			sketchybar --bar height=36 \
 				blur_radius=100 \

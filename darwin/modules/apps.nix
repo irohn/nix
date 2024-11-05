@@ -54,6 +54,7 @@
 
       # Development
       "docker" # Docker Desktop
+      "visual-studio-code"
 
       # AI
       "ollama"
