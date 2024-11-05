@@ -3,7 +3,7 @@ local act = wezterm.action
 
 local M = {}
 
-M.leader = { key = 'a', mods = 'CTRL|SHIFT', timeout_milliseconds = 1000 }
+M.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 M.keys = {
   {
@@ -65,7 +65,7 @@ M.keys = {
 
 }
 
-for i = 1, 8 do
+for i = 1, 9 do
   table.insert(M.keys, {
     key = tostring(i),
     mods = 'LEADER',
