@@ -4,7 +4,7 @@ pkgs,
 }:
 {
 	services.yabai = {
-		enable = true;
+		enable = false;
 		package = pkgs.yabai;
 		enableScriptingAddition = true;
 		config = {
@@ -37,7 +37,7 @@ pkgs,
 	};
 
 	services.skhd = {
-		enable = true;
+		enable = false;
 		package = pkgs.skhd;
 		skhdConfig = ''
 			# focus window
