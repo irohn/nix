@@ -17,6 +17,9 @@
     experimental-features = ["nix-command" "flakes"];
   };
 
+  # make default mac zsh align with nixpkgs
+  programs.zsh.enable = true;
+
   age.secrets = {
     test = {
       file = ../secrets/test;

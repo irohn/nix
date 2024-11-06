@@ -1,12 +1,14 @@
 # Terminal multiplexer for managing multiple terminal sessions
 {
   pkgs,
+  pkgs-unstable,
   lib,
   ...
 }: {
   programs = {
     tmux = {
       enable = true;
+      package = pkgs-unstable.tmux;
       baseIndex = 1;
       prefix = "C-Space";
       clock24 = true;
@@ -87,6 +89,8 @@
         bind M set-window-option synchronize-panes
 
 				set-option -g allow-passthrough on
+
+        set -gu default-command "$SHELL"
       '';
     };
 
