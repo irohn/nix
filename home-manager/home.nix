@@ -28,6 +28,7 @@ in {
     ./modules/zoxide
     ./modules/fonts
     ./modules/starship
+    ./modules/rsync
     ./modules/tmux
     ./modules/neovim
     ./modules/kubernetes

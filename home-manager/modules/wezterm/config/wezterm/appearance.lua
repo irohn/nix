@@ -15,6 +15,8 @@ M.apply_to_config = function(config)
 
   config.font_size = 20.0
   config.audible_bell = "Disabled"
+
+  config.max_fps = 120
 end
 
 return M
