@@ -5,7 +5,10 @@ local ts_config = function()
     ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
     sync_install = false,
     auto_install = true,
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      disable = { "tmux", "dockerfile", },
+    },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
