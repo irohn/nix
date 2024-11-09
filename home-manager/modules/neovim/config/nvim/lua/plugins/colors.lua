@@ -81,7 +81,7 @@ local M = {
   colorschemes,
 
   {
-    "norcalli/nvim-colorizer.lua",
+    "NvChad/nvim-colorizer.lua",
     config = colors_config,
   },
 }
