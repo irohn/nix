@@ -2,7 +2,7 @@
 -- NOTE: load before anything else
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.patched_font = true
+vim.g.patched_font = require("custom.fonts").check_patched_font()
 
 -- [[ user configuration ]]
 require("config.autocmds")
@@ -22,3 +22,4 @@ local lazy_config = require("config.lazy")
 local lazy_plugins_dir = {{ import = "plugins" }}
 
 require("lazy").setup(lazy_plugins_dir, lazy_config)
+require("custom.theme-picker").setup()
