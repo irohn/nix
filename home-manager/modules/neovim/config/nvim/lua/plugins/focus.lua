@@ -11,7 +11,7 @@ local focus_opts = function()
   end
 
   return {
-    filetypes = { "markdown", "text" },
+    -- filetypes = { "markdown", "text" },
 
     on_enter = function()
       set_tmux_status(false)
@@ -28,7 +28,7 @@ local M = {
     "irohn/focus.nvim",
     -- dir = "~/projects/personal/focus.nvim",
     opts = focus_opts,
-    ft = { "markdown", "text" },
+    -- ft = { "markdown", "text" },
     cmd = { "Focus", "FocusOn", "FocusOff" },
     keys = {
       { "<leader>z", "<cmd>Focus<cr>", desc = "Toggle focus mode" },
