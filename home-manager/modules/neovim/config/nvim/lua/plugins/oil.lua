@@ -57,6 +57,7 @@ local oil_config = function()
           end
         end,
       },
+      ["<C-t>"] = "actions.open_terminal",
     },
   }
 
