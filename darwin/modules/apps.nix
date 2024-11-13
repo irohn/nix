@@ -44,13 +44,13 @@
     casks = [
       "alt-tab" # Windows 11 style alt+tab
       "karabiner-elements" # Keyboard manager
-      "rectangle" # Window snapping app with keybindings
       "mac-mouse-fix" # Fix mouse scrolling
       "raycast" # Spotlight alternative
       "keepingyouawake" # Prevent screen from turning off
       "xquartz" # X11 server
       "mullvadvpn" # VPN client
       "iina" # Modern media player
+      "rectangle-pro" # Window manager
 
       # Development
       "docker" # Docker Desktop
