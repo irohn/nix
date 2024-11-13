@@ -51,6 +51,4 @@ opt.relativenumber = true
 opt.updatetime = 250
 opt.timeoutlen = 300
 
-opt.colorcolumn = {}
-
-require("custom.optoggle").setup()
+opt.colorcolumn = { 80 }

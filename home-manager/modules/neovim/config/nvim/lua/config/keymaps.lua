@@ -1,5 +1,3 @@
-local tog = require("custom.optoggle").toggle_option
-
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
 	if opts then
@@ -33,31 +31,9 @@ map({"n", "v"}, "<s-y>", "\"*y", {
   desc = "yank to system clipboard"
 })
 
-map("n", "<s-h>", "<cmd>bprev<cr>", {
-  desc = "Next buffer"
-})
-map("n", "<s-l>", "<cmd>bnext<cr>", {
-  desc = "Previous buffer"
-})
+map("n", "<s-h>", "<cmd>bprev<cr>", { desc = "Next buffer" })
+map("n", "<s-l>", "<cmd>bnext<cr>", { desc = "Previous buffer" })
 
--- toggles
-map("n", "<leader>tn", function()
-	tog("number")
-	tog("relativenumber")
-end, { desc = "Toggle numbers" })
-
-map("n", "<leader>tw", function()
-	tog("wrap")
-end, { desc = "Toggle word wrap" })
-
-map("n", "<leader>tcc", function()
-	tog("cursorcolumn")
-end, { desc = "Toggle cursor column" })
-
-map("n", "<leader>tcl", function()
-	tog("cursorline")
-end, { desc = "Toggle cursor line" })
-
-map("n", "<leader>t|", function()
-	tog("colorcolumn", {{80}, {}})
-end, { desc = "Toggle colorcolumn (80 characters)" })
+map("n", "<leader>tc", "<cmd>tabnew<cr>", { desc = "Create new tab" })
+map("n", "<leader>tp", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+map("n", "<leader>tn", "<cmd>tabnext<cr>", { desc = "Next tab" })
