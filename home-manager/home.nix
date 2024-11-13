@@ -51,6 +51,7 @@ in {
       yq
       gawk # ensure gnu-awk for uniformity across systems
       unixtools.watch
+      slides # terminal based slides
     ];
 
     stateVersion = "24.05";
