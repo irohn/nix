@@ -2,16 +2,30 @@ local llm_config = function()
   local config = {
     providers = {
       openai = {
-        -- secret = {
-        --   "sh", "-c",
-        --   "hcp vs secrets open openai_key -o /tmp/openai_key && cat /tmp/openai_key && rm /tmp/openai_key"
-        -- },
+        secret = {
+          "sh", "-c",
+          "hcp vs secrets open openai_key -o /tmp/openai_key && cat /tmp/openai_key && rm /tmp/openai_key"
+        },
       },
       anthropic = {
         secret = {
           "sh", "-c",
           "hcp vs secrets open anthropic_api_key -o /tmp/anthropic_api_key && cat /tmp/anthropic_api_key && rm /tmp/anthropic_api_key"
         },
+      },
+      ollama = {
+        endpoint = "http://localhost:11434/v1/chat/completions",
+      },
+    },
+
+    agents = {
+      {
+        provider = "ollama",
+        name = "DeepseekCoderV2",
+        chat = true,
+        command = true,
+        model = { model = "deepseek-coder-v2:latest", },
+        system_prompt = "You are a general AI assistant.",
       },
     },
   }
