@@ -14,7 +14,6 @@
     curl
     vim
     wezterm # GPU accelerated terminal emulator (config in home-manager)
-    utm
     discord
     pam-reattach # Touch ID support in tmux
   ];
@@ -58,10 +57,12 @@
       "mullvadvpn" # VPN client
       "iina" # Modern media player
       "rectangle-pro" # Window manager
+      "arc" # web browser
 
       # Development
       "docker" # Docker Desktop
       "visual-studio-code"
+      "multipass"
 
       # AI
       "ollama"
