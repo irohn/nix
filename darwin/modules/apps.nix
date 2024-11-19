@@ -56,6 +56,7 @@
       "xquartz" # X11 server
       "mullvadvpn" # VPN client
       "iina" # Modern media player
+      "stremio" # streaming
       "rectangle-pro" # Window manager
       "arc" # web browser
 
