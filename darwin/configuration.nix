@@ -21,12 +21,24 @@
   programs.zsh.enable = true;
 
   age.secrets = {
-    test = {
-      file = ../secrets/test;
-    };
     master_password = {
       file = ../secrets/master_password;
     };
+    anthropics_api_key = {
+      file = ../secrets/anthropics_api_key;
+    };
+    openai_api_key = {
+      file = ../secrets/openai_api_key;
+    };
+  };
+
+  environment.variables = {
+    ANTHROPIC_API_KEY = ''
+        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.anthropics_api_key.path})
+    '';
+    OPENAI_API_KEY = ''
+        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.openai_api_key.path})
+    '';
   };
 
   # Auto upgrade nix package and the daemon service.

@@ -14,6 +14,7 @@ let
 
 in
 {
-  "secrets/test".publicKeys = ori ++ systems;
   "secrets/master_password".publicKeys = ori ++ systems;
+  "secrets/anthropics_api_key".publicKeys = ori ++ systems;
+  "secrets/openai_api_key".publicKeys = ori ++ systems;
 }

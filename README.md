@@ -19,11 +19,11 @@ git clone https://github.com/irohn/nix.git ~/nix && cd ~/nix
 
 ### nix
 
-First thing first, if you are not on NixOS, install Nix itself. There is an install script provided in the repository
+First thing first, if you are not on NixOS, install Nix itself.
+The following command will install nix with flakes enabled:
 
 ```bash
-chmod +x ./install
-./install nix
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
 Once nix is installed, restart your shell and verify installation:
@@ -36,11 +36,11 @@ nix flake info # Show flake metadata
 
 ### home-manager
 
-After installing nix, we can install home-manager using flakes:
+After installing nix, we can install home-manager using flakes,
+choose one of the configurations in the flake:
 
 ```bash
-cd ~/nix
-./install home-manager
+nix --extra-experimental-features "nix-command flakes" run home-manager/master -- switch --flake .#<home_manager_config_name>
 ```
 
 This should have installed home-manager as well as created your first generation! Once installed restart your shell and verify installation:
@@ -54,8 +54,7 @@ home-manager --version
 After installing nix, we can install nix-darwin using flakes:
 
 ```bash
-cd ~/nix
-./install -c <config_name> darwin
+nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .#<darwin_config_name>
 ```
 
 Note that the `<config_name>` is the darwinConfiguration described in the flake.nix for example:
@@ -231,4 +230,3 @@ Creating your own module is a great way to extend your configuration, you can al
 ## TODO
 
 - Add NixOS configurations
-
