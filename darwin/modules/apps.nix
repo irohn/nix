@@ -59,6 +59,7 @@
       "stremio" # streaming
       "rectangle-pro" # Window manager
       "arc" # web browser
+      "slack"
 
       # Development
       "docker" # Docker Desktop
