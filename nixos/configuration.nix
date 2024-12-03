@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }: {
   imports = [
@@ -31,11 +32,22 @@
       };
       anthropics_api_key = {
         file = ../secrets/anthropics_api_key;
+        mode = "0644";
       };
       openai_api_key = {
         file = ../secrets/openai_api_key;
+        mode = "0644";
       };
     };
+  };
+
+  environment.variables = {
+    ANTHROPIC_API_KEY = ''
+        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.anthropics_api_key.path})
+    '';
+    OPENAI_API_KEY = ''
+        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.openai_api_key.path})
+    '';
   };
 
   # This value determines the NixOS release from which the default
