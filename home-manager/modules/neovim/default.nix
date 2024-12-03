@@ -12,7 +12,7 @@
       nodejs
       cargo
       unzip
-      make
+      gnumake
       gcc
     ];
     file = {
