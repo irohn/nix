@@ -12,13 +12,8 @@
       nodejs
       cargo
       unzip
+      make
       gcc
-
-      # language servers
-      lua-language-server
-      nixd
-      pyright
-      clang-tools
     ];
     file = {
       # neovim's config
