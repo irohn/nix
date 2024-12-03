@@ -44,6 +44,7 @@
     # `brew install`
     brews = [
       "hashicorp/tap/hcp"
+      "hashicorp/tap/vault"
     ];
 
     # `brew install --cask`
@@ -58,7 +59,6 @@
       "iina" # Modern media player
       "stremio" # streaming
       "rectangle-pro" # Window manager
-      "arc" # web browser
       "slack"
 
       # Development

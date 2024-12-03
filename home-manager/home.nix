@@ -54,6 +54,7 @@ in {
       slides # terminal based slides
       gnupg
       sops
+      coreutils
     ];
 
     stateVersion = "24.05";
