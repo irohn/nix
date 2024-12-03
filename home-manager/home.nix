@@ -55,6 +55,7 @@ in {
       gnupg
       sops
       coreutils
+      gnumake
     ];
 
     stateVersion = "24.05";
