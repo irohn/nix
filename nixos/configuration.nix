@@ -26,11 +26,14 @@
   age = {
     identityPaths = [ "/etc/ssh/id_ed25519" ];
     secrets = {
-      test = {
-        file = ../secrets/test;
-      };
       master_password = {
         file = ../secrets/master_password;
+      };
+      anthropics_api_key = {
+        file = ../secrets/anthropics_api_key;
+      };
+      openai_api_key = {
+        file = ../secrets/openai_api_key;
       };
     };
   };

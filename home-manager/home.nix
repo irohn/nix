@@ -54,6 +54,7 @@ in {
       slides # terminal based slides
       gnupg
       sops
+      gnumake
     ];
 
     stateVersion = "24.05";
