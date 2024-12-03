@@ -1,7 +1,8 @@
-local tab_len = 2
+local map = require("config.utils").keymap
 
-vim.opt_local.tabstop = tab_len
-vim.opt_local.softtabstop = tab_len
-vim.opt_local.shiftwidth = tab_len
+map("n", "<leader>w", "<cmd>w | source % <cr>", {
+  buffer = true,
+  desc = "source current file",
+})
 
-vim.keymap.set("n", "<leader>w", "<cmd>w | source % <cr>", { desc = "source current file" })
+-- vim: ts=2 sts=2 sw=2 et

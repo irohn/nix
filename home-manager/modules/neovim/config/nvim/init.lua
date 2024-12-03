@@ -1,25 +1,11 @@
--- [[ globals ]]
--- NOTE: load before anything else
+-- set leader keys
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.patched_font = require("custom.fonts").check_patched_font()
+vim.g.maplocalleader = "\\"
 
--- [[ user configuration ]]
-require("config.autocmds")
-require("config.options")
-require("config.keymaps")
+-- load plugin manager
+require("config.lazy")
 
--- [[ plugin manager `lazy.nvim` installation ]]
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-	local repo = "https://github.com/folke/lazy.nvim.git"
-	vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
-end
+-- custom theme management
+require("config.theme").setup()
 
-vim.opt.rtp:prepend(lazypath)
-
-local lazy_config = require("config.lazy")
-local lazy_plugins_dir = {{ import = "plugins" }}
-
-require("lazy").setup(lazy_plugins_dir, lazy_config)
-require("custom.theme-picker").setup()
+-- vim: ts=2 sts=2 sw=2 et
