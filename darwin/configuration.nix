@@ -26,9 +26,11 @@
     };
     anthropics_api_key = {
       file = ../secrets/anthropics_api_key;
+      mode = "0644";
     };
     openai_api_key = {
       file = ../secrets/openai_api_key;
+      mode = "0644";
     };
   };
 
