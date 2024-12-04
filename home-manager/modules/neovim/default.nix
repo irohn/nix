@@ -2,6 +2,7 @@
 {
   pkgs,
   pkgs-unstable,
+  nvim-config,
   ...
 }: {
   # Dependencies for ./config/nvim
@@ -19,12 +20,7 @@
     file = {
       # neovim's config
       ".config/nvim" = {
-        source = pkgs.fetchFromGitHub {
-          owner = "irohn";
-          repo = "nvim";
-          rev = "master";
-          sha256 = "sha256-iOS2HJ32Y4zqArahmfOYmwsUxBd+goeXm00D11fdawQ=";
-        };
+        source = nvim-config;
         recursive = true;
       };
     };
@@ -35,8 +31,7 @@
       package = pkgs-unstable.neovim-unwrapped;
       enable = true;
       defaultEditor = true;
-			vimAlias = true;
-			viAlias = true;
+      vimAlias = true;
     };
 
   };

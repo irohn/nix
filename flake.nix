@@ -26,6 +26,11 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvim-config = {
+      url = "github:irohn/nvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -37,6 +42,7 @@
     darwin,
     nixos-wsl,
     agenix,
+    nvim-config,
     ...
     } @inputs: let
       inherit (self) outputs;
@@ -52,7 +58,7 @@
       mkHomeConfiguration = { system, username, email, extraModules ? [] }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          modules = [ ./home-manager/home.nix ] ++ extraModules;
+          modules = [ ./home-manager/home.nix {_module.args = {inherit nvim-config;};} ] ++ extraModules;
           extraSpecialArgs = { inherit inputs outputs username email; };
         };
 

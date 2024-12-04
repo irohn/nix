@@ -212,6 +212,22 @@
         "type": "github"
       }
     },
+    "nvim-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733337904,
+        "narHash": "sha256-iOS2HJ32Y4zqArahmfOYmwsUxBd+goeXm00D11fdawQ=",
+        "owner": "irohn",
+        "repo": "nvim",
+        "rev": "f897dc713e407c3885426502007f94310510eef1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "irohn",
+        "repo": "nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -220,7 +236,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nvim-config": "nvim-config"
       }
     },
     "systems": {
