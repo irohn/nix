@@ -19,7 +19,12 @@
     file = {
       # neovim's config
       ".config/nvim" = {
-        source = ./config/nvim;
+        source = pkgs.fetchFromGitHub {
+          owner = "irohn";
+          repo = "nvim";
+          rev = "master";
+          sha256 = "sha256-iOS2HJ32Y4zqArahmfOYmwsUxBd+goeXm00D11fdawQ=";
+        };
         recursive = true;
       };
     };
