@@ -10,6 +10,7 @@
       ripgrep
       fd
       nodejs
+      go
       cargo
       unzip
       gnumake
