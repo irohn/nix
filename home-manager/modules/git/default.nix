@@ -1,7 +1,6 @@
 # Distributed version control system
 {
   pkgs,
-  lib,
   username,
   email,
   ...
@@ -30,10 +29,6 @@
       shellAliases = {
         gs = "git status";
       };
-
-      initExtra = lib.mkAfter /* bash */ ''
-        bindkey -s "^G" 'tmux popup -E -h 90% -w 90% "lazygit"^M'
-      '';
     };
 
     git = {

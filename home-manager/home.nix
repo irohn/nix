@@ -20,20 +20,20 @@ in {
   };
 
   imports = [
-    # ./modules/alacritty
     ./modules/git
     ./modules/zsh
+    ./modules/direnv
     ./modules/eza
     ./modules/bat
     ./modules/zoxide
     ./modules/fonts
-    ./modules/starship
     ./modules/rsync
     ./modules/tmux
     ./modules/neovim
     ./modules/kubernetes
     ./modules/wezterm
     ./modules/greeneye
+    ./modules/starship
   ];
 
   home = {

@@ -7,7 +7,7 @@
     eza = {
       enable = true;
       enableZshIntegration = true;
-      icons = true;
+      icons = "auto";
       extraOptions = [
         "--color-scale"
         "--group-directories-first"

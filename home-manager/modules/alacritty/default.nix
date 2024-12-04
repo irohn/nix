@@ -1,5 +1,5 @@
 {
-  ...
+...
 }: {
   programs.alacritty = {
     enable = true;
@@ -13,7 +13,7 @@
         startup_mode = "Maximized";
         title = "Terminal";
       };
-      
+
       font = {
         normal = {
           family = "JetBrainsMono Nerd Font";
@@ -26,7 +26,7 @@
 
       selection.save_to_clipboard = true;
 
-			keyboard.bindings = [];
+      keyboard.bindings = [];
 
     };
   };

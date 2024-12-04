@@ -3,39 +3,20 @@
   pkgs,
   ...
 }: {
-  programs = {
-
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      enableZshIntegration = true;
-    };
-
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-			autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-			historySubstringSearch.enable = true;
-
-      sessionVariables = {
-        TEST = "test";
-      };
-
-			initExtra = /* bash */ ''
-				stty -ixon
-				setopt completealiases
-
-        # enable command editing in editor
-        autoload -z edit-command-line
-        zle -N edit-command-line
-        bindkey "^X^E" edit-command-line
-			'';
-
-      shellAliases = {
-        ai = /* bash */ "ollama run deepseek-coder-v2:latest \"$''{@}\"";
-      };
-
-    };
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    plugins = [
+      {
+        name = pkgs.zsh-history-substring-search.pname;
+        src = pkgs.zsh-history-substring-search.src;
+      }
+      {
+        name = pkgs.zsh-nix-shell.pname;
+        src = pkgs.zsh-nix-shell.src;
+      }
+    ];
   };
 }

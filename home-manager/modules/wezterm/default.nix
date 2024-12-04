@@ -1,11 +1,10 @@
 # GPU-accelerated cross-platform terminal emulator and multiplexer
-{ ... }:
+{ dotfiles, ... }:
 
 {
   home.file = {
-    # neovim's config
     ".config/wezterm" = {
-      source = ./config/wezterm;
+      source = "${dotfiles}/xdg/wezterm";
       recursive = true;
     };
   };

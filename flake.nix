@@ -2,12 +2,12 @@
   description = "Nix and Home-manager configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -54,7 +54,6 @@
         };
       };
 
-      # Helper function to create a home-manager configuration
       mkHomeConfiguration = { system, username, email, extraModules ? [] }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
@@ -62,7 +61,6 @@
           extraSpecialArgs = { inherit inputs outputs username email; };
         };
 
-      # Helper function to create a darwin configuration
       mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
         darwin.lib.darwinSystem {
           inherit system;
@@ -70,17 +68,6 @@
             ./darwin/configuration.nix
             agenix.darwinModules.default
             { environment.systemPackages = [ agenix.packages.${system}.default ]; }
-            home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = import ./home-manager/home.nix;
-                extraSpecialArgs = { inherit inputs outputs username email; };
-              };
-              # Add home-manager to PATH
-              environment.systemPackages = [ home-manager.packages.${system}.home-manager ];
-            }
           ] ++ extraModules;
           specialArgs = { inherit inputs outputs hostname username email; };
         };
@@ -92,16 +79,6 @@
             ./nixos/configuration.nix
             agenix.nixosModules.default
             { environment.systemPackages = [ agenix.packages.${system}.default ]; }
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = import ./home-manager/home.nix;
-                extraSpecialArgs = { inherit inputs outputs username email; };
-              };
-              environment.systemPackages = [ home-manager.packages.${system}.home-manager ];
-            }
           ] ++ extraModules;
           specialArgs = { inherit inputs outputs hostname username email; };
         };
