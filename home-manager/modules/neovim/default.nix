@@ -2,7 +2,7 @@
 {
   pkgs,
   pkgs-unstable,
-  nvim-config,
+  dotfiles,
   ...
 }: {
   # Dependencies for ./config/nvim
@@ -20,7 +20,7 @@
     file = {
       # neovim's config
       ".config/nvim" = {
-        source = nvim-config;
+        source = "${dotfiles}/xdg/nvim";
         recursive = true;
       };
     };

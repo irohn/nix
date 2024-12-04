@@ -1,8 +1,8 @@
 # Terminal multiplexer for managing multiple terminal sessions
 {
-  pkgs,
   pkgs-unstable,
   lib,
+  dotfiles,
   ...
 }: {
 
@@ -12,7 +12,7 @@
     ];
     file = {
       ".config/tmux" = {
-        source = ./config/tmux;
+        source = "${dotfiles}/xdg/tmux";
         recursive = true;
       };
     };

@@ -66,6 +66,22 @@
         "type": "github"
       }
     },
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733341196,
+        "narHash": "sha256-xXo/SzwNSES95DwuBdOWzK8xwjZgQcYMHWa0CikIJ2M=",
+        "owner": "irohn",
+        "repo": "config",
+        "rev": "8831619d839a1cec40d333310618df5532a0dea8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "irohn",
+        "repo": "config",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -212,32 +228,16 @@
         "type": "github"
       }
     },
-    "nvim-config": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1733337904,
-        "narHash": "sha256-iOS2HJ32Y4zqArahmfOYmwsUxBd+goeXm00D11fdawQ=",
-        "owner": "irohn",
-        "repo": "nvim",
-        "rev": "f897dc713e407c3885426502007f94310510eef1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "irohn",
-        "repo": "nvim",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "darwin": "darwin_2",
+        "dotfiles": "dotfiles",
         "home-manager": "home-manager_2",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
-        "nvim-config": "nvim-config"
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
     "systems": {

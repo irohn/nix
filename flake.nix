@@ -27,8 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvim-config = {
-      url = "github:irohn/nvim";
+    dotfiles = {
+      url = "github:irohn/config";
       flake = false;
     };
   };
@@ -42,7 +42,7 @@
     darwin,
     nixos-wsl,
     agenix,
-    nvim-config,
+    dotfiles,
     ...
     } @inputs: let
       inherit (self) outputs;
@@ -58,7 +58,7 @@
       mkHomeConfiguration = { system, username, email, extraModules ? [] }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-          modules = [ ./home-manager/home.nix {_module.args = {inherit nvim-config;};} ] ++ extraModules;
+          modules = [ ./home-manager/home.nix {_module.args = {inherit dotfiles;};} ] ++ extraModules;
           extraSpecialArgs = { inherit inputs outputs username email; };
         };
 
