@@ -10,12 +10,13 @@
     packages = with pkgs; [
       ripgrep
       fd
-      nodejs
-      go
-      cargo
       unzip
       gnumake
       gcc
+
+      # lsp
+      nixd
+      lua-language-server
     ];
     file = {
       # neovim's config
