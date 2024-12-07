@@ -90,6 +90,18 @@ This is basic usage of already created configurations, see [Customization](#Cust
 
 ### Home Manager
 
+For secrets, first get the SSH private key
+
+```bash
+```
+
+To generate age key from SSH:
+
+```bash
+mkdir -p ~/.config/sops/age
+nix-shell -p ssh-to-age --run "ssh-to-age -private-key -i ~/.ssh/github_ed25519 > ~/.config/sops/age/keys.txt"
+```
+
 To build and activate a Home Manager configuration:
 
 ```bash

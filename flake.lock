@@ -69,11 +69,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1733392998,
-        "narHash": "sha256-dViFLG1h87OASgw6dkuuRV4mO0GYSUM6yFJN3yBfl7g=",
+        "lastModified": 1733582912,
+        "narHash": "sha256-LF2Vc2L79QJKQWA2ltVrOA3aolWxb3K6MQFkX76sJD0=",
         "owner": "irohn",
         "repo": "config",
-        "rev": "9a9441d929868dbca56c1af356e841ae97964c87",
+        "rev": "a22d2262326862c6d452176eee0a53729563562d",
         "type": "github"
       },
       "original": {
@@ -158,22 +158,6 @@
         "type": "github"
       }
     },
-    "nixos-hardware": {
-      "locked": {
-        "lastModified": 1730537918,
-        "narHash": "sha256-GJB1/aaTnAtt9sso/EQ77TAGJ/rt6uvlP0RqZFnWue8=",
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "rev": "f6e0cd5c47d150c4718199084e5764f968f1b560",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -234,7 +218,6 @@
         "darwin": "darwin_2",
         "dotfiles": "dotfiles",
         "home-manager": "home-manager_2",
-        "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable"
