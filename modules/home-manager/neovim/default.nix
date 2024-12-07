@@ -11,6 +11,10 @@
       gnumake
       gcc
       cargo
+
+      # lsp
+      nixd
+      lua-language-server
     ];
 
     file = {
