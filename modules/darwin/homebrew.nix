@@ -1,7 +1,6 @@
+{ ... }:
+
 {
-  pkgs,
-  ...
-}: {
   #  NOTE: Your can find all available options in:
   #    https://daiderd.com/nix-darwin/manual/index.html
 
