@@ -1,10 +1,11 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./system.nix
     ./users.nix
     ../../modules/darwin/homebrew.nix
+    ../../modules/darwin/skhd.nix
     ../../modules/common/tailscale
   ];
 
