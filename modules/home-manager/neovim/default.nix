@@ -19,7 +19,7 @@
 
     file = {
       ".config/nvim" = {
-        source = "${dotfiles}/xdg/nvim";
+        source = "${dotfiles}/config/nvim";
         recursive = true;
       };
     };

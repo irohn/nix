@@ -26,7 +26,7 @@
     };
 
     dotfiles = {
-      url = "github:irohn/config";
+      url = "github:irohn/xdg";
       flake = false;
     };
   };

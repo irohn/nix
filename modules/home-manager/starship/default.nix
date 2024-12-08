@@ -9,7 +9,7 @@
 
   home.file = {
     ".config/starship.toml" = {
-      source = "${dotfiles}/xdg/starship/starship.toml";
+      source = "${dotfiles}/config/starship/starship.toml";
     };
   };
 }

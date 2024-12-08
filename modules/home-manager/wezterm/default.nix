@@ -8,7 +8,7 @@
     ];
     file = {
       ".config/wezterm" = {
-        source = "${dotfiles}/xdg/wezterm";
+        source = "${dotfiles}/config/wezterm";
         recursive = true;
       };
     };
