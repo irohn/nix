@@ -14,11 +14,7 @@
   };
 
   home.sessionVariables = {
-    ANTHROPIC_API_KEY = ''
-        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.anthropics_api_key.path})
-    '';
-    OPENAI_API_KEY = ''
-        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.openai_api_key.path})
-    '';
+    ANTHROPIC_API_KEY = "$(${pkgs.coreutils}/bin/cat ${config.age.secrets.anthropics_api_key.path})";
+    OPENAI_API_KEY = "$(${pkgs.coreutils}/bin/cat ${config.age.secrets.openai_api_key.path})";
   };
 }
