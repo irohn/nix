@@ -45,7 +45,7 @@
       homeConfigurations = {
         macbook = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = inputs.nixpkgs.legacyPackages."aarch64-darwin";
-          modules = [ ./home-manager/users/ori/home.nix ] ++ homeDependencies;
+          modules = [ ./users/ori/home.nix ] ++ homeDependencies;
           extraSpecialArgs = {
             username = "ori";
             email = "orisne@greeneye.ag";
@@ -53,7 +53,7 @@
         };
         desktop = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-          modules = [ ./home-manager/users/ori/home.nix ] ++ homeDependencies;
+          modules = [ ./users/ori/home.nix ] ++ homeDependencies;
           extraSpecialArgs = {
             username = "ori";
             email = "orisneh@gmail.com";
