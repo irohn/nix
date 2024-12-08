@@ -5,26 +5,6 @@
   #  NOTE: Your can find all available options in:
   #    https://daiderd.com/nix-darwin/manual/index.html
 
-  # Install packages from nix's official package repository.
-
-  # The packages installed here are available to all users, and are reproducible across machines, and are rollbackable.
-  # But on macOS, it's less stable than homebrew.
-  environment.systemPackages = with pkgs; [
-    git
-    curl
-    vim
-    wezterm # GPU accelerated terminal emulator (config in home-manager)
-    discord
-    pam-reattach # Touch ID support in tmux
-  ];
-
-  # Hack to make pam-reattach work
-  environment.etc."pam.d/sudo_local".text = ''
-    # Written by nix-darwin
-    auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
-    auth       sufficient     pam_tid.so
-  '';
-
   # Homebrew need to be installed manually, see https://brew.sh
   # The apps installed by homebrew are not managed by nix, and not reproducible!
   homebrew = {
@@ -55,24 +35,13 @@
       "raycast" # Spotlight alternative
       "keepingyouawake" # Prevent screen from turning off
       "xquartz" # X11 server
-      "mullvadvpn" # VPN client
       "iina" # Modern media player
+      "1password" # Password Manager
       "stremio" # streaming
       "rectangle-pro" # Window manager
-      "slack"
-
-      # Development
       "docker" # Docker Desktop
-      "visual-studio-code"
-      "multipass"
-
-      # AI
-      "ollama"
-      "diffusionbee"
-
-      # Gaming
       "steam"
-      "whisky"
+      "whisky" # Wine for MacOS
     ];
   };
 }

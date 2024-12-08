@@ -32,68 +32,28 @@
   };
 
   outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    darwin,
-    nixos-wsl,
-    agenix,
     dotfiles,
     ...
     } @inputs: let
-      inherit (self) outputs;
-      settings = {
-        defaults = {
-          username = "ori";
-          email = "orisneh@gmail.com";
-          system = "x86_64-linux";
-        };
-      };
 
-      mkHomeConfiguration = { system, username, email, extraModules ? [] }:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-          modules = [ ./home-manager/home.nix {_module.args = {inherit dotfiles;};} ] ++ extraModules;
-          extraSpecialArgs = { inherit inputs outputs username email; };
-        };
-
-      mkDarwinConfiguration = { system, hostname, username, email, extraModules ? [] }:
-        darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            ./darwin/configuration.nix
-          ] ++ extraModules;
-          specialArgs = { inherit inputs outputs hostname username email; };
-        };
+      homeDependencies = [
+        {_module.args = {inherit dotfiles;};}
+        inputs.agenix.homeManagerModules.default
+      ];
 
     in {
       homeConfigurations = {
-        pinix = mkHomeConfiguration {
-          system = "aarch64-linux";
-          username = settings.defaults.username;
-          email = settings.defaults.email;
-          extraModules = [ ];
+        macbook = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = inputs.nixpkgs.legacyPackages."aarch64-darwin";
+          modules = [ ./home-manager/users/ori/home.nix ] ++ homeDependencies;
+          extraSpecialArgs = {
+            username = "ori";
+            email = "orisne@greeneye.ag";
+          };
         };
-        macbook = mkHomeConfiguration {
-          system = "aarch64-darwin";
-          username = settings.defaults.username;
-          email = "orisne@greeneye.ag";
-          extraModules = [ ];
-        };
-        wsl = mkHomeConfiguration {
-          system = settings.defaults.system;
-          username = "nixos";
-          email = settings.defaults.email;
-          extraModules = [ ];
-        };
-        desktop = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          modules = [
-            ./home-manager/users/ori/home.nix
-            {_module.args = {inherit dotfiles;};}
-            inputs.agenix.homeManagerModules.default
-          ];
+        desktop = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+          modules = [ ./home-manager/users/ori/home.nix ] ++ homeDependencies;
           extraSpecialArgs = {
             username = "ori";
             email = "orisneh@gmail.com";
@@ -102,17 +62,16 @@
       };
 
       darwinConfigurations = {
-        macbook = mkDarwinConfiguration {
-          hostname = "macbook";
+        macbook = inputs.darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          username = settings.defaults.username;
-          email = "orisne@greeneye.ag";
-          extraModules = [ ];
+          modules = [
+            ./hosts/macbook/configuration.nix
+          ];
         };
       };
 
       nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
+        desktop = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/desktop/configuration.nix

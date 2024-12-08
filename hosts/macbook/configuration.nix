@@ -1,13 +1,11 @@
+{ pkgs, config, ... }:
+
 {
-  pkgs,
-  config,
-  ...
-}: {
   imports = [
-    ../../modules/darwin/system.nix
-    ../../modules/darwin/host-users.nix
-    ../../modules/darwin/apps.nix
-    ../../modules/darwin/window-manager.nix
+    ./system.nix
+    ./users.nix
+    ../../modules/darwin/homebrew.nix
+    ../../modules/common/tailscale
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -19,29 +17,6 @@
 
   # make default mac zsh align with nixpkgs
   programs.zsh.enable = true;
-
-  age.secrets = {
-    master_password = {
-      file = ../secrets/master_password;
-    };
-    anthropics_api_key = {
-      file = ../secrets/anthropics_api_key;
-      mode = "0644";
-    };
-    openai_api_key = {
-      file = ../secrets/openai_api_key;
-      mode = "0644";
-    };
-  };
-
-  environment.variables = {
-    ANTHROPIC_API_KEY = ''
-        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.anthropics_api_key.path})
-    '';
-    OPENAI_API_KEY = ''
-        $(${pkgs.coreutils}/bin/cat ${config.age.secrets.openai_api_key.path})
-    '';
-  };
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;

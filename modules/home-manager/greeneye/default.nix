@@ -13,12 +13,12 @@
     fzf
   ];
 
-  programs.zsh = {
-    sessionVariables = {
-      FLUXCD_REPO_NAME = "rt-versions";
-      VAULT_ADDR = "https://sod.tail6954.ts.net/";
-    };
+  home.sessionVariables = {
+    FLUXCD_REPO_NAME = "rt-versions";
+    VAULT_ADDR = "https://sod.tail6954.ts.net/";
+  };
 
+  programs.zsh = {
     shellAliases = {
       whoarewe = "echo greeneye";
     };

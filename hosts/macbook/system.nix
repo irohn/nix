@@ -1,7 +1,6 @@
+{ pkgs, ... }:
+
 {
-  pkgs,
-  ...
-}: {
   #  macOS's System configuration
 
   #  All the configuration options are documented here:
@@ -71,16 +70,8 @@
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
 
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  # this is required if you want to use darwin's default shell - zsh
-  programs = {
-    zsh.enable = true;
-  };
-
   fonts = {
     packages = with pkgs; [
-      # nerdfonts
-      # https://github.com/NixOS/nixpkgs/blob/nixos-24.05/pkgs/data/fonts/nerdfonts/shas.nix
       (nerdfonts.override {
         fonts = [
           "JetBrainsMono"
@@ -88,4 +79,19 @@
       })
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    git
+    curl
+    vim
+    pam-reattach # Touch ID support in tmux
+    coreutils
+  ];
+  # Hack to make pam-reattach work (fix for tmux sudo touchID)
+  environment.etc."pam.d/sudo_local".text = ''
+    # Written by nix-darwin
+    auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+    auth       sufficient     pam_tid.so
+  '';
+
 }
