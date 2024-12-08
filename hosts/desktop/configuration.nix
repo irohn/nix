@@ -2,13 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, config, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/nvidia.nix
     ./users.nix
+    ../../modules/common/tailscale
   ];
 
   # Bootloader.
