@@ -14,7 +14,7 @@
   };
 
   home.sessionVariables = {
-    ANTHROPICS_API_KEY = ''
+    ANTHROPIC_API_KEY = ''
         $(${pkgs.coreutils}/bin/cat ${config.age.secrets.anthropics_api_key.path})
     '';
     OPENAI_API_KEY = ''
