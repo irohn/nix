@@ -31,11 +31,8 @@
     };
   };
 
-  outputs = {
-    dotfiles,
-    ...
-    } @inputs: let
-
+  outputs = { dotfiles, ... } @inputs:
+    let
       homeDependencies = [
         {_module.args = {inherit dotfiles;};}
         inputs.agenix.homeManagerModules.default
