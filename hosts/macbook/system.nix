@@ -86,6 +86,7 @@
     vim
     pam-reattach # Touch ID support in tmux
     coreutils
+    unixtools.watch # unix watch command
   ];
   # Hack to make pam-reattach work (fix for tmux sudo touchID)
   environment.etc."pam.d/sudo_local".text = ''
