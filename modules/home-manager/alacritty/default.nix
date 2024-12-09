@@ -35,4 +35,19 @@
       ];
     };
   };
+
+  home.file.".local/bin/default_terminal" = {
+    text = /*bash*/''
+        #!/bin/sh
+
+        if [ -f "$HOME/.nix-profile/bin/alacritty" ]; then
+          open -a $HOME/.nix-profile/bin/alacritty
+          killall Terminal
+        else
+          echo "Alacritty not found, falling back to default terminal."
+          /bin/zsh
+        fi
+      '';
+    executable = true;
+  };
 }
