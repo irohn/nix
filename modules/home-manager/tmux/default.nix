@@ -17,7 +17,7 @@
   };
 
   programs.zsh.initExtra = lib.mkAfter /*bash*/ ''
-  # execute tmux on sell startup
+  # execute tmux on shell startup
   if [ -z "$TMUX" ]; then
     tmux -u new-session -A -s default
   fi
