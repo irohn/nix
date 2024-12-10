@@ -16,7 +16,7 @@
           family = "JetBrainsMono Nerd Font";
           style = "Regular";
         };
-        size = 22;
+        size = 16;
       };
       bell = { command = "None"; };
       selection.save_to_clipboard = true;
