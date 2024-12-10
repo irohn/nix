@@ -81,3 +81,6 @@ nix run github:ryantm/agenix -- -e <secret-name>
 # rekey secrets
 nix run github:ryantm/agenix -- -r
 ```
+
+To add and use secrets see the [agenix tutorial](https://github.com/ryantm/agenix?tab=readme-ov-file#tutorial)
+
