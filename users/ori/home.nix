@@ -30,6 +30,7 @@
     ../../modules/home-manager/tmux
     ../../modules/home-manager/zoxide
     ../../modules/home-manager/zsh
+    ../../modules/home-manager/discord
   ];
 
   # let home-manager manage itself.
