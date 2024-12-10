@@ -21,6 +21,10 @@
     bindkey '^[[A' history-substring-search-up
     bindkey '^[OB' history-substring-search-down
     bindkey '^[[B' history-substring-search-down
+    set -o emacs
+    autoload edit-command-line
+    zle -N edit-command-line
+    bindkey '^Xe' edit-command-line
     '';
   };
 }
