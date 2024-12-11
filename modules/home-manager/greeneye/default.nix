@@ -139,10 +139,33 @@
           echo "$selection"
         }
 
+        ts_cert_valid() {
+          cert_file="$HOME/.ssh/id_rsa-cert.pub"
+          if [ ! -f "$cert_file" ]; then
+            echo "error: couldn't find certificate $cert_file"
+            return 1
+          fi
+          expire_date_timestamp=$(date -d $(ssh-keygen -L -f "$HOME"/.ssh/id_rsa-cert.pub | awk '/Valid/ {print $5}') "+%s")
+          current_date_timestamp=$(date "+%s")
+          if [ $current_date_timestamp -gt $expire_date_timestamp ]; then
+            echo "error: certificate expired"
+            return 1
+          fi
+          return 0
+        }
+
+        resign_ts_cert() {
+          vault login -method=oidc
+          vault write -field=signed_key ssh-client-signer/sign/administrator-role public_key=@"$HOME"/.ssh/id_rsa.pub valid_principals=administrator > "$HOME"/.ssh/id_rsa-cert.pub
+        }
+
         tssh() {
+          if ! ts_cert_valid; then
+            resign_ts_cert || echo "error: failed to sign certificate."
+          fi
           selection=$(tailscale_clusters_match "''${@}")
           if [ ! -z "$selection" ]; then
-            ssh -i "''${HOME}/.ssh/greenboard" green@$(echo "$selection" | cut -d " " -f1)
+            ssh yarok@$(echo "$selection" | cut -d " " -f1)
           else
             echo "error: empty selection"
             return 1
