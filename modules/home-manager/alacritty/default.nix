@@ -47,7 +47,11 @@
           echo "Alacritty not found, falling back to default terminal."
           /bin/zsh
         fi
-      '';
+    '';
     executable = true;
+  };
+
+  home.sessionVariables = {
+    TERM = "alacritty";
   };
 }
