@@ -6,6 +6,7 @@
     ./users.nix
     ../../modules/darwin/homebrew.nix
     ../../modules/darwin/skhd.nix
+    ../../modules/darwin/mouse-fix.nix
     ../../modules/common/tailscale
   ];
 
