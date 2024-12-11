@@ -11,6 +11,7 @@
     kubectl
     gawk
     fzf
+    coreutils
   ];
 
   home.sessionVariables = {
