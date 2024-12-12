@@ -11,6 +11,7 @@
     ./users.nix
     ../../modules/common/tailscale
     ../../modules/nixos/steam.nix
+    ../../modules/nixos/media.nix
   ];
 
   # Bootloader.
