@@ -12,6 +12,7 @@
     gawk
     fzf
     coreutils
+    vault
   ];
 
   home.sessionVariables = {
