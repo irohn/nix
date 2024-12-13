@@ -31,6 +31,7 @@
     ../../modules/home-manager/zoxide
     ../../modules/home-manager/zsh
     ../../modules/home-manager/discord
+    ../../modules/home-manager/hashicorp
   ];
 
   # let home-manager manage itself.
