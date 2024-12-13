@@ -29,27 +29,33 @@
       url = "github:irohn/xdg";
       flake = false;
     };
+
+    greenix = {
+      url = "github:greeneyetechnology/greenix";
+      flake = false;
+    };
   };
 
-  outputs = { dotfiles, ... } @inputs:
+  outputs = { nixpkgs, home-manager, agenix, dotfiles, greenix, ... } @inputs:
     let
       homeDependencies = [
         {_module.args = {inherit dotfiles;};}
-        inputs.agenix.homeManagerModules.default
+        {_module.args = {inherit greenix;};}
+        agenix.homeManagerModules.default
       ];
 
     in {
       homeConfigurations = {
-        macbook = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages."aarch64-darwin";
+        macbook = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [ ./users/ori/home.nix ] ++ homeDependencies;
           extraSpecialArgs = {
             username = "ori";
             email = "orisne@greeneye.ag";
           };
         };
-        desktop = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+        desktop = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [ ./users/ori/home.nix ] ++ homeDependencies;
           extraSpecialArgs = {
             username = "ori";
@@ -68,7 +74,7 @@
       };
 
       nixosConfigurations = {
-        desktop = inputs.nixpkgs.lib.nixosSystem {
+        desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/desktop/configuration.nix

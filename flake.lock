@@ -116,6 +116,22 @@
         "type": "github"
       }
     },
+    "greenix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734114474,
+        "narHash": "sha256-73AmRgzDzBLf5gdbfKn2Az+qrv04cTThuz39xPStipg=",
+        "owner": "greeneyetechnology",
+        "repo": "greenix",
+        "rev": "ab8dfd3c83bd3268d6cbdc360c0d439b902d17c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "greeneyetechnology",
+        "repo": "greenix",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -217,6 +233,7 @@
         "agenix": "agenix",
         "darwin": "darwin_2",
         "dotfiles": "dotfiles",
+        "greenix": "greenix",
         "home-manager": "home-manager_2",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
