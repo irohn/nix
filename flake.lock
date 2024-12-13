@@ -119,11 +119,11 @@
     "greenix": {
       "flake": false,
       "locked": {
-        "lastModified": 1734114474,
-        "narHash": "sha256-73AmRgzDzBLf5gdbfKn2Az+qrv04cTThuz39xPStipg=",
+        "lastModified": 1734116059,
+        "narHash": "sha256-NW/COlJivoy+Epsu9w9ig44DrcnOwtqZnV/oiwkABCM=",
         "owner": "greeneyetechnology",
         "repo": "greenix",
-        "rev": "ab8dfd3c83bd3268d6cbdc360c0d439b902d17c1",
+        "rev": "273f53dbf14620c9184e3053430925aa1f6498cc",
         "type": "github"
       },
       "original": {
