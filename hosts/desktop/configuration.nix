@@ -95,6 +95,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     wget
+    wl-clipboard # clipboard support for wayland
   ];
 
   environment.variables.EDITOR = "vim";
