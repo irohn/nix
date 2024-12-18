@@ -9,7 +9,8 @@ let
 
   ];
 
-in {
+in
+{
   "anthropics_api_key".publicKeys = github;
   "openai_api_key".publicKeys = github;
 }

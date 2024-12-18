@@ -15,7 +15,7 @@ let
     nativeCheckInputs = with pkgs; [ less ];
   };
 in
-  {
+{
   home.packages = [
     hcp
   ];

@@ -3,10 +3,12 @@
 
 {
   # required to autoload fonts from packages installed via Home Manager
-  fonts.fontconfig.enable = true; 
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [
-      "JetBrainsMono"
-    ]; })
+    (nerdfonts.override {
+      fonts = [
+        "JetBrainsMono"
+      ];
+    })
   ];
 }

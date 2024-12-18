@@ -36,15 +36,24 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, agenix, dotfiles, greenix, ... } @inputs:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      agenix,
+      dotfiles,
+      greenix,
+      ...
+    }@inputs:
     let
       homeDependencies = [
-        {_module.args = {inherit dotfiles;};}
-        {_module.args = {inherit greenix;};}
+        { _module.args = { inherit dotfiles; }; }
+        { _module.args = { inherit greenix; }; }
         agenix.homeManagerModules.default
       ];
 
-    in {
+    in
+    {
       homeConfigurations = {
         macbook = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";

@@ -8,14 +8,14 @@
   system = {
     defaults = {
       NSGlobalDomain = {
-        NSAutomaticCapitalizationEnabled = false;  # disable auto capitalization
-        NSAutomaticDashSubstitutionEnabled = false;  # disable auto dash substitution
-        NSAutomaticPeriodSubstitutionEnabled = false;  # disable auto period substitution
-        NSAutomaticQuoteSubstitutionEnabled = false;  # disable auto quote substitution
-        NSAutomaticSpellingCorrectionEnabled = false;  # disable auto spelling correction
-				# _HIHideMenuBar = true; # hide menu bar
+        NSAutomaticCapitalizationEnabled = false; # disable auto capitalization
+        NSAutomaticDashSubstitutionEnabled = false; # disable auto dash substitution
+        NSAutomaticPeriodSubstitutionEnabled = false; # disable auto period substitution
+        NSAutomaticQuoteSubstitutionEnabled = false; # disable auto quote substitution
+        NSAutomaticSpellingCorrectionEnabled = false; # disable auto spelling correction
+        # _HIHideMenuBar = true; # hide menu bar
       };
-      menuExtraClock.Show24Hour = true;  # show 24 hour clock
+      menuExtraClock.Show24Hour = true; # show 24 hour clock
       dock = {
         autohide = true;
         orientation = "bottom";
@@ -24,15 +24,15 @@
         static-only = true;
       };
       finder = {
-        _FXShowPosixPathInTitle = true;  # show full path in finder title
+        _FXShowPosixPathInTitle = true; # show full path in finder title
         AppleShowAllExtensions = true;
         ShowPathbar = true;
-        ShowStatusBar = true;  # show status bar
+        ShowStatusBar = true; # show status bar
         FXEnableExtensionChangeWarning = false;
       };
       trackpad = {
-        Clicking = true;  # enable tap to click
-        TrackpadRightClick = true;  # enable two finger right click
+        Clicking = true; # enable tap to click
+        TrackpadRightClick = true; # enable two finger right click
       };
       CustomUserPreferences = {
         "com.apple.desktopservices" = {
@@ -61,8 +61,8 @@
         "com.apple.ImageCapture".disableHotPlug = true;
       };
       loginwindow = {
-        GuestEnabled = false;  # disable guest user
-        SHOWFULLNAME = true;  # show full name in login window
+        GuestEnabled = false; # disable guest user
+        SHOWFULLNAME = true; # show full name in login window
       };
     };
   };

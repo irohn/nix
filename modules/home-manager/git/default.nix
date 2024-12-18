@@ -1,5 +1,10 @@
 # Distributed version control system
-{ pkgs, username, email, ... }:
+{
+  pkgs,
+  username,
+  email,
+  ...
+}:
 
 {
   home.packages = with pkgs; [

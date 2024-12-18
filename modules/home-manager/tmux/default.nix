@@ -1,5 +1,10 @@
 # Terminal multiplexer for managing multiple terminal sessions
-{ pkgs, lib, dotfiles, ... }:
+{
+  pkgs,
+  lib,
+  dotfiles,
+  ...
+}:
 
 {
 
@@ -16,10 +21,12 @@
     };
   };
 
-  programs.zsh.initExtra = lib.mkAfter /*bash*/ ''
-  # execute tmux on shell startup
-  if [ -z "$TMUX" ]; then
-    tmux -u new-session -A -s default
-  fi
-  '';
+  programs.zsh.initExtra =
+    lib.mkAfter # bash
+      ''
+        # execute tmux on shell startup
+        if [ -z "$TMUX" ]; then
+          tmux -u new-session -A -s default
+        fi
+      '';
 }
