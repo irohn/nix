@@ -30,7 +30,7 @@
     ../../modules/home-manager/tmux
     ../../modules/home-manager/zoxide
     ../../modules/home-manager/zsh
-    ../../modules/home-manager/discord
+    # ../../modules/home-manager/discord
     ../../modules/home-manager/hashicorp
   ];
 
