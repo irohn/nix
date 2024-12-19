@@ -11,8 +11,8 @@
     ../../modules/nixos/nvidia.nix
     ./users.nix
     ../../modules/common/tailscale
-    ../../modules/nixos/steam.nix
     ../../modules/nixos/media.nix
+    ../../modules/nixos/gaming.nix
   ];
 
   # Bootloader.
