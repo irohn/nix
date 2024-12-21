@@ -69,11 +69,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1734649311,
-        "narHash": "sha256-k9JgGFBRoJwbp2UTrN21g/XkbM2s1IYnl5V38xoUeJM=",
+        "lastModified": 1734794318,
+        "narHash": "sha256-re+cx1mxvPzr6Id9Ux0rjQSX7u1Ir0iWkcO/mg3Ykzg=",
         "owner": "irohn",
         "repo": "xdg",
-        "rev": "7848d1f82baaede4046fb4e80f5b6ab2bb83dafe",
+        "rev": "95c00eed94cfdf8b97e2269c2ce4e1776f7f2b1e",
         "type": "github"
       },
       "original": {
@@ -119,11 +119,11 @@
     "greenix": {
       "flake": false,
       "locked": {
-        "lastModified": 1734542023,
-        "narHash": "sha256-/OIJBCJIdr/92dmn8+Wpnits+hX8HtvcFKdQGKEp9zE=",
+        "lastModified": 1734625599,
+        "narHash": "sha256-v/u73AsTmcohMhGcaGllCungHCRVMVvCUoBBX/+2Ft4=",
         "owner": "greeneyetechnology",
         "repo": "greenix",
-        "rev": "8091a57584f179ed79f3e67f165bce1b7b927ff5",
+        "rev": "30e268cbcafeb5884670605a02a233b30037d29c",
         "type": "github"
       },
       "original": {
