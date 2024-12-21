@@ -26,6 +26,9 @@
       pyright
       black
       isort
+
+      yaml-language-server
+      yamlfix
     ];
 
     file = {
