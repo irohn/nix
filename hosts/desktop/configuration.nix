@@ -100,6 +100,7 @@
     git
     wget
     wl-clipboard # clipboard support for wayland
+    unrar
   ];
 
   environment.variables.EDITOR = "vim";
