@@ -2,6 +2,10 @@
 { pkgs, lib, ... }:
 
 {
+  imports = [
+    ./ksync.nix
+  ];
+
   home.packages = with pkgs; [
     kubectl
     kubectx
