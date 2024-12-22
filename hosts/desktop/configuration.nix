@@ -13,6 +13,7 @@
     ../../modules/common/tailscale
     ../../modules/nixos/media.nix
     ../../modules/nixos/gaming.nix
+    ../../modules/nixos/containers.nix
   ];
 
   # Bootloader.
