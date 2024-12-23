@@ -40,6 +40,7 @@
       "docker" # Docker Desktop
       "steam"
       "whisky" # Wine for MacOS
+      "termius" # SSH client
     ];
   };
 }
