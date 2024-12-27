@@ -14,6 +14,7 @@
     ../../modules/nixos/media.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/containers.nix
+    ../../modules/nixos/discord
   ];
 
   # Bootloader.
