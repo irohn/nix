@@ -39,6 +39,7 @@
       "rectangle-pro" # Window manager
       "docker" # Docker Desktop
       "steam"
+      "ghostty"
       "whisky" # Wine for MacOS
     ];
   };

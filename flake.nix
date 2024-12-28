@@ -25,6 +25,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
     dotfiles = {
       url = "github:irohn/xdg";
       flake = false;
@@ -43,6 +47,7 @@
       agenix,
       dotfiles,
       greenix,
+      ghostty,
       ...
     }@inputs:
     let
@@ -87,6 +92,7 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/desktop/configuration.nix
+            { environment.systemPackages = [ ghostty.packages."x86_64-linux".default ]; }
           ];
         };
       };
