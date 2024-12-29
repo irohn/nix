@@ -97,8 +97,4 @@
       '';
     executable = true;
   };
-
-  home.sessionVariables = {
-    TERM = "alacritty";
-  };
 }
