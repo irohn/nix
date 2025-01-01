@@ -15,6 +15,7 @@
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/containers.nix
     ../../modules/nixos/discord
+    ../../modules/nixos/ollama.nix
   ];
 
   # Bootloader.
