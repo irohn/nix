@@ -16,6 +16,7 @@
     ../../modules/nixos/containers.nix
     ../../modules/nixos/discord
     ../../modules/nixos/ollama.nix
+    ../../modules/nixos/virtualization.nix
   ];
 
   # Bootloader.
