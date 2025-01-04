@@ -19,6 +19,10 @@
         recursive = true;
       };
     };
+
+    shellAliases = {
+      tssh = "~/.config/tmux/tssh.sh";
+    };
   };
 
   programs.zsh.initExtra =
