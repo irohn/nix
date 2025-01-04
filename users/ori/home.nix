@@ -20,6 +20,7 @@
     ../../modules/home-manager/direnv
     ../../modules/home-manager/eza
     ../../modules/home-manager/fonts
+    ../../modules/home-manager/fzf
     ../../modules/home-manager/git
     ../../modules/home-manager/greeneye
     ../../modules/home-manager/kubernetes
