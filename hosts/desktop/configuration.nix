@@ -52,6 +52,16 @@
     LC_TIME = "he_IL.UTF-8";
   };
 
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
+    fcitx5.waylandFrontend = true;
+  };
+
   # Unfree software
   nixpkgs.config.allowUnfree = true;
 
@@ -65,7 +75,7 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
+    layout = "us,il";
     variant = "";
   };
 
