@@ -12,6 +12,7 @@
     ./users.nix
     ../../modules/common/tailscale
     ../../modules/nixos/media.nix
+    ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/gaming.nix
     ../../modules/nixos/containers.nix
     ../../modules/nixos/discord
