@@ -1,5 +1,10 @@
 # Custom module for greeneye specific needs
-{ pkgs, greenix, ... }:
+{
+  pkgs,
+  config,
+  greenix,
+  ...
+}:
 
 {
   # Dependencies
@@ -23,7 +28,8 @@
   };
 
   home.sessionPath = [
-    "${greenix}/bin"
+    "${config.home.homeDirectory}/.local/bin/greeneye/bin"
+    "${config.home.homeDirectory}/.local/bin/greeneye/scripts"
   ];
 
 }
