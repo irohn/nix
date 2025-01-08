@@ -69,11 +69,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1736328484,
-        "narHash": "sha256-KslV+fvzjX1HIvZSsYqUp2SVry0GDLHvi8awDpzCeX8=",
+        "lastModified": 1736330180,
+        "narHash": "sha256-jH74gXDMQ/RyiKCUS7HSmYZwPSfiHc+Oh7h5UGw21dk=",
         "owner": "irohn",
         "repo": "xdg",
-        "rev": "f25e6861e7ff59605450ba92fbb62ff9925fa671",
+        "rev": "f9f7773ea460f5fa20f5bf45243f591c5857e01d",
         "type": "github"
       },
       "original": {
