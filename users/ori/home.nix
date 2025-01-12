@@ -25,6 +25,7 @@
     ../../modules/home-manager/greeneye
     ../../modules/home-manager/kubernetes
     ../../modules/home-manager/neovim
+    ../../modules/home-manager/vscode
     ../../modules/home-manager/rsync
     ../../modules/home-manager/slack
     ../../modules/home-manager/starship
