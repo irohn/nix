@@ -3,6 +3,7 @@
   pkgs,
   lib,
   dotfiles,
+  use_stow,
   ...
 }:
 
@@ -13,12 +14,16 @@
       tmux
     ];
 
-    file = {
-      ".config/tmux" = {
-        source = "${dotfiles}/config/tmux";
-        recursive = true;
-      };
-    };
+    file =
+      if !use_stow then
+        {
+          ".config/tmux" = {
+            source = "${dotfiles}/config/tmux";
+            recursive = true;
+          };
+        }
+      else
+        { };
 
     shellAliases = {
       tssh = "~/.config/tmux/tssh.sh";

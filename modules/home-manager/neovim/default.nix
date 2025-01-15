@@ -1,5 +1,10 @@
 # Highly extensible Vim-based text editor
-{ pkgs, dotfiles, ... }:
+{
+  pkgs,
+  dotfiles,
+  use_stow,
+  ...
+}:
 
 {
   # Dependencies for ./config/nvim
@@ -31,12 +36,16 @@
       yamlfix
     ];
 
-    file = {
-      ".config/nvim" = {
-        source = "${dotfiles}/config/nvim";
-        recursive = true;
-      };
-    };
+    file =
+      if !use_stow then
+        {
+          ".config/nvim" = {
+            source = "${dotfiles}/config/nvim";
+            recursive = true;
+          };
+        }
+      else
+        { };
   };
 
   programs.neovim = {

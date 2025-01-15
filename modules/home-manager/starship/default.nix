@@ -1,5 +1,5 @@
 # Cross-shell prompt with extensive customization options
-{ dotfiles, ... }:
+{ dotfiles, use_stow, ... }:
 
 {
   programs.starship = {
@@ -7,9 +7,13 @@
     enableZshIntegration = true;
   };
 
-  home.file = {
-    ".config/starship.toml" = {
-      source = "${dotfiles}/config/starship/starship.toml";
-    };
-  };
+  home.file =
+    if !use_stow then
+      {
+        ".config/starship.toml" = {
+          source = "${dotfiles}/config/starship/starship.toml";
+        };
+      }
+    else
+      { };
 }

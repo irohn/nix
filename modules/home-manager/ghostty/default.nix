@@ -1,13 +1,18 @@
 {
   dotfiles,
+  use_stow,
   ...
 }:
 
 {
-  home.file = {
-    ".config/ghostty" = {
-      source = "${dotfiles}/config/ghostty";
-      recursive = true;
-    };
-  };
+  home.file =
+    if !use_stow then
+      {
+        ".config/ghostty" = {
+          source = "${dotfiles}/config/ghostty";
+          recursive = true;
+        };
+      }
+    else
+      { };
 }

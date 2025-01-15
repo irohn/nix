@@ -57,6 +57,7 @@
         agenix.homeManagerModules.default
       ];
 
+      use_stow = true;
     in
     {
       homeConfigurations = {
@@ -66,6 +67,7 @@
           extraSpecialArgs = {
             username = "ori";
             email = "orisne@greeneye.ag";
+            inherit use_stow;
           };
         };
         desktop = home-manager.lib.homeManagerConfiguration {
@@ -74,6 +76,7 @@
           extraSpecialArgs = {
             username = "ori";
             email = "orisneh@gmail.com";
+            inherit use_stow;
           };
         };
       };
