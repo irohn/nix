@@ -1,4 +1,3 @@
-# Distributed version control system
 {
   pkgs,
   username,

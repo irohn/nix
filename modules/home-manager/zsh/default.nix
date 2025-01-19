@@ -1,30 +1,19 @@
-# Z shell configuration with enhanced features over bash
-{ pkgs, config, ... }:
+{ ... }:
 
 {
-  home = {
-    packages = with pkgs; [
-      zsh-history-substring-search
-    ];
-  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    shellAliases = config.home.shellAliases;
+    autosuggestion.enable = true;
     initExtra = ''
-      HISTORY_SUBSTRING_SEARCH_PREFIXED=true;
-      HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
-      source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-      bindkey '^[OA' history-substring-search-up
-      bindkey '^[[A' history-substring-search-up
-      bindkey '^[OB' history-substring-search-down
-      bindkey '^[[B' history-substring-search-down
-      set -o emacs
-      autoload edit-command-line
-      zle -N edit-command-line
-      bindkey '^Xe' edit-command-line
+      export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
+      export HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
     '';
+    historySubstringSearch = {
+      enable = true;
+      searchUpKey = "$terminfo[kcuu1]";
+      searchDownKey = "$terminfo[kcud1]";
+    };
   };
 }
