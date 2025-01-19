@@ -18,6 +18,7 @@
     fzf
     coreutils
     vault
+    google-cloud-sdk
   ];
 
   home.file = {
