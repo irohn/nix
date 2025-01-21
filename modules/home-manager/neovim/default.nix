@@ -15,7 +15,6 @@
       fd
       gnumake
       gcc
-      cargo
 
       # external tools like lsp, formatters etc...
       nixd
