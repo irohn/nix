@@ -71,15 +71,15 @@
       "locked": {
         "lastModified": 1737298702,
         "narHash": "sha256-0lj8fS9hvRhGqdfJ4w2TNanG/X4Qbnkt0PPWy0jR82o=",
-        "owner": "irohn",
-        "repo": "xdg",
+        "ref": "refs/heads/master",
         "rev": "b1683061365201cd1231b6cd188b93dd020f9cd8",
-        "type": "github"
+        "revCount": 87,
+        "type": "git",
+        "url": "ssh://git@irohn/irohn/xdg"
       },
       "original": {
-        "owner": "irohn",
-        "repo": "xdg",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@irohn/irohn/xdg"
       }
     },
     "flake-compat": {
@@ -158,15 +158,15 @@
       "locked": {
         "lastModified": 1737650518,
         "narHash": "sha256-WivtPAieKjj/7zX1JbSx11ZLZWPR8XGDZ/oovGXA9N8=",
-        "owner": "greeneyetechnology",
-        "repo": "greenix",
+        "ref": "refs/heads/master",
         "rev": "0702430a1859241f436942ac59a01200c33b8397",
-        "type": "github"
+        "revCount": 54,
+        "type": "git",
+        "url": "ssh://git@greeneye/greeneyetechnology/greenix"
       },
       "original": {
-        "owner": "greeneyetechnology",
-        "repo": "greenix",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@greeneye/greeneyetechnology/greenix"
       }
     },
     "home-manager": {

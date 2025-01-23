@@ -30,12 +30,12 @@
     };
 
     dotfiles = {
-      url = "github:irohn/xdg";
+      url = "git+ssh://git@irohn/irohn/xdg";
       flake = false;
     };
 
     greenix = {
-      url = "github:greeneyetechnology/greenix";
+      url = "git+ssh://git@greeneye/greeneyetechnology/greenix";
       flake = false;
     };
   };
