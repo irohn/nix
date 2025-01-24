@@ -24,6 +24,7 @@
     brews = [
       "hashicorp/tap/hcp"
       "hashicorp/tap/vault"
+      "podman"
     ];
 
     # `brew install --cask`
