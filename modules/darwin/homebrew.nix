@@ -37,7 +37,7 @@
       "1password" # Password Manager
       "stremio" # streaming
       "rectangle-pro" # Window manager
-      "docker" # Docker Desktop
+      "podman-desktop" # Podman Desktop
       "steam"
       "ghostty"
       "whisky" # Wine for MacOS
