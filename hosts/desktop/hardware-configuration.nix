@@ -48,11 +48,6 @@
     fsType = "cifs";
   };
 
-  fileSystems."/mnt/nas/Media" = {
-    device = "//192.168.0.5/Media";
-    fsType = "cifs";
-  };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

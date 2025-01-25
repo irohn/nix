@@ -17,6 +17,7 @@
     ../../modules/nixos/containers.nix
     ../../modules/nixos/discord
     ../../modules/nixos/ollama.nix
+    ../../modules/nixos/k3s.nix
     ../../modules/nixos/virtualization.nix
   ];
 

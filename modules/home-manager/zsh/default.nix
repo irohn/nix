@@ -7,6 +7,9 @@
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     initExtra = ''
+      # emacs keybindings
+      bindkey -e
+
       # Edit current command in EDITOR
       autoload -z edit-command-line
       zle -N edit-command-line
