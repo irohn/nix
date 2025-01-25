@@ -43,11 +43,6 @@
     fsType = "ext4";
   };
 
-  fileSystems."/home/sir/share/norp" = {
-    device = "//192.168.0.5/norp";
-    fsType = "cifs";
-  };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
