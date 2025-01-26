@@ -3,6 +3,8 @@
 
 {
   home.packages = with pkgs; [
+    jq
+    yq
     kubectl
     kubectx
     fluxcd

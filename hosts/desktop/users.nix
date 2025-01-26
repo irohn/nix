@@ -14,6 +14,7 @@
       "networkmanager"
       "wheel"
       "libvirtd"
+      "k3s"
     ];
   };
 }
