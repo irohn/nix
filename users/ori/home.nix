@@ -30,6 +30,7 @@
     ../../modules/home-manager/rsync
     ../../modules/home-manager/slack
     ../../modules/home-manager/starship
+    ../../modules/home-manager/ssh
     ../../modules/home-manager/stow
     ../../modules/home-manager/tmux
     ../../modules/home-manager/zoxide

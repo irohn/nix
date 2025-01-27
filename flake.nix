@@ -66,7 +66,7 @@
           modules = [ ./users/ori/home.nix ] ++ homeDependencies;
           extraSpecialArgs = {
             username = "ori";
-            email = "orisne@greeneye.ag";
+            email = "orisneh@gmail.com";
             inherit use_stow;
           };
         };

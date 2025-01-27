@@ -26,6 +26,47 @@
       source = "${greenix}";
       recursive = true;
     };
+
+    ".config/git/greeneye/.gitconfig" = {
+      text = ''
+        [user]
+          name = ori
+          email = orisne@greeneye.ag
+      '';
+    };
+  };
+
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    forwardAgent = true;
+    includes = [ "~/.ssh/greeneye_config" ];
+    matchBlocks = {
+      "greeneye" = {
+        user = "git";
+        hostname = "github.com";
+        identityFile = "~/.ssh/greeneye_id_ed25519";
+      };
+    };
+  };
+
+  programs.git = {
+    enable = true;
+    includes = [
+      {
+        condition = "gitdir:~/projects/greeneye/**";
+        path = "~/.config/git/greeneye/.gitconfig";
+        contents = {
+          user = {
+            name = "ori";
+            email = "orisne@greeneye.ag";
+          };
+          core = {
+            sshcommand = "ssh -i ~/.ssh/greeneye_id_ed25519 -F /dev/null";
+          };
+        };
+      }
+    ];
   };
 
   home.sessionPath = [
