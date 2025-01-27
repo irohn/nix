@@ -10,25 +10,29 @@
 {
   # Dependencies
   home.packages = with pkgs; [
-    fd
-    ripgrep
-    tailscale
-    azure-cli
-    kubectl
+    coreutils
     gawk
     fzf
-    coreutils
+    fd
+    ripgrep
+    kubectl
+    tailscale
     vault
-    google-cloud-sdk
+    azure-cli
+    # google-cloud-sdk
   ];
 
   home.file = {
-    ".local/bin/greeneye" = {
-      source = "${greenix}";
+    ".config/greeneye/bin" = {
+      source = "${greenix}/bin";
+      recursive = true;
+    };
+    ".config/greeneye/scripts" = {
+      source = "${greenix}/scripts";
       recursive = true;
     };
 
-    ".config/git/greeneye/config" = {
+    ".config/greeneye/git/config" = {
       text = ''
         [user]
             name = ori
@@ -49,14 +53,13 @@
     includes = [
       {
         condition = "gitdir:~/projects/greeneye/**";
-        path = "~/.config/git/greeneye/config";
+        path = "~/.config/greeneye/git/config";
       }
     ];
   };
 
   home.sessionPath = [
-    "${config.home.homeDirectory}/.local/bin/greeneye/bin"
-    "${config.home.homeDirectory}/.local/bin/greeneye/scripts"
+    "${config.home.homeDirectory}/.config/greeneye/bin"
   ];
 
 }
