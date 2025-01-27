@@ -52,32 +52,31 @@
     }@inputs:
     let
       homeDependencies = [
+        ./users/ori/home.nix
         { _module.args = { inherit dotfiles; }; }
         { _module.args = { inherit greenix; }; }
         agenix.homeManagerModules.default
       ];
-
-      use_stow = true;
+      homeArgs = {
+        username = "ori";
+        email = {
+          personal = "orisneh@gmail.com";
+          work = "orisne@greeneye.ag";
+        };
+        use_stow = true;
+      };
     in
     {
       homeConfigurations = {
         macbook = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          modules = [ ./users/ori/home.nix ] ++ homeDependencies;
-          extraSpecialArgs = {
-            username = "ori";
-            email = "orisneh@gmail.com";
-            inherit use_stow;
-          };
+          modules = homeDependencies;
+          extraSpecialArgs = homeArgs;
         };
         desktop = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          modules = [ ./users/ori/home.nix ] ++ homeDependencies;
-          extraSpecialArgs = {
-            username = "ori";
-            email = "orisneh@gmail.com";
-            inherit use_stow;
-          };
+          modules = homeDependencies;
+          extraSpecialArgs = homeArgs;
         };
       };
 
