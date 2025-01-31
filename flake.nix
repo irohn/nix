@@ -58,7 +58,6 @@
           };
         }
       );
-
       darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (
         system:
         darwin.lib.darwinSystem {
@@ -71,7 +70,6 @@
           };
         }
       );
-
       nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
         system:
         nixpkgs.lib.nixosSystem {

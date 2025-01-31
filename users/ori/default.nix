@@ -19,7 +19,7 @@
   };
 
   imports = [
-    ../../modules/home-manager/secrets/agenix-home.nix
+    ../../modules/home-manager/secrets
     ../../modules/home-manager/1password
     ../../modules/home-manager/ghostty
     ../../modules/home-manager/brave

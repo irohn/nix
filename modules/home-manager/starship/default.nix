@@ -1,4 +1,3 @@
-# Cross-shell prompt with extensive customization options
 { dotfiles, stow, ... }:
 
 {
