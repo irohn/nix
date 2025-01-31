@@ -2,7 +2,7 @@
 {
   pkgs,
   dotfiles,
-  use_stow,
+  stow,
   ...
 }:
 
@@ -12,7 +12,7 @@
       wezterm
     ];
     file =
-      if !use_stow then
+      if !stow then
         {
           ".config/wezterm" = {
             source = "${dotfiles}/config/wezterm";

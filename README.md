@@ -2,7 +2,7 @@
 
 ## Overview
 
-A [Nix](https://nixos.org/) [flake](https://nixos.wiki/wiki/Flakes) holding [NixOS](https://nixos.org/), [nix-darwin](https://github.com/LnL7/nix-darwin) and [Home Manager](https://github.com/nix-community/home-manager) configurations.
+A Nix [Flake](https://nixos.wiki/wiki/Flakes) holding [NixOS](https://nixos.org/), [nix-darwin](https://github.com/LnL7/nix-darwin) and [Home Manager](https://github.com/nix-community/home-manager) configurations.
 
 ## Prerequisites
 
@@ -12,6 +12,13 @@ A [Nix](https://nixos.org/) [flake](https://nixos.wiki/wiki/Flakes) holding [Nix
 - [nixos](https://nixos.org/download/#nixos-iso) (required for NixOS hosts)
 - [nix-darwin](https://github.com/LnL7/nix-darwin) (required for MacOS hosts)
 - [home-manager](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone) (required for users configurations, standalone setup recommended)
+
+## Install Nix
+Using [DeterminateSystems](https://github.com/DeterminateSystems/nix-installer) installer:
+```bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
+  sh -s -- install
+```
 
 ## Usage
 There are different commands for different uses, however, first clone the repository and change directory into it:
@@ -25,46 +32,22 @@ cd ~/nix
 To use home-manager standalone, after installation, you can run:
 
 ```nix
-home-manager switch --flake .#ori
+home-manager switch --flake .#$(nix eval --impure --raw --expr 'builtins.currentSystem')
 ```
 
-If you have a different user defined in the flake, you can change `ori` to your selected user.
+Make sure the user defined in the flake has a module in `./users/<USERNAME>/default.nix`
 
 ### nix-darwin
 Darwin uses a slightly different command:
 
 ```nix
-darwin-rebuild switch --flake .#macbook
+darwin-rebuild switch --flake .#$(nix eval --impure --raw --expr 'builtins.currentSystem')
 ```
-
-If you have a different MacOS machine defined the the flake, you can change `macbook` to your selected machine.
 
 ### nixos
 For nixos simply run
 ```nix
-sudo nixos-rebuild switch --flake .#desktop
-```
-
-If you have a different machine defined the the flake, you can change `desktop` to your selected machine.
-
-## Structure
-
-The repository is structured as follows:
-```
-.
-├── hosts                    # Machines configurations
-│   ├── desktop              # NixOS machine
-│   └── macbook              # MacOS machine
-├── modules                  # Portable modules
-│   ├── common               # Shared modules
-│   ├── darwin               # Darwin specific modules
-│   ├── home-manager         # home-manager specific modules
-│   └── nixos                # nixos specific modules
-├── secrets                  # encrypted secrets
-│   └── secrets.nix          # Secrets specifications for encryption
-├── users                    # Users confugrations for home-manager
-│   └── ori
-└── flake.nix                # Main flake
+sudo nixos-rebuild switch --flake .#$(nix eval --impure --raw --expr 'builtins.currentSystem')
 ```
 
 ## Secrets
@@ -83,4 +66,3 @@ nix run github:ryantm/agenix -- -r
 ```
 
 To add and use secrets see the [agenix tutorial](https://github.com/ryantm/agenix?tab=readme-ov-file#tutorial)
-

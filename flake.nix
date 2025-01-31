@@ -1,39 +1,18 @@
 {
-  description = "Nix and Home-manager configurations";
+  description = "Personal Configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    agenix.url = "github:ryantm/agenix";
+    home-manager.url = "github:nix-community/home-manager";
     darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-24.11";
+      url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
     dotfiles = {
       url = "git+ssh://git@github.com/irohn/xdg";
       flake = false;
     };
-
     greenix = {
       url = "git+ssh://git@github.com/greeneyetechnology/greenix";
       flake = false;
@@ -44,59 +23,64 @@
     {
       nixpkgs,
       home-manager,
+      darwin,
       agenix,
-      dotfiles,
-      greenix,
-      ghostty,
       ...
     }@inputs:
     let
-      homeDependencies = [
-        ./users/ori/home.nix
-        { _module.args = { inherit dotfiles; }; }
-        { _module.args = { inherit greenix; }; }
-        agenix.homeManagerModules.default
-      ];
-      homeArgs = {
-        username = "ori";
-        email = {
-          personal = "orisneh@gmail.com";
-          work = "orisne@greeneye.ag";
-        };
-        use_stow = true;
+      username = "ori";
+      email = {
+        personal = "orisneh@gmail.com";
+        work = "orisne@greeneye.ag";
       };
+      stow = true; # set this to true to manually use gnu-stow instead
+      linuxSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      darwinSystems = [
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
     in
     {
-      homeConfigurations = {
-        macbook = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          modules = homeDependencies;
-          extraSpecialArgs = homeArgs;
-        };
-        desktop = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          modules = homeDependencies;
-          extraSpecialArgs = homeArgs;
-        };
-      };
-
-      darwinConfigurations = {
-        macbook = inputs.darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
+      homeConfigurations = forAllSystems (
+        system:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            ./hosts/macbook/configuration.nix
+            agenix.homeManagerModules.default
+            ./users/${username}
           ];
-        };
-      };
-
-      nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          extraSpecialArgs = inputs // {
+            inherit username email stow;
+          };
+        }
+      );
+      darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (
+        system:
+        darwin.lib.darwinSystem {
+          inherit system;
           modules = [
-            ./hosts/desktop/configuration.nix
-            { environment.systemPackages = [ ghostty.packages."x86_64-linux".default ]; }
+            ./hosts/darwin/macbook
           ];
-        };
-      };
+          specialArgs = inputs // {
+            inherit username;
+          };
+        }
+      );
+      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
+        system:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/nixos/desktop
+          ];
+          specialArgs = inputs // {
+            inherit username;
+          };
+        }
+      );
     };
 }
