@@ -3,7 +3,7 @@
   pkgs,
   lib,
   dotfiles,
-  use_stow,
+  stow,
   ...
 }:
 
@@ -15,7 +15,7 @@
     ];
 
     file =
-      if !use_stow then
+      if !stow then
         {
           ".config/tmux" = {
             source = "${dotfiles}/config/tmux";

@@ -39,9 +39,6 @@
       "stremio" # streaming
       "rectangle-pro" # Window manager
       "podman-desktop" # Podman Desktop
-      "steam"
-      "ghostty"
-      "whisky" # Wine for MacOS
     ];
   };
 }

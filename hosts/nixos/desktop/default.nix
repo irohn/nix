@@ -8,17 +8,17 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/nixos/nvidia.nix
     ./users.nix
-    ../../modules/common/tailscale
-    ../../modules/nixos/media.nix
-    ../../modules/nixos/bluetooth.nix
-    ../../modules/nixos/gaming.nix
-    ../../modules/nixos/containers.nix
-    ../../modules/nixos/discord
-    ../../modules/nixos/ollama.nix
-    ../../modules/nixos/k3s.nix
-    ../../modules/nixos/virtualization.nix
+    ../../../modules/nixos/nvidia.nix
+    ../../../modules/shared/tailscale
+    ../../../modules/nixos/media.nix
+    ../../../modules/nixos/bluetooth.nix
+    ../../../modules/nixos/gaming.nix
+    ../../../modules/nixos/containers.nix
+    ../../../modules/nixos/discord
+    ../../../modules/nixos/ollama.nix
+    ../../../modules/nixos/k3s.nix
+    ../../../modules/nixos/virtualization.nix
   ];
 
   # Bootloader.
@@ -84,7 +84,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

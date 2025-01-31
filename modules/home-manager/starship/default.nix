@@ -1,5 +1,5 @@
 # Cross-shell prompt with extensive customization options
-{ dotfiles, use_stow, ... }:
+{ dotfiles, stow, ... }:
 
 {
   programs.starship = {
@@ -8,7 +8,7 @@
   };
 
   home.file =
-    if !use_stow then
+    if !stow then
       {
         ".config/starship.toml" = {
           source = "${dotfiles}/config/starship/starship.toml";

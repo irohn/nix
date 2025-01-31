@@ -1,12 +1,16 @@
 {
+  pkgs,
   dotfiles,
-  use_stow,
+  stow,
   ...
 }:
 
 {
+  home.packages = with pkgs; [
+    ghostty
+  ];
   home.file =
-    if !use_stow then
+    if !stow then
       {
         ".config/ghostty" = {
           source = "${dotfiles}/config/ghostty";

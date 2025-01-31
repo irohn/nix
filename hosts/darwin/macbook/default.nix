@@ -4,10 +4,10 @@
   imports = [
     ./system.nix
     ./users.nix
-    ../../modules/darwin/homebrew.nix
-    ../../modules/darwin/skhd.nix
-    ../../modules/darwin/mouse-fix.nix
-    ../../modules/common/tailscale
+    ../../../modules/darwin/homebrew.nix
+    ../../../modules/darwin/skhd.nix
+    ../../../modules/darwin/mouse-fix.nix
+    ../../../modules/shared/tailscale
   ];
 
   nixpkgs.config.allowUnfree = true;

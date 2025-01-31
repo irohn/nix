@@ -9,6 +9,12 @@
     username = username;
     homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
 
+    shellAliases = {
+      hms = "home-manager switch --flake .#$(nix eval --impure --raw --expr 'builtins.currentSystem')";
+      drs = "darwin-rebuild switch --flake .#$(nix eval --impure --raw --expr 'builtins.currentSystem')";
+      nrs = "sudo nixos-rebuild switch --flake .#$(nix eval --impure --raw --expr 'builtins.currentSystem')";
+    };
+
     stateVersion = "24.11";
   };
 

@@ -2,7 +2,7 @@
 {
   pkgs,
   dotfiles,
-  use_stow,
+  stow,
   ...
 }:
 
@@ -36,7 +36,7 @@
     ];
 
     file =
-      if !use_stow then
+      if !stow then
         {
           ".config/nvim" = {
             source = "${dotfiles}/config/nvim";
