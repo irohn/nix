@@ -67,11 +67,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1738429745,
-        "narHash": "sha256-FR3Jn6iLHPHgdeWJTC/hl1N9Cc6PKovvzKxYuXZqC+I=",
+        "lastModified": 1738436386,
+        "narHash": "sha256-xDbhFXCn7oYd7FhDXZn7+V5x3TIqlGmeMX5V245hXMg=",
         "owner": "irohn",
         "repo": "xdg",
-        "rev": "365089cc29c8c8587f6458d4808fd1098f8693f8",
+        "rev": "4c4bfa80bebbcaa212b965d7a7aa72f7ffc71851",
         "type": "github"
       },
       "original": {
@@ -84,11 +84,11 @@
     "greenix": {
       "flake": false,
       "locked": {
-        "lastModified": 1738016981,
-        "narHash": "sha256-ZllSl6tg7B1jhnoZTgn9PDMgDRRtD2KaZf1PfhYos0s=",
+        "lastModified": 1738352047,
+        "narHash": "sha256-Vzbdh8Ykadx1bk6wQVD2TrWgnppEu1VfgDsoEwLF7lU=",
         "ref": "refs/heads/master",
-        "rev": "3c486449cbd767f3459d4e5fa7152ceb6cdbfe38",
-        "revCount": 62,
+        "rev": "8c15779fe92da6be846aafb58c11590a51dd1853",
+        "revCount": 63,
         "type": "git",
         "url": "ssh://git@github.com/greeneyetechnology/greenix"
       },
@@ -123,11 +123,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1738275749,
-        "narHash": "sha256-PM+cGduJ05EZ+YXulqAwUFjvfKpPmW080mcuN6R1POw=",
+        "lastModified": 1738428726,
+        "narHash": "sha256-OUoEgorFHBVnqQ2lITqs6MGN7MH4t/8hLEO29OKu6CM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a8159195bfaef3c64df75d3b1e6a68d49d392be9",
+        "rev": "dae6d3460c8bab3ac9f38a86affe45b32818e764",
         "type": "github"
       },
       "original": {

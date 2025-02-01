@@ -39,6 +39,7 @@
       "stremio" # streaming
       "rectangle-pro" # Window manager
       "podman-desktop" # Podman Desktop
+      "ghostty"
     ];
   };
 }
