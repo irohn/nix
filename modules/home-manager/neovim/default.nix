@@ -15,6 +15,7 @@
       fd
       gnumake
       gcc
+      nodejs
 
       # external tools like lsp, formatters etc...
       nixd

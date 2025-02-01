@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "git+ssh://git@github.com/irohn/xdg";
+      url = "github:irohn/xdg/master";
       flake = false;
     };
     greenix = {

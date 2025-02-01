@@ -67,17 +67,18 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1738183511,
-        "narHash": "sha256-gx1zghDdhTNSrcv38EGca6jA53RGkQmhe/oFPknDtzE=",
-        "ref": "refs/heads/master",
-        "rev": "2998ed7af183cfa4274d9970a6e052a29c2bedc9",
-        "revCount": 89,
-        "type": "git",
-        "url": "ssh://git@github.com/irohn/xdg"
+        "lastModified": 1738429745,
+        "narHash": "sha256-FR3Jn6iLHPHgdeWJTC/hl1N9Cc6PKovvzKxYuXZqC+I=",
+        "owner": "irohn",
+        "repo": "xdg",
+        "rev": "365089cc29c8c8587f6458d4808fd1098f8693f8",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/irohn/xdg"
+        "owner": "irohn",
+        "ref": "master",
+        "repo": "xdg",
+        "type": "github"
       }
     },
     "greenix": {
