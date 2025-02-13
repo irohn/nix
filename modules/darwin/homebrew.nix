@@ -41,6 +41,7 @@
       "podman-desktop" # Podman Desktop
       "ghostty"
       "rustdesk" # remote desktop
+      "firefox"
     ];
   };
 }
