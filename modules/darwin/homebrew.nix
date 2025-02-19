@@ -25,6 +25,7 @@
       "hashicorp/tap/hcp"
       "hashicorp/tap/vault"
       "podman"
+      "kind"
     ];
 
     # `brew install --cask`
