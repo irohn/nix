@@ -24,8 +24,6 @@
     brews = [
       "hashicorp/tap/hcp"
       "hashicorp/tap/vault"
-      "podman"
-      "kind"
     ];
 
     # `brew install --cask`
@@ -39,10 +37,10 @@
       "1password" # Password Manager
       "stremio" # streaming
       "rectangle-pro" # Window manager
-      "podman-desktop" # Podman Desktop
       "ghostty"
       "rustdesk" # remote desktop
       "firefox"
+      "docker"
     ];
   };
 }
