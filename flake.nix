@@ -14,7 +14,7 @@
       flake = false;
     };
     greenix = {
-      url = "git+ssh://git@github.com/greeneyetechnology/greenix";
+      url = "git+ssh://git@github.com/greeneyetechnology/dev-utils";
       flake = false;
     };
   };

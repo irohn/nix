@@ -84,17 +84,17 @@
     "greenix": {
       "flake": false,
       "locked": {
-        "lastModified": 1738352047,
-        "narHash": "sha256-Vzbdh8Ykadx1bk6wQVD2TrWgnppEu1VfgDsoEwLF7lU=",
+        "lastModified": 1741096113,
+        "narHash": "sha256-00Viu83QzgZEWqmdW/XNiTar9Nk9c+2CaMVrVKpowLI=",
         "ref": "refs/heads/master",
-        "rev": "8c15779fe92da6be846aafb58c11590a51dd1853",
-        "revCount": 63,
+        "rev": "644a6948e0b80754fe029aee4e38a72dc7620e5f",
+        "revCount": 71,
         "type": "git",
-        "url": "ssh://git@github.com/greeneyetechnology/greenix"
+        "url": "ssh://git@github.com/greeneyetechnology/dev-utils"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/greeneyetechnology/greenix"
+        "url": "ssh://git@github.com/greeneyetechnology/dev-utils"
       }
     },
     "home-manager": {
