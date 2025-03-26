@@ -65,7 +65,7 @@
       keybind=alt+zero=text:\x020
       window-decoration=false
       window-padding-balance=true
-      theme=Apple System Colors
+      theme=rose-pine
     '';
   };
 }
