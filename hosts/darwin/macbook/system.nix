@@ -67,9 +67,6 @@
     };
   };
 
-  # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
-
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono

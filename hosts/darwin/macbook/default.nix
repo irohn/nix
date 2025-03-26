@@ -23,9 +23,9 @@
   # make default mac zsh align with nixpkgs
   programs.zsh.enable = true;
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
 
-  system.stateVersion = 4;
+  ids.uids.nixbld = 350;
+
+  system.stateVersion = 5;
 }
