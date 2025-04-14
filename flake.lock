@@ -50,11 +50,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742869675,
-        "narHash": "sha256-rgwUZJZVztaNYPTsf6MIqirPL5r2JTMMyHuzk1ezyYk=",
+        "lastModified": 1744478979,
+        "narHash": "sha256-dyN+teG9G82G+m+PX/aSAagkC+vUv0SgUw3XkPhQodQ=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "bb81755a3674951724d79b8cba6bbff01409d44d",
+        "rev": "43975d782b418ebf4969e9ccba82466728c2851b",
         "type": "github"
       },
       "original": {
@@ -67,11 +67,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1742979230,
-        "narHash": "sha256-LHOlGTWpfjW36tOz6Ff+evXuaX4sQuF/62wEfUoQMrg=",
+        "lastModified": 1744179034,
+        "narHash": "sha256-4uLQkrNEXFLZ99LD0rNbTudIoOZru6fOXmAidPfL5+s=",
         "owner": "irohn",
         "repo": "xdg",
-        "rev": "70e65b15dd95dc5731180f38040b14a5fad9dc7a",
+        "rev": "1412d77029381faa7ff9e0fba066d76fdc8e2a70",
         "type": "github"
       },
       "original": {
@@ -79,22 +79,6 @@
         "ref": "master",
         "repo": "xdg",
         "type": "github"
-      }
-    },
-    "greenix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741096113,
-        "narHash": "sha256-00Viu83QzgZEWqmdW/XNiTar9Nk9c+2CaMVrVKpowLI=",
-        "ref": "refs/heads/master",
-        "rev": "644a6948e0b80754fe029aee4e38a72dc7620e5f",
-        "revCount": 71,
-        "type": "git",
-        "url": "ssh://git@github.com/greeneyetechnology/dev-utils"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/greeneyetechnology/dev-utils"
       }
     },
     "home-manager": {
@@ -123,11 +107,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1742996658,
-        "narHash": "sha256-snxgTLVq6ooaD3W3mPHu7LVWpoZKczhxHAUZy2ea4oA=",
+        "lastModified": 1744650422,
+        "narHash": "sha256-m3/FzlNbLzfbZ1F0PUm8oEHNjGgea+bXT5uvAodt4t4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "693840c01b9bef9e54100239cef937e53d4661bf",
+        "rev": "273ad32fbb4769ac56e15caccdbdaad2c2e6b88a",
         "type": "github"
       },
       "original": {
@@ -154,11 +138,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1742422364,
-        "narHash": "sha256-mNqIplmEohk5jRkqYqG19GA8MbQ/D4gQSK0Mu4LvfRQ=",
+        "lastModified": 1744463964,
+        "narHash": "sha256-LWqduOgLHCFxiTNYi3Uj5Lgz0SR+Xhw3kr/3Xd0GPTM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a84ebe20c6bc2ecbcfb000a50776219f48d134cc",
+        "rev": "2631b0b7abcea6e640ce31cd78ea58910d31e650",
         "type": "github"
       },
       "original": {
@@ -170,11 +154,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1742889210,
-        "narHash": "sha256-hw63HnwnqU3ZQfsMclLhMvOezpM7RSB0dMAtD5/sOiw=",
+        "lastModified": 1744463964,
+        "narHash": "sha256-LWqduOgLHCFxiTNYi3Uj5Lgz0SR+Xhw3kr/3Xd0GPTM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "698214a32beb4f4c8e3942372c694f40848b360d",
+        "rev": "2631b0b7abcea6e640ce31cd78ea58910d31e650",
         "type": "github"
       },
       "original": {
@@ -189,7 +173,6 @@
         "agenix": "agenix",
         "darwin": "darwin_2",
         "dotfiles": "dotfiles",
-        "greenix": "greenix",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_3"
       }
