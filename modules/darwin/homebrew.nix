@@ -28,6 +28,7 @@
 
     # `brew install --cask`
     casks = [
+      "neovide" # GUI for neovim
       "alt-tab" # Windows 11 style alt+tab
       "karabiner-elements" # Keyboard manager
       "raycast" # Spotlight alternative

@@ -34,6 +34,9 @@
 
       yaml-language-server
       yamlfix
+
+      go
+      gopls
     ];
 
     file =
