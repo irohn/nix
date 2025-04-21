@@ -41,7 +41,6 @@
       "ghostty"
       "rustdesk" # remote desktop
       "firefox"
-      "utm" # virtual machine
       "docker"
     ];
   };
