@@ -35,6 +35,7 @@
       "keepingyouawake" # Prevent screen from turning off
       "xquartz" # X11 server
       "iina" # Modern media player
+      "gimp" # Image editor
       "1password" # Password Manager
       "stremio" # streaming
       "rectangle-pro" # Window manager

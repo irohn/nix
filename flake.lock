@@ -81,6 +81,22 @@
         "type": "github"
       }
     },
+    "greenix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743424548,
+        "narHash": "sha256-ULsQPZxeRChfA7/5qDEmZE0sCyievSYFCUgD/t3QZlY=",
+        "ref": "refs/heads/master",
+        "rev": "d2e91560d90633f8999a4a8231a265b2b9313b18",
+        "revCount": 75,
+        "type": "git",
+        "url": "ssh://git@github.com/greeneyetechnology/dev-utils"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/greeneyetechnology/dev-utils"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -173,6 +189,7 @@
         "agenix": "agenix",
         "darwin": "darwin_2",
         "dotfiles": "dotfiles",
+        "greenix": "greenix",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_3"
       }
