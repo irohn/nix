@@ -42,7 +42,9 @@
       "ghostty"
       "rustdesk" # remote desktop
       "firefox"
+      "qemu"
       "docker"
+      "lima"
     ];
   };
 }
