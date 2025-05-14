@@ -24,11 +24,12 @@
     brews = [
       "hashicorp/tap/hcp"
       "hashicorp/tap/vault"
+      "qemu"
+      "lima"
     ];
 
     # `brew install --cask`
     casks = [
-      "neovide" # GUI for neovim
       "alt-tab" # Windows 11 style alt+tab
       "karabiner-elements" # Keyboard manager
       "raycast" # Spotlight alternative
@@ -42,9 +43,7 @@
       "ghostty"
       "rustdesk" # remote desktop
       "firefox"
-      "qemu"
       "docker"
-      "lima"
     ];
   };
 }

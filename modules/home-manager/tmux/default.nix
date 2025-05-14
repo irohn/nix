@@ -30,7 +30,7 @@
     };
   };
 
-  programs.zsh.initExtra =
+  programs.zsh.initContent =
     lib.mkAfter # bash
       ''
         # execute tmux on shell startup

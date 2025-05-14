@@ -22,7 +22,7 @@
         fra = "flux reconcile kustomization flux-system --with-source";
       };
 
-      initExtra =
+      initContent =
         lib.mkAfter # bash
           ''
             unalias kl 2>/dev/null

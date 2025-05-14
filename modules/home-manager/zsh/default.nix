@@ -6,7 +6,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-    initExtra = ''
+    initContent = ''
       # emacs keybindings
       bindkey -e
 
