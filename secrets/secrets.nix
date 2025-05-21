@@ -7,4 +7,5 @@ in
 {
   "anthropics_api_key".publicKeys = users;
   "openai_api_key".publicKeys = users;
+  "gemini_api_key".publicKeys = users;
 }
