@@ -23,6 +23,7 @@
     ../../modules/home-manager/1password
     ../../modules/home-manager/ghostty
     ../../modules/home-manager/brave
+    ../../modules/home-manager/cursor
     ../../modules/home-manager/direnv
     ../../modules/home-manager/eza
     ../../modules/home-manager/fonts
