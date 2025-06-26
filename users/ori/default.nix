@@ -33,6 +33,7 @@
     ../../modules/home-manager/kubernetes
     ../../modules/home-manager/neovim
     ../../modules/home-manager/obsidian
+    ../../modules/home-manager/password-store
     ../../modules/home-manager/python
     ../../modules/home-manager/vscode
     ../../modules/home-manager/rsync
