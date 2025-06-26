@@ -8,4 +8,6 @@ in
   "anthropics_api_key".publicKeys = users;
   "openai_api_key".publicKeys = users;
   "gemini_api_key".publicKeys = users;
+  "pass_gpg_public".publicKeys = users;
+  "pass_gpg_private".publicKeys = users;
 }
