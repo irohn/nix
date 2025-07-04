@@ -37,6 +37,8 @@
 
       go
       gopls
+
+      cargo
     ];
 
     file =
