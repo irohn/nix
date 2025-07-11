@@ -16,29 +16,28 @@
       gnumake
       gcc
       nodejs
+      cargo
 
       # external tools like lsp, formatters etc...
-      nixd
-      nixfmt-rfc-style
+      # nixd
+      # nixfmt-rfc-style
+      #
+      # lua-language-server
+      # stylua
+      #
+      # bash-language-server
+      # shellcheck
+      # shfmt
 
-      lua-language-server
-      stylua
+      # pyright
+      # black
+      # isort
 
-      bash-language-server
-      shellcheck
-      shfmt
-
-      pyright
-      black
-      isort
-
-      yaml-language-server
-      yamlfix
-
-      go
-      gopls
-
-      cargo
+      # yaml-language-server
+      # yamlfix
+      #
+      # go
+      # gopls
     ];
 
     file =
