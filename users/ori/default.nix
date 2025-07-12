@@ -21,6 +21,7 @@
   imports = [
     ../../modules/home-manager/secrets
     ../../modules/home-manager/1password
+    ../../modules/home-manager/bitwarden
     ../../modules/home-manager/ghostty
     ../../modules/home-manager/direnv
     ../../modules/home-manager/eza
