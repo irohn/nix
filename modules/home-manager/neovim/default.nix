@@ -17,27 +17,6 @@
       gcc
       nodejs
       cargo
-
-      # external tools like lsp, formatters etc...
-      # nixd
-      # nixfmt-rfc-style
-      #
-      # lua-language-server
-      # stylua
-      #
-      # bash-language-server
-      # shellcheck
-      # shfmt
-
-      # pyright
-      # black
-      # isort
-
-      # yaml-language-server
-      # yamlfix
-      #
-      # go
-      # gopls
     ];
 
     file =

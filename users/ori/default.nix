@@ -22,8 +22,6 @@
     ../../modules/home-manager/secrets
     ../../modules/home-manager/1password
     ../../modules/home-manager/ghostty
-    ../../modules/home-manager/brave
-    ../../modules/home-manager/cursor
     ../../modules/home-manager/direnv
     ../../modules/home-manager/eza
     ../../modules/home-manager/fonts
@@ -35,7 +33,6 @@
     ../../modules/home-manager/obsidian
     ../../modules/home-manager/password-store
     ../../modules/home-manager/python
-    ../../modules/home-manager/vscode
     ../../modules/home-manager/rsync
     ../../modules/home-manager/slack
     ../../modules/home-manager/starship
@@ -44,7 +41,6 @@
     ../../modules/home-manager/tmux
     ../../modules/home-manager/zoxide
     ../../modules/home-manager/zsh
-    ../../modules/home-manager/hashicorp
   ];
 
   # let home-manager manage itself.

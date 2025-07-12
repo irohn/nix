@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    brave
+    bitwarden-desktop
+    bitwarden-cli
   ];
 }
